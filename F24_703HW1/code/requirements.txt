@@ -1,0 +1,5 @@
+# python== 3.10.12
+gymnasium==0.29.1
+matplotlib==3.7.1
+numpy==1.24.2
+pygame==2.2.0
