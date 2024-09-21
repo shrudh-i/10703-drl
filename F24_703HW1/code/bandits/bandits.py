@@ -39,7 +39,21 @@ def epsilonGreedyExploration(epsilon, steps, k, meanRewards, n):
     # TODO implement the epsilong greedy algorithm over all steps and return
     # the expected rewards across all steps
     expectedRewards = np.zeros(steps)
+
     # BEGIN STUDENT SOLUTION
+    for step in range(0,steps):
+        action = 0
+        epsilon_probability = np.random.uniform(0,1)
+        if (epsilon_probability <= 1 - epsilon):
+            action = np.argmax(meanRewards)
+        else:
+            action = np.random.randint(1,k)
+
+        reward = meanRewards[action] + np.random.normal(0,1)
+        n[action] += 1
+        meanRewards[action] += (1/ n[action])*(reward - meanRewards[action])
+        expectedRewards[step] = meanRewards[action]
+
     # END STUDENT SOLUTION
     return(expectedRewards)
 
@@ -81,14 +95,19 @@ def plotAlgorithms(alg_param_list):
     # plots the expectedRewards of running that algorithm with those parameters
     # iters times using runExplorationAlgorithm plot all data on the same plot
     # include correct labels on your plot
-    iters = 1000
+    iters = 10 #was 1000
     alg_to_name = {epsilonGreedyExploration : 'Epsilon Greedy Exploration',
                    optimisticInitialization : 'Optimistic Initialization',
                    ucbExploration: 'UCB Exploration',
                    boltzmannExploration: 'Boltzmann Exploration'}
     # BEGIN STUDENT SOLUTION
+    plt.figure()
+    for algo, param in alg_param_list:
+        expected_rewards = runExplorationAlgorithm(algo, param, iters)
+        plt.plot(np.arange(1,1001), expected_rewards, label = alg_to_name[algo])
     # END STUDENT SOLUTION
-    pass
+    plt.show()
+    plt.savefig("Temp.png")
 
 
 
@@ -97,5 +116,8 @@ if __name__ == '__main__':
     np.random.seed(10003)
 
     # BEGIN STUDENT SOLUTION
+    expected_returns = runExplorationAlgorithm(epsilonGreedyExploration, 0.1, 10)
+    alg_param_list = np.array([(epsilonGreedyExploration,0.1)])
+    plotAlgorithms(alg_param_list)
+
     # END STUDENT SOLUTION
-    pass
