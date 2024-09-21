@@ -145,10 +145,15 @@ def plotAlgorithms(alg_param_list):
     plt.figure()
     for algo, param in alg_param_list:
         expected_rewards = runExplorationAlgorithm(algo, param, iters)
-        plt.plot(np.arange(1,1001), expected_rewards, label = param)
-    # END STUDENT SOLUTION
+        plt.plot(np.arange(1,1001), expected_rewards, label = alg_to_name[algo] + " " + str(param))
+
+    plt.title("The Plot")
+    plt.xlabel("Time Steps")
+    plt.ylabel("Average Expected Return")
     plt.legend()
-    plt.show()
+    #plt.show()
+    plt.savefig(alg_to_name[alg_param_list[0][0]], bbox_inches='tight')
+    # END STUDENT SOLUTION
 
 
 
@@ -157,47 +162,24 @@ if __name__ == '__main__':
     np.random.seed(10003)
 
     # BEGIN STUDENT SOLUTION
+    functions = np.array([epsilonGreedyExploration, optimisticInitialization, ucbExploration, boltzmannExploration])
+    values = np.array([[0.0, 0.001, 0.01, 0.1, 1.0], [0,1,2,5,10], [0,1,2,5], [1,3,10,30,100]], dtype=object)
+    for i in range(len(functions)):
+        func = functions[i]
+        val = values[i]
+        alg_param_list = []
+        for v in val:
+            alg_param_list.append((func,v))
 
-    '''
-    # EPSILON GREEDY ALGO:
-    expected_returns = runExplorationAlgorithm(epsilonGreedyExploration, 0.1, 10)
-    alg_param_list = np.array([(epsilonGreedyExploration,0.1)])
-    plotAlgorithms(alg_param_list)
-    '''
+        alg_param_list = np.array(alg_param_list)
+        plotAlgorithms(alg_param_list)
 
-    '''
-    # OPTIMISM ALGO:
-    expected_returns = runExplorationAlgorithm(optimisticInitialization, 5, 10)
+    # Optimals 
     alg_param_list = np.array([
-                                (optimisticInitialization,0), 
-                                (optimisticInitialization,1), 
-                                (optimisticInitialization,2),
+                                (epsilonGreedyExploration,0.1),
                                 (optimisticInitialization,5),
-                                (optimisticInitialization,10)])
-    plotAlgorithms(alg_param_list)
-    '''
-
-    '''
-    # UCB ALGO:
-    expected_returns = runExplorationAlgorithm(ucbExploration, 5, 10)
-    alg_param_list = np.array([
-                                (ucbExploration,0), 
-                                (ucbExploration,1), 
                                 (ucbExploration,2),
-                                (ucbExploration,5)])
+                                (boltzmannExploration,30)])
     plotAlgorithms(alg_param_list)
-    '''
-
-    # '''
-    # BOLTZMANN ALGO:
-    expected_returns = runExplorationAlgorithm(boltzmannExploration, 1, 10)
-    alg_param_list = np.array([
-                                (boltzmannExploration,1), 
-                                (boltzmannExploration,3),
-                                (boltzmannExploration,10),
-                                (boltzmannExploration,30),
-                                (boltzmannExploration,100)])
-    plotAlgorithms(alg_param_list)
-    # '''
 
     # END STUDENT SOLUTION
