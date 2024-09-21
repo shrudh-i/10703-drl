@@ -41,18 +41,20 @@ def epsilonGreedyExploration(epsilon, steps, k, meanRewards, n):
     expectedRewards = np.zeros(steps)
 
     # BEGIN STUDENT SOLUTION
+    Q = np.zeros(k)
+
     for step in range(0,steps):
         action = 0
         epsilon_probability = np.random.uniform(0,1)
         if (epsilon_probability <= 1 - epsilon):
-            action = np.argmax(meanRewards)
+            action = np.argmax(Q)
         else:
             action = np.random.randint(1,k)
 
         reward = meanRewards[action] + np.random.normal(0,1)
         n[action] += 1
-        meanRewards[action] += (1/ n[action])*(reward - meanRewards[action])
-        expectedRewards[step] = meanRewards[action]
+        Q[action] += (1/ n[action])*(reward - Q[action])
+        expectedRewards[step] = Q[action]
 
     # END STUDENT SOLUTION
     return(expectedRewards)
@@ -63,7 +65,17 @@ def optimisticInitialization(value, steps, k, meanRewards, n):
     # TODO implement the optimistic initializaiton algorithm over all steps and
     # return the expected rewards across all steps
     expectedRewards = np.zeros(steps)
+
     # BEGIN STUDENT SOLUTION
+    Q = np.zeros(k) + value
+    
+    for step in range(0,steps):
+        action = np.argmax(Q)
+
+        reward = meanRewards[action] + np.random.normal(0,1)
+        n[action] += 1
+        Q[action] += (1/ n[action])*(reward - Q[action])
+        expectedRewards[step] = Q[action]
     # END STUDENT SOLUTION
     return(expectedRewards)
 
@@ -95,7 +107,7 @@ def plotAlgorithms(alg_param_list):
     # plots the expectedRewards of running that algorithm with those parameters
     # iters times using runExplorationAlgorithm plot all data on the same plot
     # include correct labels on your plot
-    iters = 10 #was 1000
+    iters = 1000 #was 1000
     alg_to_name = {epsilonGreedyExploration : 'Epsilon Greedy Exploration',
                    optimisticInitialization : 'Optimistic Initialization',
                    ucbExploration: 'UCB Exploration',
@@ -104,10 +116,10 @@ def plotAlgorithms(alg_param_list):
     plt.figure()
     for algo, param in alg_param_list:
         expected_rewards = runExplorationAlgorithm(algo, param, iters)
-        plt.plot(np.arange(1,1001), expected_rewards, label = alg_to_name[algo])
+        plt.plot(np.arange(1,1001), expected_rewards, label = param)
     # END STUDENT SOLUTION
+    plt.legend()
     plt.show()
-    plt.savefig("Temp.png")
 
 
 
@@ -116,8 +128,24 @@ if __name__ == '__main__':
     np.random.seed(10003)
 
     # BEGIN STUDENT SOLUTION
+
+    '''
+    # EPSILON GREEDY ALGO:
     expected_returns = runExplorationAlgorithm(epsilonGreedyExploration, 0.1, 10)
     alg_param_list = np.array([(epsilonGreedyExploration,0.1)])
     plotAlgorithms(alg_param_list)
+    '''
+
+    # '''
+    # OPTIMISM ALGO:
+    expected_returns = runExplorationAlgorithm(optimisticInitialization, 5, 10)
+    alg_param_list = np.array([
+                                (optimisticInitialization,0), 
+                                (optimisticInitialization,1), 
+                                (optimisticInitialization,2),
+                                (optimisticInitialization,5),
+                                (optimisticInitialization,10)])
+    plotAlgorithms(alg_param_list)
+    # '''
 
     # END STUDENT SOLUTION
