@@ -86,6 +86,15 @@ def ucbExploration(c, steps, k, meanRewards, n):
     # expected rewards across all steps, remember to pull all arms initially
     expectedRewards = np.zeros(steps)
     # BEGIN STUDENT SOLUTION
+    Q = np.zeros(k) 
+    
+    for step in range(1,steps+1):
+        action = np.argmax(Q + c*np.sqrt(np.log10(step)/(n+1e-6)))
+
+        reward = meanRewards[action] + np.random.normal(0,1)
+        n[action] += 1
+        Q[action] += (1/ n[action])*(reward - Q[action])
+        expectedRewards[step-1] = Q[action]
     # END STUDENT SOLUTION
     return(expectedRewards)
 
@@ -136,7 +145,7 @@ if __name__ == '__main__':
     plotAlgorithms(alg_param_list)
     '''
 
-    # '''
+    '''
     # OPTIMISM ALGO:
     expected_returns = runExplorationAlgorithm(optimisticInitialization, 5, 10)
     alg_param_list = np.array([
@@ -146,6 +155,17 @@ if __name__ == '__main__':
                                 (optimisticInitialization,5),
                                 (optimisticInitialization,10)])
     plotAlgorithms(alg_param_list)
-    # '''
+    '''
+
+    '''
+    # UCB ALGO:
+    expected_returns = runExplorationAlgorithm(ucbExploration, 5, 10)
+    alg_param_list = np.array([
+                                (ucbExploration,0), 
+                                (ucbExploration,1), 
+                                (ucbExploration,2),
+                                (ucbExploration,5)])
+    plotAlgorithms(alg_param_list)
+    '''
 
     # END STUDENT SOLUTION
