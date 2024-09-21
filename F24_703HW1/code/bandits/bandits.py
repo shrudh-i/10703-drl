@@ -105,6 +105,26 @@ def boltzmannExploration(temperature, steps, k, meanRewards, n):
     # return the expected rewards across all steps
     expectedRewards = np.zeros(steps)
     # BEGIN STUDENT SOLUTION
+    Q = np.zeros(k) 
+    
+    for step in range(1,steps+1):
+        '''
+        BOLTZMANN STARTS
+        '''
+        exponent = np.exp(temperature * Q)
+        policy = (exponent) / np.sum(exponent)
+        # print(exponent)
+
+        action = np.random.choice(k, p=policy)
+
+        '''
+        BOLTZMANN ENDS
+        '''
+
+        reward = meanRewards[action] + np.random.normal(0,1)
+        n[action] += 1
+        Q[action] += (1/ n[action])*(reward - Q[action])
+        expectedRewards[step-1] = Q[action]
     # END STUDENT SOLUTION
     return(expectedRewards)
 
@@ -167,5 +187,17 @@ if __name__ == '__main__':
                                 (ucbExploration,5)])
     plotAlgorithms(alg_param_list)
     '''
+
+    # '''
+    # BOLTZMANN ALGO:
+    expected_returns = runExplorationAlgorithm(boltzmannExploration, 1, 10)
+    alg_param_list = np.array([
+                                (boltzmannExploration,1), 
+                                (boltzmannExploration,3),
+                                (boltzmannExploration,10),
+                                (boltzmannExploration,30),
+                                (boltzmannExploration,100)])
+    plotAlgorithms(alg_param_list)
+    # '''
 
     # END STUDENT SOLUTION
