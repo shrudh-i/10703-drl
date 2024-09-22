@@ -515,7 +515,47 @@ def value_iteration_async_custom(env, gamma, max_iters=int(1e3), tol=1e-3):
         converge.
     '''
     value_func = np.zeros(env.observation_space.n)
+
     # BEGIN STUDENT SOLUTION
+
+    def get_manhattan(n, start=(0,0)):
+        '''
+        function to get manhattan distance from a starting point
+        '''
+        matrix = np.zeros((n,n))
+        for i in range(n):
+            for j in range(n):
+                matrix[i][j] = np.sqrt((i-start[0])**2+(j-start[1])**2)
+        return matrix
+
+    maps = {
+        '4x4': (1, 1),
+        '8x8': (7, 1)
+    }
+
+    goal = maps[env.map_name]
+    print(goal)
+    ordered_states = np.argsort(get_manhattan(int(np.sqrt(env.observation_space.n)), start=goal).flatten())
+
+    for i in range(max_iters):
+        delta = 0
+        
+        for s in ordered_states:
+            v = value_func[s]
+
+            value = np.zeros(env.action_space.n)
+            for a in range(env.action_space.n):
+                trans_dyn = env.P[s][a]
+                for p, s_, r, _ in trans_dyn:
+                    value[a] += p*(r + gamma*value_func[s_])
+
+            new_v = max(value)
+            value_func[s] = new_v
+            delta = max(delta, abs(v-new_v))
+
+        if delta < tol:
+            break
+            
     # END STUDENT SOLUTION
     return(value_func, i)
 
@@ -582,54 +622,75 @@ if __name__ == '__main__':
     maps = lake_info.maps
     gamma = 0.9
 
-    #for map_name, map in maps.items():
-    env = gymnasium.make('FrozenLake-v1', desc=['FHSF', 'FGHF', 'FHHF', 'FFFF'], map_name='4x4', is_slippery=False)
-        # print(map_name)
-        # BEGIN STUDENT SOLUTION
-    policy, value_func, pi_steps, pe_steps = policy_iteration_sync(env, gamma, max_iters=int(1e3), tol=1e-3)
-    print("policy iteration sync")
-    print("improvement steps:{}\n evaluation steps:{}".format(pi_steps, pe_steps))
-    display_policy_letters(env, policy)
-    value_func_heatmap(env, value_func)
-    plt.savefig("synchronous_policy_iteration_heatmap.png")
+    # START STUDENT SOLUTION
+    for map_name, map in maps.items():
+        env = gymnasium.make('FrozenLake-v1', desc=map, map_name = map_name, is_slippery=False)
+        env.map_name = map_name
+
+        '''
+        Synchronous Policy Iteration
+        '''
+        policy, value_func, pi_steps, pe_steps = policy_iteration_sync(env, gamma, max_iters=int(1e3), tol=1e-3)
+        print("policy iteration sync")
+        print("improvement steps:{}\n evaluation steps:{}".format(pi_steps, pe_steps))
+        display_policy_letters(env, policy)
+        value_func_heatmap(env, value_func)
+
+        '''
+        Synchronous Value Iteration
+        '''
+        value_func, iters = value_iteration_sync(env, gamma, max_iters=int(1e3), tol=1e-3)
+        policy = value_func_to_policy(env, gamma, value_func)
+        print("value iteration sync")
+        print("steps:{}".format(iters))
+        display_policy_letters(env, policy)
+        value_func_heatmap(env, value_func)
+
+        '''
+        Asynchronous Policy Iteration
+        '''
+        policy, value_func, pi_steps, pe_steps = policy_iteration_async_ordered(env, gamma, max_iters=int(1e3), tol=1e-3)
+        print("policy iteration async ordered")
+        print("improvement steps:{}\n evaluation steps:{}".format(pi_steps, pe_steps))
+
+        '''
+        Asynchronous Value Iteration
+        '''
+        iter1, iter2 = [], []
+        for i in range(10):
+            _, _, pi_steps, pe_steps = policy_iteration_async_randperm(env, gamma, max_iters=int(1e3), tol=1e-3)
+            iter1.append(pi_steps)
+            iter2.append(pe_steps)
+        pi_steps = np.mean(iter1)
+        pe_steps = np.mean(iter2)
+        print("policy iteration async randperm")
+        print("average over 10 trials")
+        print("improvement steps:{}\n evaluation steps:{}".format(pi_steps, pe_steps))
+
+        '''
+        Aysnchronous Value Iteration: Ordered
+        '''
+        value_func, iters = value_iteration_async_ordered(env, gamma, max_iters=int(1e3), tol=1e-3)
+        print("value iteration async ordered")
+        print("steps:{}".format(iters))
+
+        '''
+        Aysnchronous Value Iteration: Randperm
+        '''
+        iter = []
+        for i in range(10):
+            value_func, iters = value_iteration_async_randperm(env, gamma, max_iters=int(1e3), tol=1e-3)
+            iter.append(iters) 
+        iters = np.mean(iters) 
+        print("value iteration async randperm")
+        print("average over 10 trials")
+        print("steps:{}".format(iters))
+
         
-
-    value_func, iters = value_iteration_sync(env, gamma, max_iters=int(1e3), tol=1e-3)
-    policy = value_func_to_policy(env, gamma, value_func)
-    print("value iteration sync")
-    print("steps:{}".format(iters))
-    display_policy_letters(env, policy)
-    value_func_heatmap(env, value_func)
-    plt.savefig("synchronous_value_iteration_heatmap.png")
-        # END STUDENT SOLUTION
-
-    policy, value_func, pi_steps, pe_steps = policy_iteration_async_ordered(env, gamma, max_iters=int(1e3), tol=1e-3)
-    print("policy iteration async ordered")
-    print("improvement steps:{}\n evaluation steps:{}".format(pi_steps, pe_steps))
-
-    iter1, iter2 = [], []
-    for i in range(10):
-        _, _, pi_steps, pe_steps = policy_iteration_async_randperm(env, gamma, max_iters=int(1e3), tol=1e-3)
-        iter1.append(pi_steps)
-        iter2.append(pe_steps)
-    pi_steps = np.mean(iter1)
-    pe_steps = np.mean(iter2)
-    print("policy iteration async randperm")
-    print("average over 10 trials")
-    print("improvement steps:{}\n evaluation steps:{}".format(pi_steps, pe_steps))
-
-    value_func, iters = value_iteration_async_ordered(env, gamma, max_iters=int(1e3), tol=1e-3)
-    print("value iteration async ordered")
-    print("steps:{}".format(iters))
-
-    iter = []
-    for i in range(10):
-        value_func, iters = value_iteration_async_randperm(env, gamma, max_iters=int(1e3), tol=1e-3)
-        iter.append(iters) 
-    iters = np.mean(iters) 
-    print("value iteration async randperm")
-    print("average over 10 trials")
-    print("steps:{}".format(iters))
-
-    # value_func, iters = value_iteration_async_custom(env, gamma, arg, max_iterations=int(1e3), tol=1e-3)
-    # print("value iteration async custom")
+        '''
+        Aysnchronous Value Iteration: Custom
+        '''
+        value_func, iters = value_iteration_async_custom(env, gamma, max_iters=int(1e3), tol=1e-3)
+        print("value iteration async custom")
+        value_func_heatmap(env, value_func)
+        print("steps:", format(iters))
