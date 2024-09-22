@@ -76,6 +76,7 @@ def optimisticInitialization(value, steps, k, meanRewards, n):
         n[action] += 1
         Q[action] += (1/ n[action])*(reward - Q[action])
         expectedRewards[step] = Q[action]
+
     # END STUDENT SOLUTION
     return(expectedRewards)
 
@@ -85,6 +86,7 @@ def ucbExploration(c, steps, k, meanRewards, n):
     # TODO implement the UCB exploration algorithm over all steps and return the
     # expected rewards across all steps, remember to pull all arms initially
     expectedRewards = np.zeros(steps)
+
     # BEGIN STUDENT SOLUTION
     Q = np.zeros(k) 
     
@@ -95,6 +97,7 @@ def ucbExploration(c, steps, k, meanRewards, n):
         n[action] += 1
         Q[action] += (1/ n[action])*(reward - Q[action])
         expectedRewards[step-1] = Q[action]
+
     # END STUDENT SOLUTION
     return(expectedRewards)
 
@@ -104,6 +107,7 @@ def boltzmannExploration(temperature, steps, k, meanRewards, n):
     # TODO implement the Boltzmann Exploration algorithm over all steps and
     # return the expected rewards across all steps
     expectedRewards = np.zeros(steps)
+
     # BEGIN STUDENT SOLUTION
     Q = np.zeros(k) 
     
@@ -125,6 +129,7 @@ def boltzmannExploration(temperature, steps, k, meanRewards, n):
         n[action] += 1
         Q[action] += (1/ n[action])*(reward - Q[action])
         expectedRewards[step-1] = Q[action]
+
     # END STUDENT SOLUTION
     return(expectedRewards)
 
@@ -141,18 +146,27 @@ def plotAlgorithms(alg_param_list):
                    optimisticInitialization : 'Optimistic Initialization',
                    ucbExploration: 'UCB Exploration',
                    boltzmannExploration: 'Boltzmann Exploration'}
+    
     # BEGIN STUDENT SOLUTION
     plt.figure()
     for algo, param in alg_param_list:
         expected_rewards = runExplorationAlgorithm(algo, param, iters)
-        plt.plot(np.arange(1,1001), expected_rewards, label = alg_to_name[algo] + " " + str(param))
+        plt.plot(np.arange(1,1001), expected_rewards, label = str(param))
+        # For optimal values
+        # plt.plot(np.arange(1,1001), expected_rewards, label = alg_to_name[algo] + " " + str(param))
 
-    plt.title("The Plot")
+    plt.title(alg_to_name[alg_param_list[0][0]])
+    # For optimal values
+    plt.title("Optimal Values")
+
     plt.xlabel("Time Steps")
     plt.ylabel("Average Expected Return")
     plt.legend()
-    #plt.show()
+
     plt.savefig(alg_to_name[alg_param_list[0][0]], bbox_inches='tight')
+    # For optimal values
+    # plt.savefig("Optimal Values", bbox_inches='tight')
+
     # END STUDENT SOLUTION
 
 
@@ -174,12 +188,14 @@ if __name__ == '__main__':
         alg_param_list = np.array(alg_param_list)
         plotAlgorithms(alg_param_list)
 
-    # Optimals 
+    '''
+    # Optimals values
     alg_param_list = np.array([
                                 (epsilonGreedyExploration,0.1),
                                 (optimisticInitialization,5),
-                                (ucbExploration,2),
-                                (boltzmannExploration,30)])
+                                (ucbExploration,1),
+                                (boltzmannExploration,3)])
     plotAlgorithms(alg_param_list)
+    '''
 
     # END STUDENT SOLUTION
