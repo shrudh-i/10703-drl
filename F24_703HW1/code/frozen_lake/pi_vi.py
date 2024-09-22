@@ -554,7 +554,7 @@ def value_iteration_async_custom(env, gamma, max_iters=int(1e3), tol=1e-3):
         matrix = np.zeros((n,n))
         for i in range(n):
             for j in range(n):
-                matrix[i][j] = np.sqrt((i-start[0])**2+(j-start[1])**2)
+                matrix[i][j] = np.abs(i-start[0]) + np.abs(j - start[1])
         return matrix
 
     # defining the goal state based on the map
@@ -658,64 +658,64 @@ if __name__ == '__main__':
         # descriptor attribute to identify the map
         env.map_name = map_name
 
-        '''
-        1.2: Synchronous Policy Iteration
-        '''
-        policy, value_func, pi_steps, pe_steps = policy_iteration_sync(env, gamma, max_iters=int(1e3), tol=1e-3)
-        print("Synchronous Policy Iteration")
-        print("Improvement steps:{}\n Evaluation steps:{}".format(pi_steps, pe_steps))
-        display_policy_letters(env, policy)
-        value_func_heatmap(env, value_func)
+        # '''
+        # 1.2: Synchronous Policy Iteration
+        # '''
+        # policy, value_func, pi_steps, pe_steps = policy_iteration_sync(env, gamma, max_iters=int(1e3), tol=1e-3)
+        # print("Synchronous Policy Iteration")
+        # print("Improvement steps:{}\n Evaluation steps:{}".format(pi_steps, pe_steps))
+        # display_policy_letters(env, policy)
+        # value_func_heatmap(env, value_func)
 
-        '''
-        1.3: Synchronous Value Iteration
-        '''
-        value_func, iters = value_iteration_sync(env, gamma, max_iters=int(1e3), tol=1e-3)
-        policy = value_func_to_policy(env, gamma, value_func)
-        print("Synchronous Value Iteration")
-        print("Steps:{}".format(iters))
-        display_policy_letters(env, policy)
-        value_func_heatmap(env, value_func)
+        # '''
+        # 1.3: Synchronous Value Iteration
+        # '''
+        # value_func, iters = value_iteration_sync(env, gamma, max_iters=int(1e3), tol=1e-3)
+        # policy = value_func_to_policy(env, gamma, value_func)
+        # print("Synchronous Value Iteration")
+        # print("Steps:{}".format(iters))
+        # display_policy_letters(env, policy)
+        # value_func_heatmap(env, value_func)
 
-        '''
-        1.4: Asynchronous Policy Iteration: Ordered
-        '''
-        policy, value_func, pi_steps, pe_steps = policy_iteration_async_ordered(env, gamma, max_iters=int(1e3), tol=1e-3)
-        print("Asynchronous Policy Iteration: Ordered")
-        print("Improvement steps:{}\n Evaluation steps:{}".format(pi_steps, pe_steps))
+        # '''
+        # 1.4: Asynchronous Policy Iteration: Ordered
+        # '''
+        # policy, value_func, pi_steps, pe_steps = policy_iteration_async_ordered(env, gamma, max_iters=int(1e3), tol=1e-3)
+        # print("Asynchronous Policy Iteration: Ordered")
+        # print("Improvement steps:{}\n Evaluation steps:{}".format(pi_steps, pe_steps))
 
-        '''
-        1.4: Asynchronous Value Iteration: Randperm
-        '''
-        iter1, iter2 = [], []
-        for i in range(10):
-            _, _, pi_steps, pe_steps = policy_iteration_async_randperm(env, gamma, max_iters=int(1e3), tol=1e-3)
-            iter1.append(pi_steps)
-            iter2.append(pe_steps)
-        pi_steps = np.mean(iter1)
-        pe_steps = np.mean(iter2)
-        print("Asynchronous Value Iteration: Randperm")
-        print("Average over 10 trials")
-        print("Improvement steps:{}\n Evaluation steps:{}".format(pi_steps, pe_steps))
+        # '''
+        # 1.4: Asynchronous Value Iteration: Randperm
+        # '''
+        # iter1, iter2 = [], []
+        # for i in range(10):
+        #     _, _, pi_steps, pe_steps = policy_iteration_async_randperm(env, gamma, max_iters=int(1e3), tol=1e-3)
+        #     iter1.append(pi_steps)
+        #     iter2.append(pe_steps)
+        # pi_steps = np.mean(iter1)
+        # pe_steps = np.mean(iter2)
+        # print("Asynchronous Value Iteration: Randperm")
+        # print("Average over 10 trials")
+        # print("Improvement steps:{}\n Evaluation steps:{}".format(pi_steps, pe_steps))
 
-        '''
-        1.5: Aysnchronous Value Iteration: Ordered
-        '''
-        value_func, iters = value_iteration_async_ordered(env, gamma, max_iters=int(1e3), tol=1e-3)
-        print("Aysnchronous Value Iteration: Ordered")
-        print("Steps:{}".format(iters))
+        # '''
+        # 1.5: Aysnchronous Value Iteration: Ordered
+        # '''
+        # value_func, iters = value_iteration_async_ordered(env, gamma, max_iters=int(1e3), tol=1e-3)
+        # print("Aysnchronous Value Iteration: Ordered")
+        # print("Steps:{}".format(iters))
 
-        '''
-        1.5: Aysnchronous Value Iteration: Randperm
-        '''
-        iter = []
-        for i in range(10):
-            value_func, iters = value_iteration_async_randperm(env, gamma, max_iters=int(1e3), tol=1e-3)
-            iter.append(iters) 
-        iters = np.mean(iters) 
-        print("Aysnchronous Value Iteration: Randperm")
-        print("Average over 10 trials")
-        print("Steps:{}".format(iters))
+        # '''
+        # 1.5: Aysnchronous Value Iteration: Randperm
+        # '''
+        # iter = []
+        # for i in range(10):
+        #     value_func, iters = value_iteration_async_randperm(env, gamma, max_iters=int(1e3), tol=1e-3)
+        #     iter.append(iters) 
+        # iters = np.mean(iters) 
+        # print("Aysnchronous Value Iteration: Randperm")
+        # print("Average over 10 trials")
+        # print("Steps:{}".format(iters))
 
         '''
         1.5: Aysnchronous Value Iteration: Custom
