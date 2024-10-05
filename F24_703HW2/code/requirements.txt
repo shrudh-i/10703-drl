@@ -1,0 +1,4 @@
+# python==3.10.12
+gymnasium==0.29.1
+matplotlib==3.7.1
+torch==2.0.1
