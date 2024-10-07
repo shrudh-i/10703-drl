@@ -9,6 +9,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+from torch.distributions import Categorical
 
 
 
@@ -41,11 +42,14 @@ class PolicyGradient(nn.Module):
             nn.Linear(state_size, hidden_layer_size),
             nn.ReLU(),
             # BEGIN STUDENT SOLUTION
+            nn.Linear(hidden_layer_size, action_size),
             # END STUDENT SOLUTION
         )
 
         # initialize networks, optimizers, move networks to device
         # BEGIN STUDENT SOLUTION
+        self.optim_actor = optim.adam(self.actor)
+        self.optim_critic = optim.adam(self.critic)
         # END STUDENT SOLUTION
 
 
@@ -56,6 +60,17 @@ class PolicyGradient(nn.Module):
     def get_action(self, state, stochastic):
         # if stochastic, sample using the action probabilities, else get the argmax
         # BEGIN STUDENT SOLUTION
+        actor_prob, critic_prob = self.forward(torch.from_numpy(state).float()) 
+        cat = Categorical(actor_prob)
+        if stochastic:
+            # sample using action probabilities
+            action = cat.sample()
+            return action.item(), cat.log_prob(action)
+        else:
+            # sample using argmax
+            action = torch.from_numpy(np.argmax(cat))
+            return action
+
         # END STUDENT SOLUTION
         pass
 
@@ -67,11 +82,21 @@ class PolicyGradient(nn.Module):
         pass
 
 
-    def train(self, states, actions, rewards):
+    def train(self, states, actions, rewards, logprobs):
         # train the agent using states, actions, and rewards
         # BEGIN STUDENT SOLUTION
+
+        # Vectorize
+        T = len(rewards)
+        G = np.zeros(T)
+        for t in range(T):
+            gammas = np.ones((T-1)-t) * self.gamma
+            cumprod_gammas = np.flip(np.cumprod(gammas)) / self.gamma
+            G[t] = cumprod_gammas * rewards
+        
+        L_theta = -(1/T) * np.sum(G * logprobs)
+        #Update = stuff
         # END STUDENT SOLUTION
-        pass
 
 
     def run(self, env, max_steps, num_episodes, train):
@@ -79,16 +104,61 @@ class PolicyGradient(nn.Module):
 
         # run the agent through the environment num_episodes times for at most max steps
         # BEGIN STUDENT SOLUTION
+        for e in range(num_episodes):
+            # generate episode with max steps
+            states, actions, rewards, logprobs = self.generate_trajectory(env, max_steps, True)
+            # train
+            self.train(states, actions, rewards, logprobs)
+
+            if e % 100 == 0:
+                cumulative_reward = 0
+                for _ in range(20):
+                    # run test 
+                    _, _, test_reward, _ = self.generate_trajectory(env, max_steps, False)
+                    cumulative_reward += test_reward
+                total_rewards.append(cumulative_reward / 20)
         # END STUDENT SOLUTION
         return(total_rewards)
 
+    # Self Made Function
+    def generate_trajectory(self, env, max_steps, train):
+        Scurr_state = env.reset()
 
+        done = False
+        steps = 0
+        curr_state = env.state
 
+        states   = []
+        actions  = []
+        rewards  = []
+        logprobs = []
+
+        while not done and steps < max_steps:
+            action, logprob
+            if train:
+                # then use stochastic
+                action, logprob = self.get_action(curr_state, True)
+                logprobs.append(logprob)
+            else:
+                action = self.get_action(curr_state, False)
+            states.append(curr_state)
+            actions.append(action)
+            next_state, reward, done, _ = env.step(action)
+
+            rewards.append(reward)
+            curr_state = next_state
+            steps = steps + 1
+        return states, actions, rewards, logprobs
+            
+            
 def graph_agents(graph_name, agents, env, max_steps, num_episodes):
     print(f'Starting: {graph_name}')
 
     # graph the data mentioned in the homework pdf
     # BEGIN STUDENT SOLUTION
+    graph_every = 1
+    min_total_rewards = np.min(average_total_rewards)
+    max_total_rewards = np.max(average_total_rewards)
     # END STUDENT SOLUTION
 
     # plot the total rewards
@@ -119,12 +189,27 @@ def parse_args():
     return parser.parse_args()
 
 
-
 def main():
     args = parse_args()
+    max_steps = args.max_steps
+    num_episodes = args.num_episodes
+    mode = args.mode
+    n = args.n
+    num_runs = args.num_runs
 
     # init args, agents, and call graph_agents on the initialized agents
     # BEGIN STUDENT SOLUTION
+    
+    # Create Env
+    env = gym.make(args.env_name, max_episode_steps=max_steps)
+    policy_gradient = PolicyGradient(mode= mode,n= n)
+
+    run_total_rewards = np.array([])
+    for run in range(num_runs):
+        run_rewards = policy_gradient.run(env, max_steps, num_episodes,True)
+        run_total_rewards = np.vstack(run_total_rewards, run_rewards)
+    
+    graph_agents("I dunno", max_steps= max_steps, num_episodes = num_episodes)
     # END STUDENT SOLUTION
 
 
