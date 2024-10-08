@@ -34,6 +34,7 @@ class PolicyGradient(nn.Module):
             nn.ReLU(),
             nn.Linear(hidden_layer_size, action_size),
             # BEGIN STUDENT SOLUTION
+            nn.Softmax()
             # END STUDENT SOLUTION
         )
 
@@ -48,8 +49,8 @@ class PolicyGradient(nn.Module):
 
         # initialize networks, optimizers, move networks to device
         # BEGIN STUDENT SOLUTION
-        self.optim_actor = optim.adam(self.actor)
-        self.optim_critic = optim.adam(self.critic)
+        self.optim_actor = optim.Adam(self.actor.parameters(), lr = lr_actor)
+        self.optim_critic = optim.Adam(self.critic.parameters(), lr = lr_critic)
         # END STUDENT SOLUTION
 
 
@@ -68,8 +69,8 @@ class PolicyGradient(nn.Module):
             return action.item(), cat.log_prob(action)
         else:
             # sample using argmax
-            action = torch.from_numpy(np.argmax(cat))
-            return action
+            action = torch.from_numpy(np.array(np.argmax(cat)))
+            return action.item()
 
         # END STUDENT SOLUTION
         pass
@@ -84,18 +85,28 @@ class PolicyGradient(nn.Module):
 
     def train(self, states, actions, rewards, logprobs):
         # train the agent using states, actions, and rewards
-        # BEGIN STUDENT SOLUTION
 
+        # BEGIN STUDENT SOLUTION
         # Vectorize
         T = len(rewards)
         G = np.zeros(T)
         for t in range(T):
             gammas = np.ones((T-1)-t) * self.gamma
-            cumprod_gammas = np.flip(np.cumprod(gammas)) / self.gamma
-            G[t] = cumprod_gammas * rewards
-        
-        L_theta = -(1/T) * np.sum(G * logprobs)
-        #Update = stuff
+            cumprod_gammas = np.cumprod(gammas) / self.gamma
+            G[t] = np.sum(cumprod_gammas * rewards[t:-1])
+        policy_loss = []
+        for t in range(T):
+            loss = -logprobs[t] * G[t] / T
+            policy_loss.append(loss.unsqueeze(0))
+        # L_theta = -(1/T) * np.sum(G * logprobs)
+        # L_theta = torch.from_numpy(np.array(L_theta))
+        # L_theta.requires_grad_()
+        policy_loss = torch.cat(policy_loss).sum()
+        #print("Policy Loss: ", policy_loss)
+
+        self.optim_actor.zero_grad()
+        policy_loss.backward()
+        self.optim_actor.step()
         # END STUDENT SOLUTION
 
 
@@ -106,6 +117,7 @@ class PolicyGradient(nn.Module):
         # BEGIN STUDENT SOLUTION
         for e in range(num_episodes):
             # generate episode with max steps
+            #print("[TRAIN] Training")
             states, actions, rewards, logprobs = self.generate_trajectory(env, max_steps, True)
             # train
             self.train(states, actions, rewards, logprobs)
@@ -114,19 +126,21 @@ class PolicyGradient(nn.Module):
                 cumulative_reward = 0
                 for _ in range(20):
                     # run test 
+                    #print("[EVAL] Testing")
                     _, _, test_reward, _ = self.generate_trajectory(env, max_steps, False)
-                    cumulative_reward += test_reward
+                    cumulative_reward += np.sum(test_reward)
                 total_rewards.append(cumulative_reward / 20)
+                print(cumulative_reward/20)
         # END STUDENT SOLUTION
-        return(total_rewards)
+        return np.array(total_rewards)
 
     # Self Made Function
     def generate_trajectory(self, env, max_steps, train):
-        Scurr_state = env.reset()
+        curr_state = env.reset()
 
         done = False
         steps = 0
-        curr_state = env.state
+        curr_state = env.unwrapped.state
 
         states   = []
         actions  = []
@@ -134,7 +148,8 @@ class PolicyGradient(nn.Module):
         logprobs = []
 
         while not done and steps < max_steps:
-            action, logprob
+            action = None
+            logprob = None
             if train:
                 # then use stochastic
                 action, logprob = self.get_action(curr_state, True)
@@ -143,22 +158,28 @@ class PolicyGradient(nn.Module):
                 action = self.get_action(curr_state, False)
             states.append(curr_state)
             actions.append(action)
-            next_state, reward, done, _ = env.step(action)
+            next_state, reward, done, _, _ = env.step(action)
 
             rewards.append(reward)
             curr_state = next_state
             steps = steps + 1
+        #print("Trajectory: ", steps)
         return states, actions, rewards, logprobs
             
             
-def graph_agents(graph_name, agents, env, max_steps, num_episodes):
+def graph_agents(graph_name, agents, env, max_steps, num_episodes, total_rewards):
     print(f'Starting: {graph_name}')
 
     # graph the data mentioned in the homework pdf
     # BEGIN STUDENT SOLUTION
-    graph_every = 1
-    min_total_rewards = np.min(average_total_rewards)
-    max_total_rewards = np.max(average_total_rewards)
+    average_total_rewards = np.average(total_rewards, axis=1)
+    graph_every = int(num_episodes / 100)
+    min_total_rewards = np.min(total_rewards, axis=1)
+    max_total_rewards = np.max(total_rewards, axis=1)
+
+    print(average_total_rewards)
+    print(min_total_rewards)
+    print(max_total_rewards)
     # END STUDENT SOLUTION
 
     # plot the total rewards
@@ -202,14 +223,17 @@ def main():
     
     # Create Env
     env = gym.make(args.env_name, max_episode_steps=max_steps)
-    policy_gradient = PolicyGradient(mode= mode,n= n)
+    policy_gradient = PolicyGradient(env.observation_space.shape[0], env.action_space.n , mode= mode,n= n)
 
-    run_total_rewards = np.array([])
+    run_total_rewards = np.zeros((num_runs,5),dtype=object)
+    print(run_total_rewards)
     for run in range(num_runs):
         run_rewards = policy_gradient.run(env, max_steps, num_episodes,True)
-        run_total_rewards = np.vstack(run_total_rewards, run_rewards)
+        print(run_rewards)
+        print(run_rewards.shape)
+        run_total_rewards[run] = run_rewards
     
-    graph_agents("I dunno", max_steps= max_steps, num_episodes = num_episodes)
+    graph_agents("I dunno", 0, 0, max_steps= max_steps, num_episodes = num_episodes, total_rewards=run_total_rewards)
     # END STUDENT SOLUTION
 
 
