@@ -46,7 +46,7 @@ class ReplayMemory():
 
         # Append new experience (transition) to the memory buffer
         self.memory.append(transition)
-        
+
         # END STUDENT SOLUTION
         pass
 
@@ -61,10 +61,12 @@ class DeepQNetwork(nn.Module):
         self.action_size = action_size
 
         self.gamma = gamma
+        # The probability of taking a random action for exploration (ε-greedy exploration)
         self.epsilon = epsilon
 
         self.target_update = target_update
 
+        #  Number of steps before the training begins, used to populate the replay memory
         self.burn_in = burn_in
 
         self.device = device
@@ -76,11 +78,34 @@ class DeepQNetwork(nn.Module):
             nn.Linear(state_size, hidden_layer_size),
             nn.ReLU(),
             # BEGIN STUDENT SOLUTION
+            nn.Linear(hidden_layer_size, hidden_layer_size),
+            nn.ReLU(),
+            nn.Linear(hidden_layer_size, action_size),
+            # TODO: include ReLU here??
+            # nn.ReLU()
             # END STUDENT SOLUTION
         )
 
         # initialize replay buffer, networks, optimizer, move networks to device
         # BEGIN STUDENT SOLUTION
+
+        # TODO: check if it can be initialized this way
+        self.policy_network = q_net_init(state_size, action_size).to(device)
+        self.target_network = q_net_init(state_size, action_size).to(device)
+        self.target_network.load_state_dict(self.policy_network.state_dict())
+
+
+        # TODO: verify the memory_size & batch_size
+        memory = ReplayMemory(10000, 10000)
+
+        '''
+            Note on optimizer:
+                * amsgrad: stochastic optimization method. helps with convergence.
+                * TODO: verify if policy param can be passed in this way [state_size, action_size]
+        '''
+        optimizer = optim.Adam(self.policy_network.params(), lr=lr_q_net, amsgrad=True)
+        
+        global steps_done; steps_done = 0
         # END STUDENT SOLUTION
 
 
@@ -91,6 +116,29 @@ class DeepQNetwork(nn.Module):
     def get_action(self, state, stochastic):
         # if stochastic, sample using epsilon greedy, else get the argmax
         # BEGIN STUDENT SOLUTION
+
+        sample = random.random()
+        if stochastic:
+            pass 
+        else: # epsilon-greedy
+            # TODO: How to define the epsilon threshold
+            # using initialized ep for now 
+            steps_done += 1
+            if sample > self.epsilon:
+                '''
+                    Note on torch.no_grad():
+                        * disable gradient calculation
+                        * TODO: understand more on this
+                '''
+                with torch.no_grad():
+                    return self.policy_network(state).max(1).indices.view(1, 1)
+            else:
+                # return torch.tensor([[env.action_space.sample()]], device=device, dtype=torch.long)
+                # TODO: is this the way to do it?
+                return torch.tensor([[env.action_space.sample()]])
+
+
+
         # END STUDENT SOLUTION
         pass
 
@@ -150,12 +198,25 @@ def main():
 
     # init args, agents, and call graph_agent on the initialized agents
     # BEGIN STUDENT SOLUTION
-    env = gym.make("CartPole-v1")
+    '''
+        TODO:
+            * verify if we can make the environment global
+    '''
+    global env; env = gym.make("CartPole-v1")
+
     device = torch.device(
     "cuda" if torch.cuda.is_available() else
     "mps" if torch.backends.mps.is_available() else
     "cpu"
-)
+    )
+    
+    n_actions = env.action_space.n
+    state, info = env.reset()
+    n_observations = len(state)
+    
+    # send in action_size & state_size
+    DeepQNetwork(n_actions, n_observations)
+    
     # END STUDENT SOLUTION
 
 
