@@ -19,6 +19,13 @@ class ReplayMemory():
         # define init params
         # use collections.deque
         # BEGIN STUDENT SOLUTION
+
+        # Initialize the replay memory as a deque with a max length of memory_size
+        self.memory = collections.deque(maxlen=memory_size)
+
+        # Store the batch size for sampling
+        self.batch_size = batch_size
+
         # END STUDENT SOLUTION
         pass
 
@@ -26,13 +33,20 @@ class ReplayMemory():
     def sample_batch(self):
         # randomly chooses from the collections.deque
         # BEGIN STUDENT SOLUTION
+
+        # Randomly sample a batch of transitions from the memory
+        return random.sample(self.memory, self.batch_size)
         # END STUDENT SOLUTION
         pass
 
 
     def append(self, transition):
-        # append to the collections.deque
+        # append to the collections.deque - FIFO approach
         # BEGIN STUDENT SOLUTION
+
+        # Append new experience (transition) to the memory buffer
+        self.memory.append(transition)
+        
         # END STUDENT SOLUTION
         pass
 
@@ -136,6 +150,12 @@ def main():
 
     # init args, agents, and call graph_agent on the initialized agents
     # BEGIN STUDENT SOLUTION
+    env = gym.make("CartPole-v1")
+    device = torch.device(
+    "cuda" if torch.cuda.is_available() else
+    "mps" if torch.backends.mps.is_available() else
+    "cpu"
+)
     # END STUDENT SOLUTION
 
 
