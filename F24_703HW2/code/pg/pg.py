@@ -72,7 +72,8 @@ class PolicyGradient(nn.Module):
             # sample using action probabilities
             action = cat.sample()
             # print("Action from stochastic ",action.item())
-            return action.item(), cat.log_prob(action), critic_prob.item()
+            # print(type(critic_prob))
+            return action.item(), cat.log_prob(action), critic_prob
         else:
             # sample using argmax
             # action = torch.from_numpy(np.array(np.argmax(cat)))
@@ -81,7 +82,8 @@ class PolicyGradient(nn.Module):
             # index = torch.argmax(cat)
 
             # action = cat[index]
-            return action.item(), critic_prob.item()
+            # print(type(critic_prob))
+            return action.item(), critic_prob
 
         # END STUDENT SOLUTION
 
@@ -93,7 +95,7 @@ class PolicyGradient(nn.Module):
         pass
 
     # Looks good to me
-    def train(self, states, actions, rewards, logprobs, mode):
+    def train(self, states, actions, rewards, logprobs, values):
         # train the agent using states, actions, and rewards
 
         # BEGIN STUDENT SOLUTION
@@ -111,27 +113,52 @@ class PolicyGradient(nn.Module):
             # print("G",G[t]) 
         # print("Entire G", G)
         # exit(0)
-        policy_loss = []
+        actor_loss = []
+        critic_loss = []
         for t in range(T):
-            if mode=="REINFORCE":
-                loss = -((logprobs[t] * G[t]) / T)
-            elif mode=="REINFORCE_WITH_BASELINE":
-                loss_theta = -((logprobs[t] * G[t]-) / T)
+            if self.mode=="REINFORCE":
+                loss_theta = -((logprobs[t] * G[t]) / T)
+                # print("ttttttt")
+                # loss_omega=0
+            elif self.mode=="REINFORCE_WITH_BASELINE":
+                delta = G[t]-values[t]
+                # print(type(delta))
+                loss_theta = -((logprobs[t] * delta) / T)
+                loss_omega = (delta**2) / T
+        
+
             # print("loss", loss)
-            policy_loss.append(loss.unsqueeze(0))
+            actor_loss.append(loss_theta.unsqueeze(0))
+            # print(type(loss_omega.unsqueeze(0)))
+            critic_loss.append(loss_omega.unsqueeze(0))
+
+        # print("actor loss",actor_loss)
+        # print("critic loss", critic_loss)    
+        
+
 
         # print(" Entire policy loss", policy_loss)
         # exit(0)
         # L_theta = -(1/T) * np.sum(G * logprobs)
         # L_theta = torch.from_numpy(np.array(L_theta))
         # L_theta.requires_grad_()
-        policy_loss = torch.cat(policy_loss).sum()
-        # print("Policy Loss: ", policy_loss)
-        # exit(0)
-        self.optim_actor.zero_grad()
-        policy_loss.backward()
-        self.optim_actor.step()
+        actor_loss= torch.cat(actor_loss).sum()
+        # critic_loss = critic_loss.sum()
+        critic_loss= torch.cat(critic_loss).sum()
+        # critic_loss = torch.sum(torch.stack(critic_loss))
 
+        # print(actor_loss)
+        # print(critic_loss)        
+        # # print("Policy Loss: ", policy_loss)
+        # # exit(0)
+        self.optim_actor.zero_grad()
+        self.optim_critic.zero_grad()
+
+        actor_loss.backward()
+        critic_loss.backward()
+        
+        self.optim_actor.step()
+        self.optim_critic.step()
 
         # END STUDENT SOLUTION
 
@@ -143,20 +170,20 @@ class PolicyGradient(nn.Module):
         # BEGIN STUDENT SOLUTION
         for e in range(num_episodes):
             # generate episode with max steps
-            #print("[TRAIN] Training")
-            states, actions, rewards, logprobs = self.generate_trajectory(env, max_steps, True)
+            print("[TRAIN] Training: ", e)
+            states, actions, rewards, logprobs, values = self.generate_trajectory(env, max_steps, True)
             # train
             # print("rewards before train", rewards)
             # print("states before train", states)
             # print("actions before train", actions)
-            self.train(states, actions, rewards, logprobs)
+            self.train(states, actions, rewards, logprobs, values)
 
             if e % 100 == 0:
                 cumulative_reward = 0
                 for _ in range(20):
                     # run test 
                     #print("[EVAL] Testing")
-                    _, _, test_reward, _ = self.generate_trajectory(env, max_steps, False) # False
+                    _, _, test_reward, _, _ = self.generate_trajectory(env, max_steps, False) # False
                     cumulative_reward += np.sum(test_reward)
                 total_rewards.append(cumulative_reward / 20)
                 print("Epsodic reward in eval",cumulative_reward/20)
@@ -182,22 +209,26 @@ class PolicyGradient(nn.Module):
             action = None
             logprob = None
             value = None
+
             if train:
                 # then use stochastic
                 action, logprob, value = self.get_action(curr_state, True)
                 logprobs.append(logprob)
             else:
                 action, value = self.get_action(curr_state, False)
+
             states.append(curr_state)
             actions.append(action)
+
             values.append(value)
+            
             next_state, reward, done, _, _ = env.step(action)
 
             rewards.append(reward)
             curr_state = next_state
             steps = steps + 1
         #print("Trajectory: ", steps)
-        return states, actions, rewards, logprobs
+        return states, actions, rewards, logprobs, values
             
             
 def graph_agents(graph_name, agents, env, max_steps, num_episodes, total_rewards):
@@ -234,7 +265,7 @@ def parse_args():
     mode_choices = ['REINFORCE', 'REINFORCE_WITH_BASELINE', 'A2C']
 
     parser = argparse.ArgumentParser(description='Train an agent.')
-    parser.add_argument('--mode', type=str, default='REINFORCE', choices=mode_choices, help='Mode to run the agent in')
+    parser.add_argument('--mode', type=str, default='REINFORCE_WITH_BASELINE', choices=mode_choices, help='Mode to run the agent in')
     parser.add_argument('--n', type=int, default=64, help='The n to use for n step A2C')
     parser.add_argument('--num_runs', type=int, default=5, help='Number of runs to average over for graph')
     parser.add_argument('--num_episodes', type=int, default=3500, help='Number of episodes to train for')
