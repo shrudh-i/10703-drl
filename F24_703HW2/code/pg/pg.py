@@ -34,7 +34,7 @@ class PolicyGradient(nn.Module):
             nn.ReLU(),
             nn.Linear(hidden_layer_size, action_size),
             # BEGIN STUDENT SOLUTION
-            nn.Softmax()
+            nn.Softmax(dim=0)
             # END STUDENT SOLUTION
         )
 
@@ -43,37 +43,47 @@ class PolicyGradient(nn.Module):
             nn.Linear(state_size, hidden_layer_size),
             nn.ReLU(),
             # BEGIN STUDENT SOLUTION
-            nn.Linear(hidden_layer_size, action_size),
+            nn.Linear(hidden_layer_size, 1)
             # END STUDENT SOLUTION
         )
 
         # initialize networks, optimizers, move networks to device
         # BEGIN STUDENT SOLUTION
+        # print(self.actor)
         self.optim_actor = optim.Adam(self.actor.parameters(), lr = lr_actor)
         self.optim_critic = optim.Adam(self.critic.parameters(), lr = lr_critic)
         # END STUDENT SOLUTION
 
-
+    # Looks good to me
     def forward(self, state):
+        # print("fwd",self.actor(state))
         return(self.actor(state), self.critic(state))
 
-
+    # Looks good to me 
     def get_action(self, state, stochastic):
         # if stochastic, sample using the action probabilities, else get the argmax
         # BEGIN STUDENT SOLUTION
-        actor_prob, critic_prob = self.forward(torch.from_numpy(state).float()) 
+        # print(state)
+        actor_prob, critic_prob = self.forward(torch.from_numpy(state).float())
+        # print(actor_prob)
+        # exit(0)
         cat = Categorical(actor_prob)
         if stochastic:
             # sample using action probabilities
             action = cat.sample()
-            return action.item(), cat.log_prob(action)
+            # print("Action from stochastic ",action.item())
+            return action.item(), cat.log_prob(action), critic_prob.item()
         else:
             # sample using argmax
-            action = torch.from_numpy(np.array(np.argmax(cat)))
-            return action.item()
+            # action = torch.from_numpy(np.array(np.argmax(cat)))
+            action = cat.probs.argmax()
+            # action = cat.probs[index]
+            # index = torch.argmax(cat)
+
+            # action = cat[index]
+            return action.item(), critic_prob.item()
 
         # END STUDENT SOLUTION
-        pass
 
 
     def calculate_n_step_bootstrap(self, rewards_tensor, values):
@@ -82,31 +92,47 @@ class PolicyGradient(nn.Module):
         # END STUDENT SOLUTION
         pass
 
-
-    def train(self, states, actions, rewards, logprobs):
+    # Looks good to me
+    def train(self, states, actions, rewards, logprobs, mode):
         # train the agent using states, actions, and rewards
 
         # BEGIN STUDENT SOLUTION
         # Vectorize
         T = len(rewards)
+        # print("T",T)
         G = np.zeros(T)
         for t in range(T):
-            gammas = np.ones((T-1)-t) * self.gamma
+            gammas = np.ones((T)-t) * self.gamma
+            # print("gammas", len(gammas))
             cumprod_gammas = np.cumprod(gammas) / self.gamma
-            G[t] = np.sum(cumprod_gammas * rewards[t:-1])
+            # print("gamma",cumprod_gammas)
+            # print("rewards",rewards[t:])
+            G[t] = np.sum(cumprod_gammas * rewards[t:])
+            # print("G",G[t]) 
+        # print("Entire G", G)
+        # exit(0)
         policy_loss = []
         for t in range(T):
-            loss = -logprobs[t] * G[t] / T
+            if mode=="REINFORCE":
+                loss = -((logprobs[t] * G[t]) / T)
+            elif mode=="REINFORCE_WITH_BASELINE":
+                loss_theta = -((logprobs[t] * G[t]-) / T)
+            # print("loss", loss)
             policy_loss.append(loss.unsqueeze(0))
+
+        # print(" Entire policy loss", policy_loss)
+        # exit(0)
         # L_theta = -(1/T) * np.sum(G * logprobs)
         # L_theta = torch.from_numpy(np.array(L_theta))
         # L_theta.requires_grad_()
         policy_loss = torch.cat(policy_loss).sum()
-        #print("Policy Loss: ", policy_loss)
-
+        # print("Policy Loss: ", policy_loss)
+        # exit(0)
         self.optim_actor.zero_grad()
         policy_loss.backward()
         self.optim_actor.step()
+
+
         # END STUDENT SOLUTION
 
 
@@ -120,6 +146,9 @@ class PolicyGradient(nn.Module):
             #print("[TRAIN] Training")
             states, actions, rewards, logprobs = self.generate_trajectory(env, max_steps, True)
             # train
+            # print("rewards before train", rewards)
+            # print("states before train", states)
+            # print("actions before train", actions)
             self.train(states, actions, rewards, logprobs)
 
             if e % 100 == 0:
@@ -127,14 +156,15 @@ class PolicyGradient(nn.Module):
                 for _ in range(20):
                     # run test 
                     #print("[EVAL] Testing")
-                    _, _, test_reward, _ = self.generate_trajectory(env, max_steps, False)
+                    _, _, test_reward, _ = self.generate_trajectory(env, max_steps, False) # False
                     cumulative_reward += np.sum(test_reward)
                 total_rewards.append(cumulative_reward / 20)
-                print(cumulative_reward/20)
+                print("Epsodic reward in eval",cumulative_reward/20)
         # END STUDENT SOLUTION
         return np.array(total_rewards)
 
     # Self Made Function
+    # Looks good to me
     def generate_trajectory(self, env, max_steps, train):
         curr_state = env.reset()
 
@@ -146,18 +176,21 @@ class PolicyGradient(nn.Module):
         actions  = []
         rewards  = []
         logprobs = []
+        values = []
 
         while not done and steps < max_steps:
             action = None
             logprob = None
+            value = None
             if train:
                 # then use stochastic
-                action, logprob = self.get_action(curr_state, True)
+                action, logprob, value = self.get_action(curr_state, True)
                 logprobs.append(logprob)
             else:
-                action = self.get_action(curr_state, False)
+                action, value = self.get_action(curr_state, False)
             states.append(curr_state)
             actions.append(action)
+            values.append(value)
             next_state, reward, done, _, _ = env.step(action)
 
             rewards.append(reward)
@@ -226,14 +259,15 @@ def main():
     policy_gradient = PolicyGradient(env.observation_space.shape[0], env.action_space.n , mode= mode,n= n)
 
     run_total_rewards = np.zeros((num_runs,5),dtype=object)
-    print(run_total_rewards)
-    for run in range(num_runs):
+    # print(run_total_rewards)
+    for run in range(5): #num_runs
         run_rewards = policy_gradient.run(env, max_steps, num_episodes,True)
-        print(run_rewards)
+        print("Run: ", run)
+        print("Reward",run_rewards)
         print(run_rewards.shape)
         run_total_rewards[run] = run_rewards
     
-    graph_agents("I dunno", 0, 0, max_steps= max_steps, num_episodes = num_episodes, total_rewards=run_total_rewards)
+    # graph_agents("I dunno", 0, 0, max_steps= max_steps, num_episodes = num_episodes, total_rewards=run_total_rewards)
     # END STUDENT SOLUTION
 
 
