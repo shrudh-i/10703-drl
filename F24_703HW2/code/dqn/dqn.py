@@ -12,7 +12,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 
-
+#experience replay
+Transition = collections.namedtuple("Transition", ("state", "action", "next_state", "reward"))
 
 class ReplayMemory():
     def __init__(self, memory_size, batch_size):
@@ -78,9 +79,7 @@ class DeepQNetwork(nn.Module):
             nn.Linear(state_size, hidden_layer_size),
             nn.ReLU(),
             # BEGIN STUDENT SOLUTION
-            nn.Linear(hidden_layer_size, hidden_layer_size),
-            nn.ReLU(),
-            nn.Linear(hidden_layer_size, action_size),
+            nn.Linear(hidden_layer_size, action_size)
             # TODO: include ReLU here??
             # nn.ReLU()
             # END STUDENT SOLUTION
@@ -89,23 +88,24 @@ class DeepQNetwork(nn.Module):
         # initialize replay buffer, networks, optimizer, move networks to device
         # BEGIN STUDENT SOLUTION
 
-        # TODO: check if it can be initialized this way
-        self.policy_network = q_net_init(state_size, action_size).to(device)
-        self.target_network = q_net_init(state_size, action_size).to(device)
-        self.target_network.load_state_dict(self.policy_network.state_dict())
+        self.q_net = q_net_init().to(self.device)
+        self.target_network = q_net_init().to(self.device)
+
+        # TODO: verify if this is needed
+        self.target_network.load_state_dict(self.q_net.state_dict())
+        self.target_network.eval()
 
 
         # TODO: verify the memory_size & batch_size
-        memory = ReplayMemory(10000, 10000)
+        self.memory = ReplayMemory(10000, 10000)
 
         '''
             Note on optimizer:
                 * amsgrad: stochastic optimization method. helps with convergence.
-                * TODO: verify if policy param can be passed in this way [state_size, action_size]
         '''
-        optimizer = optim.Adam(self.policy_network.params(), lr=lr_q_net, amsgrad=True)
+        self.optimizer = optim.Adam(self.q_net.params(), lr=lr_q_net, amsgrad=True)
         
-        global steps_done; steps_done = 0
+        self.steps_done = 0
         # END STUDENT SOLUTION
 
 
@@ -118,12 +118,18 @@ class DeepQNetwork(nn.Module):
         # BEGIN STUDENT SOLUTION
 
         sample = random.random()
-        if stochastic:
-            pass 
-        else: # epsilon-greedy
-            # TODO: How to define the epsilon threshold
+        state = torch.tensor(state, dtype=torch.float32).unsqueeze(0).to(self.device)
+
+        if stochastic: #greedy policy (use episilon-greedy)
+            # TODO: do we need to define the epsilon threshold
             # using initialized ep for now 
-            steps_done += 1
+            self.steps_done += 1
+
+            '''
+                If we want to include epsilon threshold:
+                    self.epsilon = max(0.01, self.epsilon * 0.995)  # Decay epsilon, but never below 0.01
+                    decays the epsilon but never below 0.01
+            '''
             if sample > self.epsilon:
                 '''
                     Note on torch.no_grad():
@@ -131,14 +137,24 @@ class DeepQNetwork(nn.Module):
                         * TODO: understand more on this
                 '''
                 with torch.no_grad():
-                    return self.policy_network(state).max(1).indices.view(1, 1)
+                    # return the action
+                    action = torch.argmax(self.q_net(state)).view(1, 1)
+                    return action
             else:
                 # return torch.tensor([[env.action_space.sample()]], device=device, dtype=torch.long)
                 # TODO: is this the way to do it?
                 return torch.tensor([[env.action_space.sample()]])
+                '''
+                or is this the way??:
+                    return torch.tensor([[random.randrange(env.action_space.n)]], device = device, dtype=torch.long)
+                '''
 
-
-
+        else: # deterministic policy (just the argmax)
+            with torch.no_grad():
+                    # return the action
+                    action = torch.argmax(self.q_net(state)).view(1, 1)
+           
+                
         # END STUDENT SOLUTION
         pass
 
@@ -146,6 +162,10 @@ class DeepQNetwork(nn.Module):
     def train(self):
         # train the agent using the replay buffer
         # BEGIN STUDENT SOLUTION
+        if len(self.memory) < self.action_size:
+            return 0
+        
+
         # END STUDENT SOLUTION
         pass
 
