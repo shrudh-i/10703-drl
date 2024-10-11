@@ -99,16 +99,22 @@ class PolicyGradient(nn.Module):
         G = np.zeros(T)
         for t in range(T):
             gammas = np.ones((T)-t) * self.gamma
+            gammas_a2c = np.ones(min(t+self.n, T)-t) * self.gamma
             # print("gammas", len(gammas))
             cumprod_gammas = np.cumprod(gammas) / self.gamma
+            cumprod_gammas_a2c = np.cumprod(gammas_a2c) / self.gamma
             # print("gamma",cumprod_gammas)
             # print("rewards",rewards[t:])
-            G[t] = np.sum(cumprod_gammas * rewards[t:])
+            if self.mode=="A2C":
+                G[t] = np.sum(cumprod_gammas_a2c * rewards[t:min(t+self.n, T)])
+            else:
+                G[t] = np.sum(cumprod_gammas * rewards[t:])
             # print("G",G[t]) 
         # print("Entire G", G)
         # exit(0)
         actor_loss = []
         critic_loss = []
+        Vend = 0
 
         for t in range(T):
             if self.mode=="REINFORCE":
@@ -118,26 +124,39 @@ class PolicyGradient(nn.Module):
                 delta = G[t]-values[t]
                 loss_theta = -((logprobs[t] * delta) / T)
                 loss_omega = (delta**2) / T
+                critic_loss.append(loss_omega.unsqueeze(0))
+            elif self.mode=="A2C":
+                if t+self.n<T:
+                    Vend = values[t+self.n]
+                else:
+                    Vend = 0
+                G[t] = G[t] + (self.gamma**self.n)*Vend
+                delta = G[t]-values[t]
+                loss_theta = -((logprobs[t] * delta) / T)
+                loss_omega = (delta**2) / T
+                critic_loss.append(loss_omega.unsqueeze(0))
+                
+
         
 
             # print("loss", loss)
             actor_loss.append(loss_theta.unsqueeze(0))
             # print(type(loss_omega.unsqueeze(0)))
-            critic_loss.append(loss_omega.unsqueeze(0))
 
         actor_loss= torch.cat(actor_loss).sum()
         # critic_loss = critic_loss.sum()
-        critic_loss= torch.cat(critic_loss).sum()
         # critic_loss = torch.sum(torch.stack(critic_loss))
 
         self.optim_actor.zero_grad()
-        self.optim_critic.zero_grad()
-
         actor_loss.backward(retain_graph=True)
-        critic_loss.backward()
-
         self.optim_actor.step()
-        self.optim_critic.step()
+
+        if self.mode != "REINFORCE":
+            critic_loss= torch.cat(critic_loss).sum()
+
+            self.optim_critic.zero_grad()
+            critic_loss.backward()
+            self.optim_critic.step()
         
         # END STUDENT SOLUTION
 
@@ -157,7 +176,7 @@ class PolicyGradient(nn.Module):
             # print("actions before train", actions)
             self.train(states, actions, rewards, logprobs, values)
 
-            if e % 100 == 0:
+            if (e+1) % 100 == 0:
                 cumulative_reward = 0
                 for _ in range(20):
                     # run test 
@@ -215,18 +234,17 @@ def graph_agents(graph_name, agents, env, max_steps, num_episodes, total_rewards
 
     # graph the data mentioned in the homework pdf
     # BEGIN STUDENT SOLUTION
-    average_total_rewards = np.average(total_rewards, axis=1)
-    graph_every = int(num_episodes / 100)
-    min_total_rewards = np.min(total_rewards, axis=1)
-    max_total_rewards = np.max(total_rewards, axis=1)
+    average_total_rewards = np.average(total_rewards, axis=0)
+    graph_every = 100
+    min_total_rewards = np.array(np.min(total_rewards, axis=0), dtype=float)
+    max_total_rewards = np.array(np.max(total_rewards, axis=0), dtype=float)
 
-    print(average_total_rewards)
-    print(min_total_rewards)
-    print(max_total_rewards)
     # END STUDENT SOLUTION
 
     # plot the total rewards
     xs = [i * graph_every for i in range(len(average_total_rewards))]
+    print("XS: ", xs)
+    print(np.isfinite(xs).all())
     fig, ax = plt.subplots()
     plt.fill_between(xs, min_total_rewards, max_total_rewards, alpha=0.1)
     ax.plot(xs, average_total_rewards)
@@ -244,7 +262,7 @@ def parse_args():
     mode_choices = ['REINFORCE', 'REINFORCE_WITH_BASELINE', 'A2C']
 
     parser = argparse.ArgumentParser(description='Train an agent.')
-    parser.add_argument('--mode', type=str, default='REINFORCE_WITH_BASELINE', choices=mode_choices, help='Mode to run the agent in')
+    parser.add_argument('--mode', type=str, default='A2C', choices=mode_choices, help='Mode to run the agent in')
     parser.add_argument('--n', type=int, default=64, help='The n to use for n step A2C')
     parser.add_argument('--num_runs', type=int, default=5, help='Number of runs to average over for graph')
     parser.add_argument('--num_episodes', type=int, default=3500, help='Number of episodes to train for')
@@ -266,18 +284,21 @@ def main():
     
     # Create Env
     env = gym.make(args.env_name, max_episode_steps=max_steps)
-    policy_gradient = PolicyGradient(env.observation_space.shape[0], env.action_space.n , mode= mode,n= n)
 
-    run_total_rewards = np.zeros((num_runs,5),dtype=object)
+    run_total_rewards = np.zeros((num_runs,int(num_episodes/100)),dtype=object)
     # print(run_total_rewards)
-    for run in range(5): #num_runs
-        run_rewards = policy_gradient.run(env, max_steps, num_episodes,True)
+    for run in range(num_runs): #num_runs
         print("Run: ", run)
-        print("Reward",run_rewards)
-        print(run_rewards.shape)
+
+        # We reinitialize our policy gradient so they are independent.
+        policy_gradient = PolicyGradient(env.observation_space.shape[0], env.action_space.n , mode= mode,n= n)
+
+        run_rewards = policy_gradient.run(env, max_steps, num_episodes,True)
+        # print("Reward",run_rewards)
+        # print(run_rewards.shape)
         run_total_rewards[run] = run_rewards
     
-    # graph_agents("I dunno", 0, 0, max_steps= max_steps, num_episodes = num_episodes, total_rewards=run_total_rewards)
+    graph_agents("I dunno", 0, 0, max_steps= max_steps, num_episodes = num_episodes, total_rewards=run_total_rewards)
     # END STUDENT SOLUTION
 
 
