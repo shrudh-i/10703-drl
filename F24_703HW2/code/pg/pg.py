@@ -44,6 +44,7 @@ class PolicyGradient(nn.Module):
             nn.ReLU(),
             # BEGIN STUDENT SOLUTION
             nn.Linear(hidden_layer_size, 1)
+            #nn.Softmax(dim=0)
             # END STUDENT SOLUTION
         )
 
@@ -65,24 +66,17 @@ class PolicyGradient(nn.Module):
         # BEGIN STUDENT SOLUTION
         # print(state)
         actor_prob, critic_prob = self.forward(torch.from_numpy(state).float())
-        # print(actor_prob)
-        # exit(0)
         cat = Categorical(actor_prob)
         if stochastic:
             # sample using action probabilities
             action = cat.sample()
             # print("Action from stochastic ",action.item())
-            # print(type(critic_prob))
+            
             return action.item(), cat.log_prob(action), critic_prob
         else:
             # sample using argmax
             # action = torch.from_numpy(np.array(np.argmax(cat)))
             action = cat.probs.argmax()
-            # action = cat.probs[index]
-            # index = torch.argmax(cat)
-
-            # action = cat[index]
-            # print(type(critic_prob))
             return action.item(), critic_prob
 
         # END STUDENT SOLUTION
@@ -115,14 +109,13 @@ class PolicyGradient(nn.Module):
         # exit(0)
         actor_loss = []
         critic_loss = []
+
         for t in range(T):
             if self.mode=="REINFORCE":
                 loss_theta = -((logprobs[t] * G[t]) / T)
-                # print("ttttttt")
                 # loss_omega=0
             elif self.mode=="REINFORCE_WITH_BASELINE":
                 delta = G[t]-values[t]
-                # print(type(delta))
                 loss_theta = -((logprobs[t] * delta) / T)
                 loss_omega = (delta**2) / T
         
@@ -132,34 +125,20 @@ class PolicyGradient(nn.Module):
             # print(type(loss_omega.unsqueeze(0)))
             critic_loss.append(loss_omega.unsqueeze(0))
 
-        # print("actor loss",actor_loss)
-        # print("critic loss", critic_loss)    
-        
-
-
-        # print(" Entire policy loss", policy_loss)
-        # exit(0)
-        # L_theta = -(1/T) * np.sum(G * logprobs)
-        # L_theta = torch.from_numpy(np.array(L_theta))
-        # L_theta.requires_grad_()
         actor_loss= torch.cat(actor_loss).sum()
         # critic_loss = critic_loss.sum()
         critic_loss= torch.cat(critic_loss).sum()
         # critic_loss = torch.sum(torch.stack(critic_loss))
 
-        # print(actor_loss)
-        # print(critic_loss)        
-        # # print("Policy Loss: ", policy_loss)
-        # # exit(0)
         self.optim_actor.zero_grad()
         self.optim_critic.zero_grad()
 
-        actor_loss.backward()
+        actor_loss.backward(retain_graph=True)
         critic_loss.backward()
-        
+
         self.optim_actor.step()
         self.optim_critic.step()
-
+        
         # END STUDENT SOLUTION
 
 
@@ -170,7 +149,7 @@ class PolicyGradient(nn.Module):
         # BEGIN STUDENT SOLUTION
         for e in range(num_episodes):
             # generate episode with max steps
-            print("[TRAIN] Training: ", e)
+            # print("[TRAIN] Training: ", e)
             states, actions, rewards, logprobs, values = self.generate_trajectory(env, max_steps, True)
             # train
             # print("rewards before train", rewards)
