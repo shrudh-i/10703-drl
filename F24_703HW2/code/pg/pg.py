@@ -201,7 +201,7 @@ class PolicyGradient(nn.Module):
         actions  = []
         rewards  = []
         logprobs = []
-        values = []
+        values   = []
 
         while not done and steps < max_steps:
             action = None
@@ -242,7 +242,7 @@ def graph_agents(graph_name, agents, env, max_steps, num_episodes, total_rewards
     # END STUDENT SOLUTION
 
     # plot the total rewards
-    xs = [i * graph_every for i in range(len(average_total_rewards))]
+    xs = [(i+1) * graph_every for i in range(len(average_total_rewards))]
     print("XS: ", xs)
     print(np.isfinite(xs).all())
     fig, ax = plt.subplots()
@@ -262,7 +262,7 @@ def parse_args():
     mode_choices = ['REINFORCE', 'REINFORCE_WITH_BASELINE', 'A2C']
 
     parser = argparse.ArgumentParser(description='Train an agent.')
-    parser.add_argument('--mode', type=str, default='A2C', choices=mode_choices, help='Mode to run the agent in')
+    parser.add_argument('--mode', type=str, default='REINFORCE', choices=mode_choices, help='Mode to run the agent in')
     parser.add_argument('--n', type=int, default=64, help='The n to use for n step A2C')
     parser.add_argument('--num_runs', type=int, default=5, help='Number of runs to average over for graph')
     parser.add_argument('--num_episodes', type=int, default=3500, help='Number of episodes to train for')
@@ -298,7 +298,7 @@ def main():
         # print(run_rewards.shape)
         run_total_rewards[run] = run_rewards
     
-    graph_agents("I dunno", 0, 0, max_steps= max_steps, num_episodes = num_episodes, total_rewards=run_total_rewards)
+    graph_agents(mode + "_n" + str(n), 0, 0, max_steps= max_steps, num_episodes = num_episodes, total_rewards=run_total_rewards)
     # END STUDENT SOLUTION
 
 
