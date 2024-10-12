@@ -14,6 +14,7 @@ import torch.optim as optim
 
 # we added these
 import copy
+from tqdm import tqdm
 
 Transition = collections.namedtuple("Transition", field_names=['state', 'action', 'reward', 'next_state', 'dones'])
 
@@ -121,135 +122,80 @@ class DeepQNetwork(nn.Module):
     def train(self):
         # train the agent using the replay buffer
         # BEGIN STUDENT SOLUTION
-        # minibatch= self.replay_buffer.sample_batch()
         if len(self.replay_buffer.memory) < self.replay_buffer.batch_size:
             return
         
         trans = self.replay_buffer.sample()
-
         minibatch = Transition(*zip(*trans))
 
-        # non_final_mask = torch.tensor(tuple(map(lambda s: s is not None,
-        #                                   minibatch.next_state)), dtype=torch.bool)
-        
-        # non_final_next_states = np.array([s for s in minibatch.next_state if s is not None])
-       
-
         state_batch = torch.tensor(np.array(minibatch.state))
-        
         action_batch = torch.tensor(minibatch.action)
-
         reward_batch = torch.tensor(minibatch.reward)
-
-        state_action_values = self.q_omega(state_batch).gather(1, action_batch.unsqueeze(1))
-
         dones = torch.tensor(np.array(minibatch.dones), dtype=torch.float32, device=self.device)
 
-        # next_state_values = torch.zeros(self.replay_buffer.batch_size)
-
-        # next_state_values[non_final_mask] = self.q_target(torch.from_numpy(non_final_next_states)).max(1).values
+        state_action_values = self.q_omega(state_batch).gather(1, action_batch.unsqueeze(1))
         next_state_values = self.q_target(torch.from_numpy(np.array(minibatch.next_state))).max(1).values
-        # # with torch.no_grad():
         
-        # # Compute the expected Q values
+        # Compute the expected Q values
         expected_state_action_values = (next_state_values * self.gamma * (1-dones)) + reward_batch
         
-        # # loss_omega = self.loss(state_action_values.squeeze(1), expected_state_action_values)
+        # Compute the loss
         loss_omega = F.mse_loss(state_action_values.squeeze(1), expected_state_action_values)
 
         self.optimizer.zero_grad()
         loss_omega.backward()
 
         self.optimizer.step()
-        ##################################################################################################
-        # if len(self.replay_buffer.memory) < self.replay_buffer.batch_size:
-        #     return
-
-        # batch = self.replay_buffer.sample()
-        # minibatch = Transition(*zip(*batch))
-
-        # states = minibatch.state
-        # actions = minibatch.action
-        # rewards = minibatch.reward
-        # next_states = minibatch.next_state
-        # dones = minibatch.dones
-
-
-        # states = torch.tensor(np.array(states), dtype=torch.float32, device=self.device)
-        # actions = torch.tensor(actions, dtype=torch.long, device=self.device).unsqueeze(1)
-        # rewards = torch.tensor(rewards, dtype=torch.float32, device=self.device)
-        # next_states = torch.tensor(np.array(next_states), dtype=torch.float32, device=self.device)
-        # dones = torch.tensor(dones, dtype=torch.float32, device=self.device)
-
-        # q_values = self.q_omega(states).gather(1, actions).squeeze()
-        # next_q_values = self.q_target(next_states).max(1)[0]
-        # target_q_values = rewards + self.gamma * next_q_values * (1 - dones)
-
-        # loss = F.mse_loss(q_values, target_q_values)
-        # self.optimizer.zero_grad()
-        # loss.backward()
-        # self.optimizer.step()
 
 
     def run(self, env, max_steps, num_episodes, train, init_buffer):
         total_rewards = []
 
+        # initialize replay buffer
+        # run the agent through the environment num_episodes times for at most max steps
+        # BEGIN STUDENT SOLUTION
         if train:
             self.q_omega.train()
         else:
             self.q_omega.eval()
-
-        # initialize replay buffer
-        # run the agent through the environment num_episodes times for at most max steps
-        # BEGIN STUDENT SOLUTION
+        
+        # Initialize the replay buffer with experience using a random policy
         if init_buffer:
             self.burn_traj(env)
 
-        c = 0
+        c = 0 # number of steps
         for e in range(num_episodes):
             state, _ = env.reset()
             total_reward = 0
             for t in range(max_steps):
-                #get the action
                 action = self.get_action(state,stochastic=True)
                 next_state, reward, done, _, _ = env.step(action)
-                total_reward += reward
-                # if done:
-                #     next_state = None
-                # else:
-                #     state = next_state
 
-                self.replay_buffer.append(Transition(torch.from_numpy(state).float(), action, reward, next_state, done))
+                if train:
+                    self.replay_buffer.append(Transition(torch.from_numpy(state).float(), action, reward, next_state, done))
+
+                total_reward += reward
+                state = next_state
 
                 if train:
                     self.train()
 
-                if not done:
-                    state = next_state
+                # if not done:
+                #     state = next_state
 
                 c = c + 1
-
-                #fix ya policy, son.
-                if c % 50 == 0:
-                    # deepcopy
-                    self.q_target.load_state_dict(self.q_omega.state_dict())
-
+                
                 if done:
                     break
+
+                # Update target policy
+                if train and c % self.target_update == 0:
+                    # deepcopy
+                    self.q_target.load_state_dict(self.q_omega.state_dict())
             
             print(f"Episode {e} - Reward {total_reward}")
-            # if (e+1) % 100 == 0:
-            #     cumulative_reward = 0
-            #     for _ in range(20):
-            #         state, _ = env.reset()
-            #         for i in range(max_steps):
-            #             action = self.get_action(state, stochastic=False)
-            #             next_state, reward, done, _, _ = env.step(action)
-            #             cumulative_reward = cumulative_reward + reward
-            #             if done:
-            #                 break
-            #     total_rewards.append(cumulative_reward/20)
-            #     print("Epsodic reward in eval",cumulative_reward/20)
+            total_rewards.append(total_reward)
+
         # END STUDENT SOLUTION
         return(total_rewards)
 
@@ -260,6 +206,41 @@ def graph_agents(graph_name, agents, env, max_steps, num_episodes):
 
     # graph the data mentioned in the homework pdf
     # BEGIN STUDENT SOLUTION
+
+    graph_every = 100
+    eval_episodes = 20
+
+    # Define the evaluation checkpoints based on the number of episodes
+    eval_checkpoints = np.arange(graph_every, num_episodes + 1, graph_every)
+
+    # Initialize the rewards matrix to store evaluation results
+    D = np.zeros((len(agents), len(eval_checkpoints)))
+
+    # Function to evaluate the agent at a checkpoint
+    def evaluate_agent(agent, env, max_steps, eval_episodes):
+        return np.mean(agent.run(env, max_steps, eval_episodes, train=False, init_buffer=False))
+
+    # Loop through each agent
+    for i, agent in enumerate(agents):
+        print(f'Evaluating agent {i+1}/{len(agents)}')
+
+        # Loop through evaluation checkpoints
+        for j, checkpoint in tqdm(enumerate(eval_checkpoints), total=len(eval_checkpoints)):
+            print(f'Agent {i+1}, Checkpoint: Episode {checkpoint}/{num_episodes}')
+
+            # Train the agent until the next checkpoint
+            init_buffer = (j == 0)  # Initialize buffer only at the first training step
+            agent.run(env, max_steps, checkpoint - (eval_checkpoints[j - 1] if j > 0 else 0), train=True, init_buffer=init_buffer)
+
+            # Evaluate the agent after training
+            D[i, j] = evaluate_agent(agent, env, max_steps, eval_episodes)
+
+    # Compute statistics for graphing
+    average_total_rewards = np.mean(D, axis=0)
+    min_total_rewards = np.min(D, axis=0)
+    max_total_rewards = np.max(D, axis=0)
+    
+
     # END STUDENT SOLUTION
 
     # plot the total rewards
@@ -297,14 +278,26 @@ def main():
     # BEGIN STUDENT SOLUTION
     env = gym.make(env_name)
 
-    run_total_rewards = np.zeros((num_runs,int(num_episodes/100)),dtype=object)
+    # run_total_rewards = np.zeros((num_runs,int(num_episodes/100)),dtype=object)
 
-    for run in range(num_runs):
-        q_net = DeepQNetwork(env.observation_space.shape[0], env.action_space.n)
-        rewards = q_net.run(env, max_steps, num_episodes, 1, 1)
-        run_total_rewards[run] = rewards
+    # for run in range(num_runs):
+    #     agent = DeepQNetwork(env.observation_space.shape[0], env.action_space.n)
+    #     rewards = agent.run(env, max_steps, num_episodes, train=True, init_buffer=True)
+    #     run_total_rewards[run] = rewards
 
-    graph_agents("I dunno", 0, 0, max_steps= max_steps, num_episodes = num_episodes, total_rewards=run_total_rewards)
+    # graph_agents("I dunno", 0, 0, max_steps= max_steps, num_episodes = num_episodes, total_rewards=run_total_rewards)
+
+    # Initialize agent
+    agents = [DeepQNetwork(env.observation_space.shape[0],
+                           env.action_space.n) for _ in range(args.num_runs)]
+
+    # Train each agent
+    for i, agent in enumerate(agents):
+    #     print(f'Starting run {i+1}/{args.num_runs}')
+        agent.run(env, max_steps=args.max_steps, num_episodes=args.num_episodes, train=True, init_buffer=True)
+
+    # Graph the performance
+    graph_agents(f'DQN_n{args.num_runs}', agents, env, args.max_steps, args.num_episodes)
 
     # END STUDENT SOLUTION
 
