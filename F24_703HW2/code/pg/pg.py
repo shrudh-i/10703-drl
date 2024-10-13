@@ -85,6 +85,7 @@ class PolicyGradient(nn.Module):
     def calculate_n_step_bootstrap(self, rewards_tensor, values):
         # calculate n step bootstrap
         # BEGIN STUDENT SOLUTION
+        ## NOTE: We have already implemented it under thr train function
         # END STUDENT SOLUTION
         pass
 
@@ -109,9 +110,7 @@ class PolicyGradient(nn.Module):
                 G[t] = np.sum(cumprod_gammas_a2c * rewards[t:min(t+self.n, T)])
             else:
                 G[t] = np.sum(cumprod_gammas * rewards[t:])
-            # print("G",G[t]) 
-        # print("Entire G", G)
-        # exit(0)
+
         actor_loss = []
         critic_loss = []
         Vend = 0
@@ -119,12 +118,13 @@ class PolicyGradient(nn.Module):
         for t in range(T):
             if self.mode=="REINFORCE":
                 loss_theta = -((logprobs[t] * G[t]) / T)
-                # loss_omega=0
+            
             elif self.mode=="REINFORCE_WITH_BASELINE":
                 delta = G[t]-values[t]
                 loss_theta = -((logprobs[t] * delta) / T)
                 loss_omega = (delta**2) / T
                 critic_loss.append(loss_omega.unsqueeze(0))
+            
             elif self.mode=="A2C":
                 if t+self.n<T:
                     Vend = values[t+self.n]
@@ -136,16 +136,11 @@ class PolicyGradient(nn.Module):
                 loss_omega = (delta**2) / T
                 critic_loss.append(loss_omega.unsqueeze(0))
                 
-
-        
-
             # print("loss", loss)
             actor_loss.append(loss_theta.unsqueeze(0))
             # print(type(loss_omega.unsqueeze(0)))
 
         actor_loss= torch.cat(actor_loss).sum()
-        # critic_loss = critic_loss.sum()
-        # critic_loss = torch.sum(torch.stack(critic_loss))
 
         self.optim_actor.zero_grad()
         actor_loss.backward(retain_graph=True)
@@ -168,12 +163,8 @@ class PolicyGradient(nn.Module):
         # BEGIN STUDENT SOLUTION
         for e in range(num_episodes):
             # generate episode with max steps
-            # print("[TRAIN] Training: ", e)
             states, actions, rewards, logprobs, values = self.generate_trajectory(env, max_steps, True)
             # train
-            # print("rewards before train", rewards)
-            # print("states before train", states)
-            # print("actions before train", actions)
             self.train(states, actions, rewards, logprobs, values)
 
             if (e+1) % 100 == 0:
@@ -181,7 +172,7 @@ class PolicyGradient(nn.Module):
                 for _ in range(20):
                     # run test 
                     #print("[EVAL] Testing")
-                    _, _, test_reward, _, _ = self.generate_trajectory(env, max_steps, False) # False
+                    _, _, test_reward, _, _ = self.generate_trajectory(env, max_steps, False)
                     cumulative_reward += np.sum(test_reward)
                 total_rewards.append(cumulative_reward / 20)
                 print("Epsodic reward in eval",cumulative_reward/20)
@@ -189,7 +180,6 @@ class PolicyGradient(nn.Module):
         return np.array(total_rewards)
 
     # Self Made Function
-    # Looks good to me
     def generate_trajectory(self, env, max_steps, train):
         curr_state = env.reset()
 
