@@ -210,32 +210,22 @@ def graph_agents(graph_name, agents, env, max_steps, num_episodes):
     graph_every = 100
     eval_episodes = 20
 
-    # Define the evaluation checkpoints based on the number of episodes
-    eval_checkpoints = np.arange(graph_every, num_episodes + 1, graph_every)
+    eval_checkpoints = [i * graph_every for i in range(num_episodes // graph_every)]
 
-    # Initialize the rewards matrix to store evaluation results
     D = np.zeros((len(agents), len(eval_checkpoints)))
 
-    # Function to evaluate the agent at a checkpoint
-    def evaluate_agent(agent, env, max_steps, eval_episodes):
-        return np.mean(agent.run(env, max_steps, eval_episodes, train=False, init_buffer=False))
-
-    # Loop through each agent
     for i, agent in enumerate(agents):
-        print(f'Evaluating agent {i+1}/{len(agents)}')
 
-        # Loop through evaluation checkpoints
-        for j, checkpoint in tqdm(enumerate(eval_checkpoints), total=len(eval_checkpoints)):
-            print(f'Agent {i+1}, Checkpoint: Episode {checkpoint}/{num_episodes}')
+        # Run agent in train until checkpoint then eval, repeat
+        for j, checkpoint in tqdm(enumerate(eval_checkpoints)):
+            print(f'Run {i+1}/{len(agents)}: Episode {checkpoint}/{num_episodes}')
+            if j>0:
+                init_buffer = False
+            else:
+                init_buffer = True
+            agent.run(env, max_steps, graph_every, train=True, init_buffer=init_buffer)
+            D[i, j] = np.mean(agent.run(env, max_steps, eval_episodes, train=False, init_buffer=False))
 
-            # Train the agent until the next checkpoint
-            init_buffer = (j == 0)  # Initialize buffer only at the first training step
-            agent.run(env, max_steps, checkpoint - (eval_checkpoints[j - 1] if j > 0 else 0), train=True, init_buffer=init_buffer)
-
-            # Evaluate the agent after training
-            D[i, j] = evaluate_agent(agent, env, max_steps, eval_episodes)
-
-    # Compute statistics for graphing
     average_total_rewards = np.mean(D, axis=0)
     min_total_rewards = np.min(D, axis=0)
     max_total_rewards = np.max(D, axis=0)
@@ -278,23 +268,14 @@ def main():
     # BEGIN STUDENT SOLUTION
     env = gym.make(env_name)
 
-    # run_total_rewards = np.zeros((num_runs,int(num_episodes/100)),dtype=object)
-
-    # for run in range(num_runs):
-    #     agent = DeepQNetwork(env.observation_space.shape[0], env.action_space.n)
-    #     rewards = agent.run(env, max_steps, num_episodes, train=True, init_buffer=True)
-    #     run_total_rewards[run] = rewards
-
-    # graph_agents("I dunno", 0, 0, max_steps= max_steps, num_episodes = num_episodes, total_rewards=run_total_rewards)
-
     # Initialize agent
     agents = [DeepQNetwork(env.observation_space.shape[0],
                            env.action_space.n) for _ in range(args.num_runs)]
 
     # Train each agent
-    for i, agent in enumerate(agents):
-    #     print(f'Starting run {i+1}/{args.num_runs}')
-        agent.run(env, max_steps=args.max_steps, num_episodes=args.num_episodes, train=True, init_buffer=True)
+    # for i, agent in enumerate(agents):
+    # #     print(f'Starting run {i+1}/{args.num_runs}')
+    #     agent.run(env, max_steps=args.max_steps, num_episodes=args.num_episodes, train=True, init_buffer=True)
 
     # Graph the performance
     graph_agents(f'DQN_n{args.num_runs}', agents, env, args.max_steps, args.num_episodes)
