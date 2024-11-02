@@ -34,7 +34,8 @@ class TrainDaggerBC:
         self.expert_model = expert_model
         self.optimizer = optimizer
         self.device = device
-        model.set_device(self.device)
+        #model.set_device(self.device)
+        model.to(self.device)
         self.expert_model = self.expert_model.to(self.device)
 
         self.mode = mode
@@ -85,7 +86,6 @@ class TrainDaggerBC:
                 p = policy(torch.from_numpy(cur_state).to(self.device).float().unsqueeze(0), torch.tensor(t).to(self.device).long().unsqueeze(0))
             a = p.cpu().numpy()[0]
             next_state, reward, done, trunc, _ = env.step(a)
-
             states.append(cur_state)
             old_actions.append(a)
             timesteps.append(t)
@@ -137,14 +137,20 @@ class TrainDaggerBC:
         NOTE: you will need to call self.generate_trajectory in this function.
         """
         # BEGIN STUDENT SOLUTION
+        rewards = []
 
+        for num_traj in range(num_trajectories_per_batch_collection):
+            _, _, _, reward = self.generate_trajectory(self.env, self.model)
+            rewards.append(np.sum(reward))
+
+        rewards = np.array(rewards)
         # END STUDENT SOLUTION
 
         return rewards
 
     def train(
         self, 
-        num_batch_collection_steps, 
+        num_batch_collection_steps=0, 
         num_BC_training_steps=20000,
         num_training_steps_per_batch_collection=1000, 
         num_trajectories_per_batch_collection=20, 
@@ -171,7 +177,42 @@ class TrainDaggerBC:
         """
 
         # BEGIN STUDENT SOLUTION
+        losses = []
+        average_rewards = []
+        median_rewards = []
+        max_rewards = []
+        if self.mode == "BC":
+            for num in range(num_BC_training_steps):
+                loss = self.training_step(batch_size)
+                losses.append(loss)
+                if (num+1) % print_every == 0 or num == 0:
+                    print("Training Step", num+1, "Loss:", loss)
 
+                # "Evaluate Reward Every" not included, Piazza says to set to 1000
+                if (num+1) % 1000 == 0 or num == 0:
+                    rewards = self.generate_trajectories(num_trajectories_per_batch_collection)
+                    average_rewards.append(np.average(rewards))
+                    median_rewards.append(np.median(rewards))
+                    max_rewards.append(np.max(rewards))
+                    print("Training Step", num+1, "Rewards:", "[Avg]", np.average(rewards), "[Med]", np.median(rewards), "[Max]", np.max(rewards))
+
+        elif self.mode == "DAgger":
+            # use num_batch_collection_steps & num_training_steps_per_batch_collections in DAgger only
+            pass
+
+        losses = np.array(losses)
+
+        # for plotting
+        x = np.arange(len(losses))
+        ys = np.array([losses])
+        print(ys)
+        self.plot_results(x, ys, ["loss"], "Loss", "Iterations", "Loss")
+
+        x = np.arange(len(average_rewards))
+        x = x * 1000
+        print(x)
+        ys = np.array([average_rewards, median_rewards, max_rewards])
+        self.plot_results(x, ys, ["Average", "Median", "Max"], "Rewards", "Iterations", "Rewards")
         # END STUDENT SOLUTION
 
         return losses
@@ -213,6 +254,17 @@ class TrainDaggerBC:
             
         
         return states, actions, timesteps
+    
+    def plot_results(self, x, ys, labels, title, x_axis_label, y_axis_label):
+        plt.figure()
+        for i in range(len(ys)):
+            plt.plot(x, ys[i], label=labels[i])
+        plt.legend()
+        plt.xlabel(x_axis_label)
+        plt.ylabel(y_axis_label)
+        plt.title(title)
+        plt.show()
+
 
 def run_training():
     """
@@ -223,11 +275,11 @@ def run_training():
 
     model_name = "super_expert_PPO_model"
     expert_model = PolicyNet(24, 4)
-    model_weights = torch.load(f"data/models/{model_name}.pt")
+    model_weights = torch.load(f"data/models/{model_name}.pt", map_location=torch.device('cpu'))
     expert_model.load_state_dict(model_weights["PolicyNet"])
 
-    states_path = "your_path_here"
-    actions_path = "your_path_here"
+    states_path = "data/states_BC.pkl"
+    actions_path = "data/actions_BC.pkl"
 
     with open(states_path, "rb") as f:
         states = pickle.load(f)
@@ -235,7 +287,17 @@ def run_training():
         actions = pickle.load(f)
 
     # BEGIN STUDENT SOLUTION
+    hidden_layer_dimensions = 128
+    max_episode_length = 1600
+    model = SimpleNet(24, 4, hidden_layer_dimensions, max_episode_length)
 
+    learning_rate = 0.0001
+    weight_decay = 0.0001
+    optimizer = torch.optim.AdamW(model.parameters(), lr = learning_rate, weight_decay = weight_decay)
+
+    trainBC = TrainDaggerBC(env, model, expert_model, optimizer, states, actions, "cpu", "BC")
+    
+    losses = trainBC.train()
     # END STUDENT SOLUTION
 
 if __name__ == "__main__":
