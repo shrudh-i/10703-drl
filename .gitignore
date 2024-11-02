@@ -1,0 +1,5 @@
+# ignore ALL .pkl files
+*.pkl
+
+# ignore ALL files in ANY directory named data
+data/
