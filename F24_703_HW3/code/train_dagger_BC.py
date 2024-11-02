@@ -122,8 +122,31 @@ class TrainDaggerBC:
         NOTE: you should update self.states, self.actions, and self.timesteps in this function.
         """
         # BEGIN STUDENT SOLUTION
+        # self.states = self.states.tolist()
+        # self.actions = self.action.tolist()
+        # self.timesteps = self.timesteps.tolist()
+        rewards = []
 
+        for num in range(num_trajectories_per_batch_collection):
+            states, old_actions, timesteps, reward = self.generate_trajectory(self.env, self.model)
+
+            for i in range(len(states)):
+                state = states[i]
+                timestep = timesteps[i]
+                expert_action = self.call_expert_policy(state)
+
+                #aggregation
+                self.states = np.append(self.states, np.array([state]), axis=0)
+                # self.states = np.concatenate((self.states, state), axis=0)
+                self.actions = np.append(self.actions, np.array([expert_action]), axis = 0)
+                # self.actions.append(expert_action)
+                self.timesteps = np.append(self.timesteps, np.array(timestep))
+                # self.timesteps.append(timestep)
+                rewards.append(np.sum(reward))
         # END STUDENT SOLUTION
+        # self.states = np.ndarray(self.states)
+        # self.action = np.ndarray(self.action)
+        # self.timestep = np.ndarray(self.timestep)
 
         return rewards
 
@@ -185,6 +208,7 @@ class TrainDaggerBC:
             for num in range(num_BC_training_steps):
                 loss = self.training_step(batch_size)
                 losses.append(loss)
+
                 if (num+1) % print_every == 0 or num == 0:
                     print("Training Step", num+1, "Loss:", loss)
 
@@ -198,7 +222,22 @@ class TrainDaggerBC:
 
         elif self.mode == "DAgger":
             # use num_batch_collection_steps & num_training_steps_per_batch_collections in DAgger only
-            pass
+            self.states = np.empty((0,24))
+            self.actions = np.empty((0,4))
+            self.timesteps = np.empty((0,1), dtype=int)
+            for i in range(num_batch_collection_steps):
+                rewards = self.update_training_data()
+                average_rewards.append(np.average(rewards))
+                median_rewards.append(np.median(rewards))
+                max_rewards.append(np.max(rewards))
+                print("Batch", i+1, "Rewards:", "[Avg]", np.average(rewards), "[Med]", np.median(rewards), "[Max]", np.max(rewards))
+
+                for j in range(num_training_steps_per_batch_collection):
+                    loss = self.training_step(batch_size)
+                    losses.append(loss)
+
+                    if (j+1) % print_every == 0 or j == 0:
+                        print("Training Step", j+1, "Loss:", loss)
 
         losses = np.array(losses)
 
@@ -209,8 +248,8 @@ class TrainDaggerBC:
         self.plot_results(x, ys, ["loss"], "Loss", "Iterations", "Loss")
 
         x = np.arange(len(average_rewards))
-        x = x * 1000
-        print(x)
+        if self.mode == "BC":
+            x = x * 1000
         ys = np.array([average_rewards, median_rewards, max_rewards])
         self.plot_results(x, ys, ["Average", "Median", "Max"], "Rewards", "Iterations", "Rewards")
         # END STUDENT SOLUTION
@@ -296,8 +335,10 @@ def run_training():
     optimizer = torch.optim.AdamW(model.parameters(), lr = learning_rate, weight_decay = weight_decay)
 
     trainBC = TrainDaggerBC(env, model, expert_model, optimizer, states, actions, "cpu", "BC")
+    trainDagger = TrainDaggerBC(env, model, expert_model, optimizer, states, actions, "cpu", "DAgger")
     
-    losses = trainBC.train()
+    #losses = trainBC.train()
+    losses = trainDagger.train(num_batch_collection_steps=20, num_training_steps_per_batch_collection=1000, batch_size=128)
     # END STUDENT SOLUTION
 
 if __name__ == "__main__":
