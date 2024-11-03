@@ -264,7 +264,30 @@ class TrainDiffusionPolicy:
         NOTE: return a loss value that is a plain float (not a tensor), and is on cpu
         """
         # BEGIN STUDENT SOLUTION
+        previous_states_batch, previous_actions_batch, actions_batch, episode_timesteps_batch, _, _, _ = self.get_training_batch(batch_size) # TODO
 
+        # Computing noisy actions
+        mu = np.zeros(batch_size)
+        std_dev = np.eye(batch_size)
+        epsilon = np.random.multivariate_normal(mu, std_dev, batch_size)
+
+        # Denoising timesteps 30 ???
+
+        noisy_timesteps_batch = np.random.randint(0, self.num_train_diffusion_timesteps, batch_size)
+        noisy_actions = self.training_scheduler.add_noise(actions_batch, epsilon, noisy_timesteps_batch)
+
+        # Compute loss function
+        loss_fn = nn.MSELoss()
+        self.optimizer.zero_grad()
+        epsilon_theta = self.model(previous_states_batch,
+                                    previous_actions_batch,
+                                    noisy_actions,
+                                    episode_timesteps_batch,
+                                    noisy_timesteps_batch) #inputs
+        
+        loss = loss_fn(epsilon_theta, epsilon)
+        loss.backward()
+        self.optimizer.step()
         # END STUDENT SOLUTION
 
         return loss
@@ -366,7 +389,29 @@ def run_training():
 
     env = gym.make('BipedalWalker-v3') # , render_mode="rgb_array"
     # BEGIN STUDENT SOLUTION
-
+    num_episodes = 1600
+    model = PolicyDiffusionTransformer(num_transformer_layers=6,
+                                       state_dim= env.observation_space, 
+                                       act_dim= env.action_space, 
+                                       hidden_size= 128, 
+                                       max_episode_length=num_episodes,
+                                       n_transformer_heads= 1,
+                                       device='cpu')
+    
+    learning_rate = 0.00005
+    weight_decay = 0.001
+    optimizer = torch.optim.AdamW(model.parameters(), lr = learning_rate, weight_decay = weight_decay)
+    
+    Train = TrainDiffusionPolicy(env=env,
+                        model=model,
+                        optimizer=optimizer,
+                        states_array=,
+                        actions_array=, 
+                        device='cpu',
+                        num_train_diffusion_timesteps=30,
+                        max_trajectory_length=num_episodes
+                         )
+    Train.train(num_training_steps=50_000, batch_size=256)
     # END STUDENT SOLUTION
 if __name__ == "__main__":
     run_training()
