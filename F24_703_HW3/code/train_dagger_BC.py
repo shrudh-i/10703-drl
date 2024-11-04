@@ -337,6 +337,7 @@ def run_training():
     trainBC = TrainDaggerBC(env, model, expert_model, optimizer, states, actions, "cpu", "BC")
     trainDagger = TrainDaggerBC(env, model, expert_model, optimizer, states, actions, "cpu", "DAgger")
     
+    # TODO: use batch_size = 128 for both Dagger and BC
     #losses = trainBC.train()
     losses = trainDagger.train(num_batch_collection_steps=20, num_training_steps_per_batch_collection=1000, batch_size=128)
     # END STUDENT SOLUTION
