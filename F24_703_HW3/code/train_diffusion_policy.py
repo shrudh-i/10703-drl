@@ -264,16 +264,28 @@ class TrainDiffusionPolicy:
         NOTE: return a loss value that is a plain float (not a tensor), and is on cpu
         """
         # BEGIN STUDENT SOLUTION
-        previous_states_batch, previous_actions_batch, actions_batch, episode_timesteps_batch, _, _, _ = self.get_training_batch(batch_size) # TODO
-
+        previous_states_batch, previous_actions_batch, actions_batch, episode_timesteps_batch, _, _, _ = self.get_training_batch(batch_size, 
+                                                                                                                                 num_previous_states=self.num_train_diffusion_timesteps, 
+                                                                                                                                 num_previous_actions=self.num_train_diffusion_timesteps-1, 
+                                                                                                                                 max_action_len=self.num_train_diffusion_timesteps) # TODO
+        # print(previous_states_batch.shape)
         # Computing noisy actions
-        mu = np.zeros(batch_size)
-        std_dev = np.eye(batch_size)
-        epsilon = np.random.multivariate_normal(mu, std_dev, batch_size)
+        # mu = np.zeros(batch_size)
+        # std_dev = np.eye(batch_size)
+        # epsilon = np.random.multivariate_normal(mu, std_dev, batch_size)
+
+        mu = torch.zeros(batch_size)
+        std_dev = torch.eye(batch_size)
+        epsilon = torch.distributions.MultivariateNormal(mu, std_dev).sample()
 
         # Denoising timesteps 30 ???
 
-        noisy_timesteps_batch = np.random.randint(0, self.num_train_diffusion_timesteps, batch_size)
+        # noisy_timesteps_batch = np.random.randint(0, self.num_train_diffusion_timesteps, batch_size)
+        noisy_timesteps_batch = torch.randint(0, self.num_train_diffusion_timesteps, (batch_size,))
+        # print(noisy_timesteps_batch.shape)
+        # print(epsilon.shape)
+        # print(actions_batch.shape)
+        # print(actions_batch)
         noisy_actions = self.training_scheduler.add_noise(actions_batch, epsilon, noisy_timesteps_batch)
 
         # Compute loss function
@@ -402,14 +414,13 @@ def run_training():
     weight_decay = 0.001
     optimizer = torch.optim.AdamW(model.parameters(), lr = learning_rate, weight_decay = weight_decay)
 
-    states_path = "data/states_Diffusion.pkl"
-    actions_path = "data/actions_Diffusion.pkl"
+    states_path = "data/states_diffusion_policy.pkl"
+    actions_path = "data/actions_diffusion_policy.pkl"
 
     with open(states_path, "rb") as f:
         states = pickle.load(f)
     with open(actions_path, "rb") as f:
         actions = pickle.load(f)
-    
     TrainDiffusion = TrainDiffusionPolicy(env=env,
                         model=model,
                         optimizer=optimizer,
