@@ -128,7 +128,7 @@ class TrainDiffusionPolicy:
         NOTE: remember that you are predicting max_action_len actions, not just one
         """
         # BEGIN STUDENT SOLUTION
-
+        
         # END STUDENT SOLUTION
         return predicted_actions
 
@@ -401,17 +401,25 @@ def run_training():
     learning_rate = 0.00005
     weight_decay = 0.001
     optimizer = torch.optim.AdamW(model.parameters(), lr = learning_rate, weight_decay = weight_decay)
+
+    states_path = "data/states_Diffusion.pkl"
+    actions_path = "data/actions_Diffusion.pkl"
+
+    with open(states_path, "rb") as f:
+        states = pickle.load(f)
+    with open(actions_path, "rb") as f:
+        actions = pickle.load(f)
     
-    Train = TrainDiffusionPolicy(env=env,
+    TrainDiffusion = TrainDiffusionPolicy(env=env,
                         model=model,
                         optimizer=optimizer,
-                        states_array=,
-                        actions_array=, 
+                        states_array=states,
+                        actions_array=actions, 
                         device='cpu',
                         num_train_diffusion_timesteps=30,
                         max_trajectory_length=num_episodes
                          )
-    Train.train(num_training_steps=50_000, batch_size=256)
+    TrainDiffusion.train(num_training_steps=50_000, batch_size=256)
     # END STUDENT SOLUTION
 if __name__ == "__main__":
     run_training()
