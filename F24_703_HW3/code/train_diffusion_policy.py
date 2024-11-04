@@ -391,8 +391,8 @@ def run_training():
     # BEGIN STUDENT SOLUTION
     num_episodes = 1600
     model = PolicyDiffusionTransformer(num_transformer_layers=6,
-                                       state_dim= env.observation_space, 
-                                       act_dim= env.action_space, 
+                                       state_dim= env.observation_space.shape[0], 
+                                       act_dim= env.action_space.shape[0], 
                                        hidden_size= 128, 
                                        max_episode_length=num_episodes,
                                        n_transformer_heads= 1,
