@@ -9,6 +9,7 @@ from simple_network import SimpleNet
 from tqdm import tqdm
 import pickle
 import matplotlib.pyplot as plt
+from PIL import Image
 
 try:
     import wandb
@@ -244,14 +245,24 @@ class TrainDaggerBC:
         # for plotting
         x = np.arange(len(losses))
         ys = np.array([losses])
-        print(ys)
-        self.plot_results(x, ys, ["loss"], "Loss", "Iterations", "Loss")
+        title_loss = ""
+        if self.mode == "BC":
+            title_loss = "Behavior Cloning Loss over Iterations"
+            title_reward = "Behavior Cloning Reward at Training Step"
+        else:
+            title_loss = "DAgger Loss over Iterations"
+            title_reward = "DAgger Reward at Batch"
+
+        self.plot_results(x, ys, ["Loss"], title_loss, "Iterations", "Loss")
 
         x = np.arange(len(average_rewards))
         if self.mode == "BC":
             x = x * 1000
+            x_label = "Training Step"
+        else:
+            x_label = "Batch"
         ys = np.array([average_rewards, median_rewards, max_rewards])
-        self.plot_results(x, ys, ["Average", "Median", "Max"], "Rewards", "Iterations", "Rewards")
+        self.plot_results(x, ys, ["Average", "Median", "Max"], title_reward, x_label, "Reward")
         # END STUDENT SOLUTION
 
         return losses
@@ -302,8 +313,38 @@ class TrainDaggerBC:
         plt.xlabel(x_axis_label)
         plt.ylabel(y_axis_label)
         plt.title(title)
+        plt.savefig(title + ".png",bbox_inches = "tight")
         plt.show()
 
+    def create_gif(self, title):
+        images = []
+        rewards = []
+
+        env = self.env
+        policy = self.model
+        
+        done, trunc = False, False
+        cur_state, _ = env.reset()  
+        img = env.render("rgb_array")
+        img = Image.fromarray(np.array(img).astype(np.uint8),"RGB")
+        images.append(img)
+        t = 0
+        while (not done) and (not trunc):
+            with torch.no_grad():
+                p = policy(torch.from_numpy(cur_state).to(self.device).float().unsqueeze(0), torch.tensor(t).to(self.device).long().unsqueeze(0))
+            a = p.cpu().numpy()[0]
+            next_state, reward, done, trunc, _ = env.step(a)
+            rewards.append(reward)
+
+            img = env.render("rgb_array")
+            img = Image.fromarray(np.array(img).astype(np.uint8),"RGB")
+            images.append(img)
+
+            t += 1
+            cur_state = next_state
+
+        images[0].save("results/" + title + ".gif", save_all = True, append_images = images[1:], optimize = False, duration = 50, loop = 0)
+        print(np.average(rewards))
 
 def run_training():
     """
@@ -338,8 +379,10 @@ def run_training():
     trainDagger = TrainDaggerBC(env, model, expert_model, optimizer, states, actions, "cpu", "DAgger")
     
     # TODO: use batch_size = 128 for both Dagger and BC
-    #losses = trainBC.train()
+    losses = trainBC.train(batch_size=128)
+    trainBC.create_gif("BC_Walking")
     losses = trainDagger.train(num_batch_collection_steps=20, num_training_steps_per_batch_collection=1000, batch_size=128)
+    trainDagger.create_gif("DAgger_Walking")
     # END STUDENT SOLUTION
 
 if __name__ == "__main__":
