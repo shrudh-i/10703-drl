@@ -140,10 +140,10 @@ class TrainDiffusionPolicy:
              
             timesteps = self.get_inference_timesteps()
 
+            noisy_actions = x_T
             for t in timesteps:
                 #input to the model
                 # model_inputs = previous_states_batch, previous_actions_batch #, noisy_actions, noise_levels
-                noisy_actions = x_T
                 noise_levels = t.repeat(x_T.shape[0])
                 epsilon_theta = self.model(previous_states, 
                                            previous_actions, 
@@ -154,7 +154,10 @@ class TrainDiffusionPolicy:
                                            previous_actions_padding_mask, 
                                            actions_padding_mask)
                 
-                predicted_actions = self.inference_scheduler.step(epsilon_theta, noise_levels, x_T)
+                scheduler_output = self.inference_scheduler.step(epsilon_theta, noise_levels, noisy_actions)
+                noisy_actions = scheduler_output.prev_sample
+                predicted_actions = scheduler_output.pred_original_sample
+
             
             # END STUDENT SOLUTION
             return predicted_actions
@@ -545,8 +548,8 @@ def run_training():
                         num_train_diffusion_timesteps=30,
                         max_trajectory_length=num_episodes
                          )
-    # TrainDiffusion.train(num_training_steps=50_000, batch_size=256, print_every=10_000, wandb_logging=True)
-    TrainDiffusion.evaluation(num_samples=20, num_actions_to_eval_in_a_row=3)
+    TrainDiffusion.train(num_training_steps=50_000, batch_size=256, print_every=10_000, wandb_logging=True)
+    # TrainDiffusion.evaluation(num_samples=20, num_actions_to_eval_in_a_row=3)
     # END STUDENT SOLUTION
 if __name__ == "__main__":
     run_training()
