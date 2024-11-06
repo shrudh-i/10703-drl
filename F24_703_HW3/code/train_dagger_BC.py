@@ -206,15 +206,14 @@ class TrainDaggerBC:
         median_rewards = []
         max_rewards = []
         if self.mode == "BC":
-            for num in range(num_BC_training_steps):
+            for num in tqdm(range(num_BC_training_steps)):
                 loss = self.training_step(batch_size)
                 losses.append(loss)
 
-                if (num+1) % print_every == 0 or num == 0:
-                    print("Training Step", num+1, "Loss:", loss)
+                # if (num+1) % print_every == 0 or num == 0:
+                #     print("Training Step", num+1, "Loss:", loss)
 
-                # "Evaluate Reward Every" not included, Piazza says to set to 1000
-                if (num+1) % 1000 == 0 or num == 0:
+                if (num+1) % save_every == 0 or num == 0:
                     rewards = self.generate_trajectories(num_trajectories_per_batch_collection)
                     average_rewards.append(np.average(rewards))
                     median_rewards.append(np.median(rewards))
@@ -226,7 +225,8 @@ class TrainDaggerBC:
             self.states = np.empty((0,24))
             self.actions = np.empty((0,4))
             self.timesteps = np.empty((0,1), dtype=int)
-            for i in range(num_batch_collection_steps):
+
+            for i in tqdm(range(num_batch_collection_steps)):
                 rewards = self.update_training_data()
                 average_rewards.append(np.average(rewards))
                 median_rewards.append(np.median(rewards))
@@ -237,12 +237,12 @@ class TrainDaggerBC:
                     loss = self.training_step(batch_size)
                     losses.append(loss)
 
-                    if (j+1) % print_every == 0 or j == 0:
-                        print("Training Step", j+1, "Loss:", loss)
+                    # if (j+1) % print_every == 0 or j == 0:
+                    #     print("Training Step", j+1, "Loss:", loss)
 
         losses = np.array(losses)
 
-        # for plotting
+        # For Plotting:
         x = np.arange(len(losses))
         ys = np.array([losses])
         title_loss = ""
@@ -263,6 +263,7 @@ class TrainDaggerBC:
             x_label = "Batch"
         ys = np.array([average_rewards, median_rewards, max_rewards])
         self.plot_results(x, ys, ["Average", "Median", "Max"], title_reward, x_label, "Reward")
+        
         # END STUDENT SOLUTION
 
         return losses
@@ -325,7 +326,7 @@ class TrainDaggerBC:
         
         done, trunc = False, False
         cur_state, _ = env.reset()  
-        img = env.render("rgb_array")
+        img = env.render()
         img = Image.fromarray(np.array(img).astype(np.uint8),"RGB")
         images.append(img)
         t = 0
@@ -336,7 +337,7 @@ class TrainDaggerBC:
             next_state, reward, done, trunc, _ = env.step(a)
             rewards.append(reward)
 
-            img = env.render("rgb_array")
+            img = env.render()
             img = Image.fromarray(np.array(img).astype(np.uint8),"RGB")
             images.append(img)
 
@@ -351,7 +352,7 @@ def run_training():
     Simple Run Training Function
     """
 
-    env = gym.make('BipedalWalker-v3') # , render_mode="rgb_array"
+    env = gym.make('BipedalWalker-v3', render_mode="rgb_array") 
 
     model_name = "super_expert_PPO_model"
     expert_model = PolicyNet(24, 4)
@@ -378,9 +379,17 @@ def run_training():
     trainBC = TrainDaggerBC(env, model, expert_model, optimizer, states, actions, "cpu", "BC")
     trainDagger = TrainDaggerBC(env, model, expert_model, optimizer, states, actions, "cpu", "DAgger")
     
-    # TODO: use batch_size = 128 for both Dagger and BC
-    losses = trainBC.train(batch_size=128)
-    trainBC.create_gif("BC_Walking")
+    # TODO: use batch_size = 128 for both DAgger and BC
+
+    '''
+        Behaviour Cloning:
+            * "Evaluate Reward Every" not included, Piazza says to set to 1000
+            * Create GIF after training
+    '''
+    # losses = trainBC.train(batch_size=128, save_every=1000)
+    # trainBC.create_gif("BC_Walking")
+    
+    #DAgger
     losses = trainDagger.train(num_batch_collection_steps=20, num_training_steps_per_batch_collection=1000, batch_size=128)
     trainDagger.create_gif("DAgger_Walking")
     # END STUDENT SOLUTION
