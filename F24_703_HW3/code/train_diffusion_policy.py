@@ -128,23 +128,26 @@ class TrainDiffusionPolicy:
             NOTE: remember that you are predicting max_action_len actions, not just one
             """
             # BEGIN STUDENT SOLUTION
-            #TODO: do we need to do it like this + do we need the padding arguments
-            # previous_states_batch, previous_actions_batch, actions_batch, episode_timesteps_batch, _, _, _ = self.get_training_batch(batch_size)
-
-            # Computing noisy actions - pure noise that will become actions
-            # mu = np.zeros(batch_size)
-            # std_dev = np.eye(batch_size)
-            # x_T = np.random.multivariate_normal(mu, std_dev, batch_size)
-
             x_T = torch.randn((previous_actions.shape[0], max_action_len, self.action_dimension)) #what shape ?
              
             timesteps = self.get_inference_timesteps()
 
             noisy_actions = x_T
             for t in timesteps:
-                #input to the model
+                # input to the model
                 # model_inputs = previous_states_batch, previous_actions_batch #, noisy_actions, noise_levels
                 noise_levels = t.repeat(x_T.shape[0])
+                print("im in diffusion sample")
+
+                print(f"prev states: {previous_states.shape}")
+                print(f"prev actions: {previous_actions.shape}")
+                print(f"noisy_actions: {noisy_actions.shape}")
+                print(f"episode timesteps: {episode_timesteps.shape}")
+                print(f"noise_levels.unsqueeze(1): {noise_levels.unsqueeze(1)}")
+                print(f" prev states padding mask: {previous_states_padding_mask.shape}")
+                print(f" prev actions padding mask: {previous_actions_padding_mask.shape}")
+                print(f"actions padding mask: {actions_padding_mask.shape}")
+
                 epsilon_theta = self.model(previous_states, 
                                            previous_actions, 
                                            noisy_actions, 
@@ -162,49 +165,15 @@ class TrainDiffusionPolicy:
             # END STUDENT SOLUTION
             return predicted_actions
 
-    # def sample_trajectory(
-    #     self, 
-    #     env, 
-    #     num_actions_to_eval_in_a_row=3, 
-    #     num_previous_states=5,
-    #     num_previous_actions=4, 
-    # ):
-    #     """
-    #     run a trajectory using the trained model
-
-    #     Args:
-    #         env (gym.Env): the environment to run the trajectory in
-    #         num_actions_to_eval_in_a_row (int): the number of actions to evaluate in a row
-    #         num_previous_states (int): the number of previous states to condition on
-    #         num_previous_actions (int): the number of previous actions to condition on
-
-    #     NOTE: use with torch.no_grad(): to speed up inference by not storing gradients
-    #     NOTE: for the first few steps, make sure to add padding to previous states/actions - use False if a state/action should be included, and True if it should be padded
-    #     NOTE: both states and actions should be normalized before being passed to the model, and the model outputs normalized actions that need to be denormalized
-    #     NOTE: refer to the forward function of diffusion_policy_transformer to see how to pass in the inputs (tensor shapes, etc.)
-    #     """
-    #     # BEGIN STUDENT SOLUTION
-    #     s,a,t,done, trunc = [env.reset()], [], [0], False, False
-    #     while not done and not trunc:
-    #         actions = self.diffusion_sample( ,s, a, t)
-    #         for i in range(num_actions_to_eval_in_a_row):
-    #             new_state, rewards, done, trunc, _ = env.step(actions[i])
-    #             if done or trunc:
-    #                 return
-    #             s,a,t = s +[new_state], a +[actions[i]], t + [len(s)]
-    #         s,a,t = s[]
-    #     # END STUDENT SOLUTION
-    #     return rewards
-
     def sample_trajectory(
-    self, 
-    env, 
-    num_actions_to_eval_in_a_row=3, 
-    num_previous_states=5,
-    num_previous_actions=4, 
+        self, 
+        env, 
+        num_actions_to_eval_in_a_row=3, 
+        num_previous_states=5,
+        num_previous_actions=4, 
     ):
         """
-        Run a trajectory using the trained model.
+        run a trajectory using the trained model
 
         Args:
             env (gym.Env): the environment to run the trajectory in
@@ -212,39 +181,70 @@ class TrainDiffusionPolicy:
             num_previous_states (int): the number of previous states to condition on
             num_previous_actions (int): the number of previous actions to condition on
 
-        NOTE: use with torch.no_grad() to speed up inference by not storing gradients
+        NOTE: use with torch.no_grad(): to speed up inference by not storing gradients
+        NOTE: for the first few steps, make sure to add padding to previous states/actions - use False if a state/action should be included, and True if it should be padded
+        NOTE: both states and actions should be normalized before being passed to the model, and the model outputs normalized actions that need to be denormalized
+        NOTE: refer to the forward function of diffusion_policy_transformer to see how to pass in the inputs (tensor shapes, etc.)
         """
+        # BEGIN STUDENT SOLUTION
+        # s,a,t,done, trunc = [env.reset()], [], [0], False, False
+        # while not done and not trunc:
+        #     actions = self.diffusion_sample( ,s, a, t)
+        #     for i in range(num_actions_to_eval_in_a_row):
+        #         new_state, rewards, done, trunc, _ = env.step(actions[i])
+        #         if done or trunc:
+        #             return
+        #         s,a,t = s +[new_state], a +[actions[i]], t + [len(s)]
+        #     s,a,t = s[]
+        # END STUDENT SOLUTION
+
+
+        # BEGIN NEW SOLUTION
+
         rewards = 0
         states = []
         actions = []
         state = env.reset()[0]
         done = False
-        timesteps = 0
+        timesteps = [0]
+        truncated = False
         
-        # Normalize the initial state
-        state = (state - self.states_mean) / self.states_std
+        # Normalize the initial state - handled in training
         
+        states.append(state)
         with torch.no_grad():
-            while not done and timesteps < self.max_trajectory_length:
+            # while not done and timesteps < self.max_trajectory_length:
+            while not done: # and not truncated:
                 # Prepare previous states and actions with padding if necessary
                 states_to_use = states[-num_previous_states:] if len(states) >= num_previous_states else [np.zeros_like(state)] * (num_previous_states - len(states)) + states
                 actions_to_use = actions[-num_previous_actions:] if len(actions) >= num_previous_actions else [np.zeros(self.action_dimension)] * (num_previous_actions - len(actions)) + actions
 
                 # Convert lists to tensors and apply padding masks
-                previous_states = torch.tensor(states_to_use, dtype=torch.float32).unsqueeze(0)#.to(self.device)
-                previous_actions = torch.tensor(actions_to_use, dtype=torch.float32).unsqueeze(0)#.to(self.device)
-                episode_timesteps = torch.tensor([timesteps], dtype=torch.int64).unsqueeze(0)#.to(self.device)
+                previous_states = torch.tensor(states_to_use, dtype=torch.float32).unsqueeze(0)
+                previous_actions = torch.tensor(actions_to_use, dtype=torch.float32).unsqueeze(0)
+                episode_timesteps = torch.tensor([timesteps], dtype=torch.int64) #.unsqueeze(0)
                 
                 # Padding masks
                 previous_states_padding_mask = torch.tensor(
-                    [True] * (num_previous_states - len(states_to_use)) + [False] * len(states_to_use),
+                    [True] * (num_previous_states - len(states)) + [False] * len(states),
                     dtype=torch.bool
-                ).unsqueeze(0)#.to(self.device)
+                ).unsqueeze(0)
                 previous_actions_padding_mask = torch.tensor(
-                    [True] * (num_previous_actions - len(actions_to_use)) + [False] * len(actions_to_use),
+                    [True] * (num_previous_actions - len(actions)) + [False] * len(actions),
                     dtype=torch.bool
-                ).unsqueeze(0)#.to(self.device)
-                actions_padding_mask = torch.zeros((1, num_actions_to_eval_in_a_row), dtype=torch.bool)#.to(self.device)
+                ).unsqueeze(0)
+
+                actions_padding_mask = torch.zeros((1, num_actions_to_eval_in_a_row), dtype=torch.bool)
+
+                # print(f"initial state: {state}")
+                # print(f"states to use: {states_to_use}")
+                # print(f"actions to use: {actions_to_use}")
+                # print(f"prev states: {previous_states}")
+                # print(f"prev actions: {previous_actions}")
+                # print(f"episode timesteps: {episode_timesteps.shape}")
+                # print(f" prev states padding mask: {previous_states_padding_mask}")
+                # print(f" prev actions padding mask: {previous_actions_padding_mask}")
+                # print(f"actions padding mask: {actions_padding_mask.shape}")
 
                 # Generate actions
                 sampled_actions = self.diffusion_sample(
@@ -256,29 +256,128 @@ class TrainDiffusionPolicy:
                     actions_padding_mask=actions_padding_mask,
                     max_action_len=num_actions_to_eval_in_a_row
                 )[0].cpu().numpy()
+                
+                print(f"this is the norm actions {sampled_actions}")
 
-                # Denormalize actions
+                # Denormalize actions - training results normalized actions
                 denormalized_actions = sampled_actions * self.actions_std + self.actions_mean
-                # print("Denorm",denormalized_actions)
+
+                print(f"this is denorm actions: {denormalized_actions}")
+        
                 # Take actions in the environment
                 for i in range(num_actions_to_eval_in_a_row):
-                    action = np.clip(denormalized_actions[0][i], -1, 1)
-                    actions.append(action)
-                    print(action)
-                    state, reward, done, _, _ = env.step(action)
-                    # rewards.append(reward)
-                    rewards = rewards + reward
-                    # Normalize and store the new state
-                    state = (state - self.states_mean) / self.states_std
-                    states.append(state)
-                    timesteps += 1
+                    # TODO: check the shape of action here
+                    # action = np.clip(denormalized_actions[i], -1, 1)
+                    action = sampled_actions[i]
+                    print(f"this is the action: {action}")
+                    print(f"this is the shape of action: {action.shape}")
+                    print(f"this is the shape of the actions list: {denormalized_actions.shape}")
 
-                    if done or timesteps >= self.max_trajectory_length:
+                    # TODO: is state normalized from step
+                    state, reward, done, _, _ = env.step(action)
+
+                    # Append new tokens to the sequence
+                    states = states + state 
+                    denormalized_actions = denormalized_actions + action
+                    timesteps = timesteps + [len(states)]
+
+                    print(f"reward: {reward}")
+                    print(f"states: {states.shape}")
+                    print(f"actions: {denormalized_actions.shape}")
+                    print(f"timesteps: {timesteps}")
+
+                    # exit(0)
+
+                    # if done or timesteps >= self.max_trajectory_length:
+                    if done: #or truncated:
                         break
 
-            # print(len(rewards)) 
-        
+        # END NEW SOLUTION
         return rewards
+
+    # def sample_trajectory(
+    # self, 
+    # env, 
+    # num_actions_to_eval_in_a_row=3, 
+    # num_previous_states=5,
+    # num_previous_actions=4, 
+    # ):
+    #     """
+    #     Run a trajectory using the trained model.
+
+    #     Args:
+    #         env (gym.Env): the environment to run the trajectory in
+    #         num_actions_to_eval_in_a_row (int): the number of actions to evaluate in a row
+    #         num_previous_states (int): the number of previous states to condition on
+    #         num_previous_actions (int): the number of previous actions to condition on
+
+    #     NOTE: use with torch.no_grad() to speed up inference by not storing gradients
+    #     """
+    #     rewards = 0
+    #     states = []
+    #     actions = []
+    #     state = env.reset()[0]
+    #     done = False
+    #     timesteps = 0
+        
+    #     # Normalize the initial state
+    #     state = (state - self.states_mean) / self.states_std
+        
+    #     with torch.no_grad():
+    #         while not done and timesteps < self.max_trajectory_length:
+    #             # Prepare previous states and actions with padding if necessary
+    #             states_to_use = states[-num_previous_states:] if len(states) >= num_previous_states else [np.zeros_like(state)] * (num_previous_states - len(states)) + states
+    #             actions_to_use = actions[-num_previous_actions:] if len(actions) >= num_previous_actions else [np.zeros(self.action_dimension)] * (num_previous_actions - len(actions)) + actions
+
+    #             # Convert lists to tensors and apply padding masks
+    #             previous_states = torch.tensor(states_to_use, dtype=torch.float32).unsqueeze(0)#.to(self.device)
+    #             previous_actions = torch.tensor(actions_to_use, dtype=torch.float32).unsqueeze(0)#.to(self.device)
+    #             episode_timesteps = torch.tensor([timesteps], dtype=torch.int64).unsqueeze(0)#.to(self.device)
+                
+    #             # Padding masks
+    #             previous_states_padding_mask = torch.tensor(
+    #                 [True] * (num_previous_states - len(states_to_use)) + [False] * len(states_to_use),
+    #                 dtype=torch.bool
+    #             ).unsqueeze(0)#.to(self.device)
+    #             previous_actions_padding_mask = torch.tensor(
+    #                 [True] * (num_previous_actions - len(actions_to_use)) + [False] * len(actions_to_use),
+    #                 dtype=torch.bool
+    #             ).unsqueeze(0)#.to(self.device)
+    #             actions_padding_mask = torch.zeros((1, num_actions_to_eval_in_a_row), dtype=torch.bool)#.to(self.device)
+
+    #             # Generate actions
+    #             sampled_actions = self.diffusion_sample(
+    #                 previous_states=previous_states,
+    #                 previous_actions=previous_actions,
+    #                 episode_timesteps=episode_timesteps,
+    #                 previous_states_padding_mask=previous_states_padding_mask,
+    #                 previous_actions_padding_mask=previous_actions_padding_mask,
+    #                 actions_padding_mask=actions_padding_mask,
+    #                 max_action_len=num_actions_to_eval_in_a_row
+    #             )[0].cpu().numpy()
+
+    #             # Denormalize actions
+    #             denormalized_actions = sampled_actions * self.actions_std + self.actions_mean
+    #             # print("Denorm",denormalized_actions)
+    #             # Take actions in the environment
+    #             for i in range(num_actions_to_eval_in_a_row):
+    #                 action = np.clip(denormalized_actions[0][i], -1, 1)
+    #                 actions.append(action)
+    #                 print(action)
+    #                 state, reward, done, _, _ = env.step(action)
+    #                 # rewards.append(reward)
+    #                 rewards = rewards + reward
+    #                 # Normalize and store the new state
+    #                 state = (state - self.states_mean) / self.states_std
+    #                 states.append(state)
+    #                 timesteps += 1
+
+    #                 if done or timesteps >= self.max_trajectory_length:
+    #                     break
+
+    #         # print(len(rewards)) 
+        
+    #     return rewards
 
     def evaluation(
         self,
@@ -405,6 +504,8 @@ class TrainDiffusionPolicy:
         loss_fn = nn.MSELoss()
         self.optimizer.zero_grad()
 
+        print(f"ep timesteps batch {episode_timesteps_batch.shape}")
+        exit(0)
         epsilon_theta = self.model(previous_states_batch,
                                     previous_actions_batch,
                                     noisy_actions,
@@ -548,8 +649,8 @@ def run_training():
                         num_train_diffusion_timesteps=30,
                         max_trajectory_length=num_episodes
                          )
-    TrainDiffusion.train(num_training_steps=50_000, batch_size=256, print_every=10_000, wandb_logging=True)
-    # TrainDiffusion.evaluation(num_samples=20, num_actions_to_eval_in_a_row=3)
+    # TrainDiffusion.train(num_training_steps=50_000, batch_size=256, print_every=10_000, wandb_logging=True)
+    TrainDiffusion.evaluation(num_samples=2, num_actions_to_eval_in_a_row=3)
     # END STUDENT SOLUTION
 if __name__ == "__main__":
     run_training()
