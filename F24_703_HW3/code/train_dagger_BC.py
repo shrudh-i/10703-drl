@@ -247,11 +247,11 @@ class TrainDaggerBC:
         ys = np.array([losses])
         title_loss = ""
         if self.mode == "BC":
-            title_loss = "Behavior Cloning Loss over Iterations"
-            title_reward = "Behavior Cloning Reward at Training Step"
+            title_loss = "Behavior_Cloning_Loss_over_Iterations"
+            title_reward = "Behavior_Cloning_Reward_at_Training_Step"
         else:
-            title_loss = "DAgger Loss over Iterations"
-            title_reward = "DAgger Reward at Batch"
+            title_loss = "DAgger_Loss_over_Iterations"
+            title_reward = "DAgger_Reward_at_Batch"
 
         self.plot_results(x, ys, ["Loss"], title_loss, "Iterations", "Loss")
 
