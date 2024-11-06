@@ -314,7 +314,7 @@ class TrainDaggerBC:
         plt.xlabel(x_axis_label)
         plt.ylabel(y_axis_label)
         plt.title(title)
-        plt.savefig(title + ".png",bbox_inches = "tight")
+        plt.savefig("results/" + title + ".png",bbox_inches = "tight")
         plt.show()
 
     def create_gif(self, title):
