@@ -137,16 +137,16 @@ class TrainDiffusionPolicy:
                 # input to the model
                 # model_inputs = previous_states_batch, previous_actions_batch #, noisy_actions, noise_levels
                 noise_levels = t.repeat(x_T.shape[0])
-                print("im in diffusion sample")
+                # print("im in diffusion sample")
 
-                print(f"prev states: {previous_states.shape}")
-                print(f"prev actions: {previous_actions.shape}")
-                print(f"noisy_actions: {noisy_actions.shape}")
-                print(f"episode timesteps: {episode_timesteps.shape}")
-                print(f"noise_levels.unsqueeze(1): {noise_levels.unsqueeze(1)}")
-                print(f" prev states padding mask: {previous_states_padding_mask.shape}")
-                print(f" prev actions padding mask: {previous_actions_padding_mask.shape}")
-                print(f"actions padding mask: {actions_padding_mask.shape}")
+                # print(f"prev states: {previous_states.shape}")
+                # print(f"prev actions: {previous_actions.shape}")
+                # print(f"noisy_actions: {noisy_actions.shape}")
+                # print(f"episode timesteps: {episode_timesteps.shape}")
+                # print(f"noise_levels.unsqueeze(1): {noise_levels.unsqueeze(1)}")
+                # print(f" prev states padding mask: {previous_states_padding_mask.shape}")
+                # print(f" prev actions padding mask: {previous_actions_padding_mask.shape}")
+                # print(f"actions padding mask: {actions_padding_mask.shape}")
 
                 epsilon_theta = self.model(previous_states, 
                                            previous_actions, 
@@ -212,25 +212,32 @@ class TrainDiffusionPolicy:
         # Normalize the initial state - handled in training
         
         states.append(state)
+        K = num_previous_states
+        KA = num_previous_actions
         with torch.no_grad():
             # while not done and timesteps < self.max_trajectory_length:
             while not done: # and not truncated:
                 # Prepare previous states and actions with padding if necessary
-                states_to_use = states[-num_previous_states:] if len(states) >= num_previous_states else [np.zeros_like(state)] * (num_previous_states - len(states)) + states
-                actions_to_use = actions[-num_previous_actions:] if len(actions) >= num_previous_actions else [np.zeros(self.action_dimension)] * (num_previous_actions - len(actions)) + actions
+                states_to_use = states[-K:] if len(states) >= K else [np.zeros_like(state)] * (K - len(states)) + states
+                actions_to_use = actions[-KA:] if len(actions) >= KA else [np.zeros(self.action_dimension)] * (KA - len(actions)) + actions
+                timesteps_to_use = timesteps[-K:] if len(timesteps) >= K else [0] * (K - len(timesteps)) + timesteps
+                
+                # Normalize
+                previous_states = (states_to_use - self.states_mean) / self.states_std
+                previous_actions = (actions_to_use - self.actions_mean) / self.actions_std
 
                 # Convert lists to tensors and apply padding masks
-                previous_states = torch.tensor(states_to_use, dtype=torch.float32).unsqueeze(0)
-                previous_actions = torch.tensor(actions_to_use, dtype=torch.float32).unsqueeze(0)
-                episode_timesteps = torch.tensor([timesteps], dtype=torch.int64) #.unsqueeze(0)
-                
+                previous_states = torch.tensor(previous_states, dtype=torch.float32).unsqueeze(0)
+                previous_actions = torch.tensor(previous_actions, dtype=torch.float32).unsqueeze(0)
+                episode_timesteps = torch.tensor(timesteps_to_use, dtype=torch.int64).unsqueeze(0)
+
                 # Padding masks
                 previous_states_padding_mask = torch.tensor(
-                    [True] * (num_previous_states - len(states)) + [False] * len(states),
+                    [True] * max(0,(K - len(states))) + [False] * min(K,len(states)),
                     dtype=torch.bool
                 ).unsqueeze(0)
                 previous_actions_padding_mask = torch.tensor(
-                    [True] * (num_previous_actions - len(actions)) + [False] * len(actions),
+                    [True] * max(0,(KA - len(actions))) + [False] * min(KA,len(actions)),
                     dtype=torch.bool
                 ).unsqueeze(0)
 
@@ -257,40 +264,48 @@ class TrainDiffusionPolicy:
                     max_action_len=num_actions_to_eval_in_a_row
                 )[0].cpu().numpy()
                 
-                print(f"this is the norm actions {sampled_actions}")
+                # print(f"this is the norm actions {sampled_actions}")
 
                 # Denormalize actions - training results normalized actions
-                denormalized_actions = sampled_actions * self.actions_std + self.actions_mean
 
-                print(f"this is denorm actions: {denormalized_actions}")
+                sampled_actions = (sampled_actions * self.actions_std) + self.actions_mean
+                sampled_actions = np.clip(sampled_actions, -self.clip_sample_range, self.clip_sample_range)
+
+                # denormalized_actions = sampled_actions * self.actions_std + self.actions_mean
+                # print(f"this is denorm actions: {denormalized_actions}")
         
                 # Take actions in the environment
                 for i in range(num_actions_to_eval_in_a_row):
                     # TODO: check the shape of action here
                     # action = np.clip(denormalized_actions[i], -1, 1)
                     action = sampled_actions[i]
-                    print(f"this is the action: {action}")
-                    print(f"this is the shape of action: {action.shape}")
-                    print(f"this is the shape of the actions list: {denormalized_actions.shape}")
+                    # print(f"this is the action: {action}")
+                    # print(f"this is the shape of action: {action.shape}")
+                    # print(f"this is the shape of the actions list: {denormalized_actions.shape}")
 
                     # TODO: is state normalized from step
                     state, reward, done, _, _ = env.step(action)
-
-                    # Append new tokens to the sequence
-                    states = states + state 
-                    denormalized_actions = denormalized_actions + action
-                    timesteps = timesteps + [len(states)]
-
-                    print(f"reward: {reward}")
-                    print(f"states: {states.shape}")
-                    print(f"actions: {denormalized_actions.shape}")
-                    print(f"timesteps: {timesteps}")
-
-                    # exit(0)
+                    rewards += reward
 
                     # if done or timesteps >= self.max_trajectory_length:
                     if done: #or truncated:
                         break
+
+                    # Append new tokens to the sequence
+                    states = states + [state] 
+                    actions = actions + [action]
+                    # denormalized_actions = denormalized_actions + [action]
+                    timesteps = timesteps + [len(states)-1]
+
+                    # print("Length of states", len(states))
+                
+                    # print(f"reward: {reward}")
+                    # print(f"states: {states.shape}")
+                    # print(f"actions: {denormalized_actions.shape}")
+                    # print(f"timesteps: {timesteps}")
+
+                    # exit(0)
+
 
         # END NEW SOLUTION
         return rewards
@@ -405,16 +420,19 @@ class TrainDiffusionPolicy:
 
         rewards = np.zeros((num_samples, self.max_trajectory_length))
         os.makedirs("data/diffusion_policy_trajectories", exist_ok=True)
+        time_elapsed =[]
         for sample_trajectory in tqdm(range(num_samples)):
             time1 = time.time()
             reward = self.sample_trajectory(self.env, num_actions_to_eval_in_a_row=num_actions_to_eval_in_a_row)
             time2 = time.time()
+            time_elapsed.append(time2-time1)
             print(f"trajectory {sample_trajectory} took {time2 - time1} seconds")
             rewards[sample_trajectory] = reward
             print(f"rewards from trajectory {sample_trajectory}={reward.sum()}")
-        print(f"average reward per trajectory={rewards.sum() / (rewards.shape[0])}")
-        print(f"median reward per trajectory={np.median(rewards.sum(axis=1))}")
-        print(f"max reward per trajectory={np.max(rewards.sum(axis=1))}")
+        print(f"average reward per trajectory={np.average(rewards)}")
+        print(f"median reward per trajectory={np.median(rewards)}")
+        print(f"max reward per trajectory={np.max(rewards)}")
+        print(f"average time to generate trajectory={np.average(time_elapsed)} seconds")
         print(f"average trajectory length={np.mean(np.array([sum(1 for r in rewards[i] if r != 0) for i in range(len(rewards))]))}")
 
     def train(
@@ -650,7 +668,8 @@ def run_training():
                         max_trajectory_length=num_episodes
                          )
     # TrainDiffusion.train(num_training_steps=50_000, batch_size=256, print_every=10_000, wandb_logging=True)
-    TrainDiffusion.evaluation(num_samples=2, num_actions_to_eval_in_a_row=3)
+    print("EVALUATING")
+    TrainDiffusion.evaluation(num_samples=20, num_actions_to_eval_in_a_row=3)
     # END STUDENT SOLUTION
 if __name__ == "__main__":
     run_training()
