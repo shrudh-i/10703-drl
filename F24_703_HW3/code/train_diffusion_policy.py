@@ -186,28 +186,22 @@ class TrainDiffusionPolicy:
         NOTE: both states and actions should be normalized before being passed to the model, and the model outputs normalized actions that need to be denormalized
         NOTE: refer to the forward function of diffusion_policy_transformer to see how to pass in the inputs (tensor shapes, etc.)
         """
-        # BEGIN STUDENT SOLUTION
-        # s,a,t,done, trunc = [env.reset()], [], [0], False, False
-        # while not done and not trunc:
-        #     actions = self.diffusion_sample( ,s, a, t)
-        #     for i in range(num_actions_to_eval_in_a_row):
-        #         new_state, rewards, done, trunc, _ = env.step(actions[i])
-        #         if done or trunc:
-        #             return
-        #         s,a,t = s +[new_state], a +[actions[i]], t + [len(s)]
-        #     s,a,t = s[]
-        # END STUDENT SOLUTION
-
-
         # BEGIN NEW SOLUTION
 
         rewards = 0
         states = []
         actions = []
         state = env.reset()[0]
+
+        
         done = False
         timesteps = [0]
         truncated = False
+        
+        images =[]
+        img = env.render()
+        img = Image.fromarray(np.array(img).astype(np.uint8), "RGB")
+        images.append(img)
         
         # Normalize the initial state - handled in training
         
@@ -285,6 +279,11 @@ class TrainDiffusionPolicy:
 
                     # TODO: is state normalized from step
                     state, reward, done, _, _ = env.step(action)
+                   
+                    img = env.render()
+                    img = Image.fromarray(np.array(img).astype(np.uint8), "RGB")
+                    images.append(img)
+
                     rewards += reward
 
                     # if done or timesteps >= self.max_trajectory_length:
@@ -305,94 +304,12 @@ class TrainDiffusionPolicy:
                     # print(f"timesteps: {timesteps}")
 
                     # exit(0)
-
+            
+            images[0].save("results/Diffusion_trajectory.gif", save_all = True, append_images = images[1:], optimize = False, duration = 50, loop = 0)
 
         # END NEW SOLUTION
         return rewards
 
-    # def sample_trajectory(
-    # self, 
-    # env, 
-    # num_actions_to_eval_in_a_row=3, 
-    # num_previous_states=5,
-    # num_previous_actions=4, 
-    # ):
-    #     """
-    #     Run a trajectory using the trained model.
-
-    #     Args:
-    #         env (gym.Env): the environment to run the trajectory in
-    #         num_actions_to_eval_in_a_row (int): the number of actions to evaluate in a row
-    #         num_previous_states (int): the number of previous states to condition on
-    #         num_previous_actions (int): the number of previous actions to condition on
-
-    #     NOTE: use with torch.no_grad() to speed up inference by not storing gradients
-    #     """
-    #     rewards = 0
-    #     states = []
-    #     actions = []
-    #     state = env.reset()[0]
-    #     done = False
-    #     timesteps = 0
-        
-    #     # Normalize the initial state
-    #     state = (state - self.states_mean) / self.states_std
-        
-    #     with torch.no_grad():
-    #         while not done and timesteps < self.max_trajectory_length:
-    #             # Prepare previous states and actions with padding if necessary
-    #             states_to_use = states[-num_previous_states:] if len(states) >= num_previous_states else [np.zeros_like(state)] * (num_previous_states - len(states)) + states
-    #             actions_to_use = actions[-num_previous_actions:] if len(actions) >= num_previous_actions else [np.zeros(self.action_dimension)] * (num_previous_actions - len(actions)) + actions
-
-    #             # Convert lists to tensors and apply padding masks
-    #             previous_states = torch.tensor(states_to_use, dtype=torch.float32).unsqueeze(0)#.to(self.device)
-    #             previous_actions = torch.tensor(actions_to_use, dtype=torch.float32).unsqueeze(0)#.to(self.device)
-    #             episode_timesteps = torch.tensor([timesteps], dtype=torch.int64).unsqueeze(0)#.to(self.device)
-                
-    #             # Padding masks
-    #             previous_states_padding_mask = torch.tensor(
-    #                 [True] * (num_previous_states - len(states_to_use)) + [False] * len(states_to_use),
-    #                 dtype=torch.bool
-    #             ).unsqueeze(0)#.to(self.device)
-    #             previous_actions_padding_mask = torch.tensor(
-    #                 [True] * (num_previous_actions - len(actions_to_use)) + [False] * len(actions_to_use),
-    #                 dtype=torch.bool
-    #             ).unsqueeze(0)#.to(self.device)
-    #             actions_padding_mask = torch.zeros((1, num_actions_to_eval_in_a_row), dtype=torch.bool)#.to(self.device)
-
-    #             # Generate actions
-    #             sampled_actions = self.diffusion_sample(
-    #                 previous_states=previous_states,
-    #                 previous_actions=previous_actions,
-    #                 episode_timesteps=episode_timesteps,
-    #                 previous_states_padding_mask=previous_states_padding_mask,
-    #                 previous_actions_padding_mask=previous_actions_padding_mask,
-    #                 actions_padding_mask=actions_padding_mask,
-    #                 max_action_len=num_actions_to_eval_in_a_row
-    #             )[0].cpu().numpy()
-
-    #             # Denormalize actions
-    #             denormalized_actions = sampled_actions * self.actions_std + self.actions_mean
-    #             # print("Denorm",denormalized_actions)
-    #             # Take actions in the environment
-    #             for i in range(num_actions_to_eval_in_a_row):
-    #                 action = np.clip(denormalized_actions[0][i], -1, 1)
-    #                 actions.append(action)
-    #                 print(action)
-    #                 state, reward, done, _, _ = env.step(action)
-    #                 # rewards.append(reward)
-    #                 rewards = rewards + reward
-    #                 # Normalize and store the new state
-    #                 state = (state - self.states_mean) / self.states_std
-    #                 states.append(state)
-    #                 timesteps += 1
-
-    #                 if done or timesteps >= self.max_trajectory_length:
-    #                     break
-
-    #         # print(len(rewards)) 
-        
-    #     return rewards
 
     def evaluation(
         self,
@@ -505,12 +422,7 @@ class TrainDiffusionPolicy:
         # BEGIN STUDENT SOLUTION
         previous_states_batch, previous_actions_batch, actions_batch, episode_timesteps_batch, previous_states_padding_batch, previous_actions_padding_batch, actions_padding_batch = self.get_training_batch(batch_size) 
 
-        # mu = torch.zeros(batch_size) 
-        # std_dev = torch.eye(batch_size)
-        # mu = torch.zeros_like((actions_batch))
-        # std_dev = torch.eye(actions_batch)
-        # epsilon = torch.distributions.MultivariateNormal(mu, std_dev).sample()
-        # epsilon = torch.mul(torch.ones_like(actions_batch), epsilon.unsqueeze(1).unsqueeze(1))
+
 
         # epsilon = torch.distributions.MultivariateNormal(mu, std_dev).sample()
         epsilon = torch.randn_like(actions_batch)
@@ -523,7 +435,6 @@ class TrainDiffusionPolicy:
         self.optimizer.zero_grad()
 
         print(f"ep timesteps batch {episode_timesteps_batch.shape}")
-        exit(0)
         epsilon_theta = self.model(previous_states_batch,
                                     previous_actions_batch,
                                     noisy_actions,
@@ -635,7 +546,7 @@ def run_training():
     Creates the environment, model, and optimizer, loads the data, and trains/evaluates the model using the TrainDiffusionPolicy class.
     """
 
-    env = gym.make('BipedalWalker-v3') # , render_mode="rgb_array"
+    env = gym.make('BipedalWalker-v3' , render_mode="rgb_array")
     # BEGIN STUDENT SOLUTION
     num_episodes = 1600
     model = PolicyDiffusionTransformer(num_transformer_layers = 6,
