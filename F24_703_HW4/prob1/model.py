@@ -62,6 +62,20 @@ class PENN(nn.Module):
     def get_loss(self, targ, mean, logvar):
         # TODO: write your code here
 
+        var = torch.exp(logvar)
+        mean = mean.detach().numpy()
+        var = var.detach().numpy()
+        print(f"type of mean size: {type(mean.size())}")
+        print(f"type of var: {type(var)}")
+        print(f"type of target: {type(targ)}")
+        
+        loss_fn = nn.GaussianNLLLoss()
+        nll_loss = loss_fn(mean, targ, var)
+        exit(0)
+
+        return loss_fn(mean, targ, var)
+
+        # return loss
         raise NotImplementedError
 
     def create_network(self, n):
@@ -83,5 +97,40 @@ class PENN(nn.Module):
 
         """
         # TODO: write your code here
+        for _ in range(1, num_train_itrs):
+            # Sample a minibatch
+            batchIndex = torch.randint(0, len(inputs), (batch_size,))
+            minibatch_inputs = inputs[batchIndex]
+            minibatch_targets = targets[batchIndex]
+
+            # Forward pass:  returns a list of both networks
+            self.opt.zero_grad()
+            print(f"minibatch size {len(self.forward(minibatch_inputs))}")
+
+            total_loss = 0
+
+            # TODO: train each network with the neg log likelihood
+            for i in range(self.num_nets):
+                # print(f"this is the network: {i+1}")
+                pred_mean, pred_logvar = self.forward(minibatch_inputs)[i]
+                # print(f"pred_mean shape: {pred_mean.shape}")
+                # print(f"pred_logvar shape: {pred_logvar.shape}")
+                # print(f"minibatch_targets shape: {minibatch_targets.shape}")
+                
+            
+                # Calculate the loss
+                loss = self.get_loss(minibatch_targets, pred_mean, pred_logvar)
+                print(f"this is the loss: {loss}")
+                exit(0)
+                total_loss += loss
+
+            # TODO: Average loss for current minibatch 
+            # avg_loss = total_loss / self.num_nets
+
+            # Backprop and update model params
+
+            total_loss.backward()
+            # avg_loss.backward()
+            self.opt.step()
 
         raise NotImplementedError
