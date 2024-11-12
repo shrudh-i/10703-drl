@@ -108,10 +108,12 @@ class PENN(nn.Module):
             self.opt.zero_grad()
             total_loss = 0
 
+            forward_run = self.forward(minibatch_inputs)
+
             # TODO: train each network with the neg log likelihood
             for i in range(self.num_nets):
                 # print(f"this is the network: {i+1}")
-                pred_mean, pred_logvar = self.forward(minibatch_inputs)[i]
+                pred_mean, pred_logvar = forward_run[i]
             
                 # Calculate the loss
                 loss = self.get_loss(minibatch_targets, pred_mean, pred_logvar)
