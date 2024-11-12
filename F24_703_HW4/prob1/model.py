@@ -65,12 +65,16 @@ class PENN(nn.Module):
             targ = torch.tensor(targ, device=mean.device, dtype=torch.float32)
         
         var = torch.exp(logvar)
+        # print(f"this is the variance shape: {var.shape}")
+        # exit(0)
         
         # print(f"Mean device: {mean.device}, mean size: {mean.size()}")
         # print(f"Var device: {var.device}, var size: {var.size()}")
         # print(f"Target device: {targ.device}, target size: {targ.size()}")
 
         loss_fn = nn.GaussianNLLLoss()
+
+        # mean = torch.nn.functional.log_softmax(mean)
         
         # return loss
         return loss_fn(mean, targ, var)
@@ -99,19 +103,20 @@ class PENN(nn.Module):
         print(f"total number of nets in this minibatch: {self.num_nets}")
 
         for k in range(1, num_train_itrs):
-            # Sample a minibatch
-            batchIndex = torch.randint(0, len(inputs), (batch_size,))
-            minibatch_inputs = inputs[batchIndex]
-            minibatch_targets = targets[batchIndex]
-
-            # Forward pass:  returns a list of both networks
-            self.opt.zero_grad()
-            total_loss = 0
-
-            forward_run = self.forward(minibatch_inputs)
-
-            # TODO: train each network with the neg log likelihood
+            
             for i in range(self.num_nets):
+
+                # Sample a minibatch
+                batchIndex = torch.randint(0, len(inputs), (batch_size,))
+                minibatch_inputs = inputs[batchIndex]
+                minibatch_targets = targets[batchIndex]
+
+                # Forward pass:  returns a list of both networks
+                self.opt.zero_grad()
+                total_loss = 0
+
+                forward_run = self.forward(minibatch_inputs)
+
                 # print(f"this is the network: {i+1}")
                 pred_mean, pred_logvar = forward_run[i]
             
@@ -119,14 +124,15 @@ class PENN(nn.Module):
                 loss = self.get_loss(minibatch_targets, pred_mean, pred_logvar)
                 total_loss += loss
 
+                # Backprop and update model params
+                loss.backward()
+                self.opt.step()
+
             # Append the average loss
             avg_loss = total_loss / self.num_nets
             print(f"iter: {k} - average loss: {avg_loss}")
             average_loss.append(avg_loss.detach().numpy())
 
-            # Backprop and update model params
-            avg_loss.backward()
-            self.opt.step()
 
         return average_loss
         raise NotImplementedError
