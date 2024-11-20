@@ -64,9 +64,13 @@ class PENN(nn.Module):
         if isinstance(targ, np.ndarray):
             targ = torch.tensor(targ, device=mean.device, dtype=torch.float32)
         
-        var = torch.exp(logvar)
-        # print(f"this is the variance shape: {var.shape}")
+        # print(f"logvar: {logvar}")
+        var = torch.exp(logvar)  
+        # print(f"this is the variance: {var}")
+        print(f"target-mean: {targ - mean}")
         # exit(0)
+
+        # print(f"mean: {mean}, variance: {var}")
         
         # print(f"Mean device: {mean.device}, mean size: {mean.size()}")
         # print(f"Var device: {var.device}, var size: {var.size()}")
@@ -75,6 +79,7 @@ class PENN(nn.Module):
         loss_fn = nn.GaussianNLLLoss()
 
         # mean = torch.nn.functional.log_softmax(mean)
+        # targ = torch.nn.functional.log_softmax(targ)
         
         # return loss
         return loss_fn(mean, targ, var)
@@ -102,7 +107,8 @@ class PENN(nn.Module):
         average_loss = []
         print(f"total number of nets in this minibatch: {self.num_nets}")
 
-        for k in range(1, num_train_itrs):
+        for k in range(num_train_itrs):
+            total_loss = 0
             
             for i in range(self.num_nets):
 
@@ -113,7 +119,6 @@ class PENN(nn.Module):
 
                 # Forward pass:  returns a list of both networks
                 self.opt.zero_grad()
-                total_loss = 0
 
                 forward_run = self.forward(minibatch_inputs)
 
@@ -122,7 +127,7 @@ class PENN(nn.Module):
             
                 # Calculate the loss
                 loss = self.get_loss(minibatch_targets, pred_mean, pred_logvar)
-                total_loss += loss
+                total_loss += loss.item()
 
                 # Backprop and update model params
                 loss.backward()
@@ -131,7 +136,8 @@ class PENN(nn.Module):
             # Append the average loss
             avg_loss = total_loss / self.num_nets
             print(f"iter: {k} - average loss: {avg_loss}")
-            average_loss.append(avg_loss.detach().numpy())
+            # average_loss.append(avg_loss.detach().numpy())
+            average_loss.append(avg_loss)
 
 
         return average_loss

@@ -137,6 +137,19 @@ class MPC:
         # TODO: write your code here
         # REMEMBER: model prediction is delta   
         # Next state = delta sampled from model prediction + CURRENT state!
+        S = np.zeros((self.num_particles, self.plan_horizon))
+
+        for p in range(self.num_particles):
+            for t in range(self.plan_horizon):
+                # sample the sequence for each network
+            
+            # find the delta state using the model
+
+            # store the new s' in S
+
+            # continue
+            
+        # return 0
 
         raise NotImplementedError
 
