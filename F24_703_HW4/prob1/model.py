@@ -5,6 +5,7 @@ import torch.nn as nn
 import operator
 from functools import reduce
 from utils.util import ZFilter
+import torch.nn.functional as F
 
 HIDDEN1_UNITS = 400
 HIDDEN2_UNITS = 400
@@ -67,7 +68,7 @@ class PENN(nn.Module):
         # print(f"logvar: {logvar}")
         var = torch.exp(logvar)  
         # print(f"this is the variance: {var}")
-        print(f"target-mean: {targ - mean}")
+        # print(f"target-mean: {targ - mean}")
         # exit(0)
 
         # print(f"mean: {mean}, variance: {var}")
@@ -76,13 +77,14 @@ class PENN(nn.Module):
         # print(f"Var device: {var.device}, var size: {var.size()}")
         # print(f"Target device: {targ.device}, target size: {targ.size()}")
 
-        loss_fn = nn.GaussianNLLLoss()
+        # loss_fn = nn.GaussianNLLLoss()
+        loss = F.gaussian_nll_loss(mean, targ, var)
 
         # mean = torch.nn.functional.log_softmax(mean)
         # targ = torch.nn.functional.log_softmax(targ)
         
         # return loss
-        return loss_fn(mean, targ, var)
+        return loss
         raise NotImplementedError
 
     def create_network(self, n):
@@ -104,11 +106,13 @@ class PENN(nn.Module):
 
         """
         # TODO: write your code here
+        self.train()
         average_loss = []
         print(f"total number of nets in this minibatch: {self.num_nets}")
 
         for k in range(num_train_itrs):
             total_loss = 0
+            self.opt.zero_grad()
             
             for i in range(self.num_nets):
 
@@ -118,8 +122,6 @@ class PENN(nn.Module):
                 minibatch_targets = targets[batchIndex]
 
                 # Forward pass:  returns a list of both networks
-                self.opt.zero_grad()
-
                 forward_run = self.forward(minibatch_inputs)
 
                 # print(f"this is the network: {i+1}")
@@ -127,14 +129,14 @@ class PENN(nn.Module):
             
                 # Calculate the loss
                 loss = self.get_loss(minibatch_targets, pred_mean, pred_logvar)
-                total_loss += loss.item()
+                total_loss = total_loss + loss
 
-                # Backprop and update model params
-                loss.backward()
-                self.opt.step()
+            # Backprop and update model params
+            total_loss.backward()
+            self.opt.step()
 
             # Append the average loss
-            avg_loss = total_loss / self.num_nets
+            avg_loss = total_loss.item() / self.num_nets
             print(f"iter: {k} - average loss: {avg_loss}")
             # average_loss.append(avg_loss.detach().numpy())
             average_loss.append(avg_loss)
