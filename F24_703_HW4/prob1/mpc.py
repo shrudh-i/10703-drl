@@ -137,20 +137,42 @@ class MPC:
         # TODO: write your code here
         # REMEMBER: model prediction is delta   
         # Next state = delta sampled from model prediction + CURRENT state!
-        S = np.zeros((self.num_particles, self.plan_horizon))
+        
+        self.model.eval()
+        
+        # padding the actions to match the states shape
+        action_repeat_factor = int(states.shape[0]/actions.shape[0])
+        actions = np.repeat(actions, action_repeat_factor, axis=0)
 
-        for p in range(self.num_particles):
-            for t in range(self.plan_horizon):
-                # sample the sequence for each network
-            
-            # find the delta state using the model
+        model_index = np.random.choice(self.num_nets)
+        # selected_model = self.model.networks[model_index]
 
-            # store the new s' in S
+        # print(f"states: {states.shape}")
+        # print(f"actions: {actions.shape}")
+        # exit(0)
+        model_input = np.concatenate([states, actions], axis=1)
+        forward_run = self.model.forward(model_input)
 
-            # continue
-            
-        # return 0
+        pred_mean, pred_logvar = forward_run[model_index]
 
+        # print(f"shape of pred_mean: {pred_mean.shape}")
+        # print(f"shape of pred_logvar: {pred_logvar.shape}")
+
+        # sample from predicted distribution
+        # rand_particle = torch.randn([states.shape[0], self.plan_horizon])
+        rand2_particle = torch.randn([states.shape[0], self.state_dim])
+
+        # print(f"rand shape: {rand_particle.shape}")
+        # print(f"rand2 shape: {rand2_particle.shape}")
+
+        # exit(0)
+
+        state_delta = pred_mean + torch.exp(pred_logvar / 2) * rand2_particle
+        next_states = states + state_delta.cpu().detach().numpy()
+
+        print(f"next states")
+
+        return next_states
         raise NotImplementedError
 
     def predict_next_state_gt(self, states, actions):
