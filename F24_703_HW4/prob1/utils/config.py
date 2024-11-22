@@ -44,7 +44,7 @@ class Now():
 ####################
 import matplotlib.pyplot as plt
 import matplotlib
-font = {"family" : "normal",
+font = {"family" : "serif",
         "weight" : "bold",
         "size"	 : 14
         }

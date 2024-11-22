@@ -46,7 +46,7 @@ class ExperimentGTDynamics(object):
         # Use Ground Truth Dynamics
         mpc_params["use_gt_dynamics"] = True
 
-        # Model Predictive Contoal (MPC)
+        # Model Predictive Control (MPC)
         self.cem_policy = MPC(self.env, PLAN_HORIZON, None, POPSIZE, NUM_ELITES, MAX_ITERS, **mpc_params,
                               use_random_optimizer=False)
         self.random_policy = MPC(self.env, PLAN_HORIZON, None, POPSIZE, NUM_ELITES, MAX_ITERS, **mpc_params,

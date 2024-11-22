@@ -170,7 +170,7 @@ class MPC:
         state_delta = pred_mean + torch.exp(pred_logvar / 2) * rand2_particle
         next_states = states + state_delta.cpu().detach().numpy()
 
-        print(f"next states")
+        # print(f"next states")
 
         return next_states
         raise NotImplementedError
@@ -178,7 +178,14 @@ class MPC:
     def predict_next_state_gt(self, states, actions):
         """ Given a list of state action pairs, use the ground truth dynamics to predict the next state"""
         # TODO: write your code here
+        next_states = []
+        assert len(states) == len(actions)
 
+        for i in range(len(states)):
+            # from 2Dpusher_env
+            next_states.append(self.env.get_nxt_state(states[i], actions[i]))
+        
+        return next_states
         raise NotImplementedError
 
     def train(self, obs_trajs, acs_trajs, rews_trajs, num_train_itrs=5):
