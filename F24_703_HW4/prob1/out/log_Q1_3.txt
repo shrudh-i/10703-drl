@@ -1,0 +1,2094 @@
+2024-11-22 15:34:29 run.py     INFO    : ### Q1.3.1: Train an ensemble of probabilistic dynamics model (PETS)
+2024-11-22 15:34:30 run.py     INFO    : ### Q1.3.1: Train from 100 randomly sampled episodes + 500 MPC iterations
+2024-11-22 15:34:30 run.py     INFO    : Warm up episode 0
+2024-11-22 15:34:31 run.py     INFO    : Warm up episode 99
+2024-11-22 15:34:31 mpc.py     INFO    : Train dynamics model with CEM for 10 iterations
+2024-11-22 15:34:31 run.py     INFO    : ####################################################################
+2024-11-22 15:34:31 run.py     INFO    : Starting training iteration 1.
+2024-11-22 15:34:43 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 34
+2024-11-22 15:34:43 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:34:43 run.py     INFO    : Test episode 0
+2024-11-22 15:35:50 run.py     INFO    : Test episode 9
+2024-11-22 15:37:06 run.py     INFO    : Test episode 19
+2024-11-22 15:37:12 run.py     INFO    : Test success CEM + MPC: 0.45
+2024-11-22 15:37:12 run.py     INFO    : Test episode 0
+2024-11-22 15:39:47 run.py     INFO    : Test episode 9
+2024-11-22 15:42:58 run.py     INFO    : Test episode 19
+2024-11-22 15:43:15 run.py     INFO    : Test success Random + MPC: 0.1
+2024-11-22 15:43:15 run.py     INFO    : ####################################################################
+2024-11-22 15:43:15 run.py     INFO    : Starting training iteration 2.
+2024-11-22 15:43:24 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 28
+2024-11-22 15:43:24 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:43:24 run.py     INFO    : ####################################################################
+2024-11-22 15:43:24 run.py     INFO    : Starting training iteration 3.
+2024-11-22 15:43:29 run.py     INFO    : Rewards obtained: [-16], Rollout Length: 18
+2024-11-22 15:43:29 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:43:29 run.py     INFO    : ####################################################################
+2024-11-22 15:43:29 run.py     INFO    : Starting training iteration 4.
+2024-11-22 15:43:34 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 15:43:34 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:43:34 run.py     INFO    : ####################################################################
+2024-11-22 15:43:34 run.py     INFO    : Starting training iteration 5.
+2024-11-22 15:43:42 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 15:43:42 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:43:42 run.py     INFO    : ####################################################################
+2024-11-22 15:43:42 run.py     INFO    : Starting training iteration 6.
+2024-11-22 15:43:54 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 26
+2024-11-22 15:43:54 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:43:54 run.py     INFO    : ####################################################################
+2024-11-22 15:43:54 run.py     INFO    : Starting training iteration 7.
+2024-11-22 15:44:07 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 35
+2024-11-22 15:44:07 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:44:07 run.py     INFO    : ####################################################################
+2024-11-22 15:44:07 run.py     INFO    : Starting training iteration 8.
+2024-11-22 15:44:14 run.py     INFO    : Rewards obtained: [-19], Rollout Length: 21
+2024-11-22 15:44:14 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:44:15 run.py     INFO    : ####################################################################
+2024-11-22 15:44:15 run.py     INFO    : Starting training iteration 9.
+2024-11-22 15:44:27 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 30
+2024-11-22 15:44:27 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:44:27 run.py     INFO    : ####################################################################
+2024-11-22 15:44:27 run.py     INFO    : Starting training iteration 10.
+2024-11-22 15:44:37 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 26
+2024-11-22 15:44:37 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:44:37 run.py     INFO    : ####################################################################
+2024-11-22 15:44:37 run.py     INFO    : Starting training iteration 11.
+2024-11-22 15:44:43 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 15:44:43 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:44:43 run.py     INFO    : ####################################################################
+2024-11-22 15:44:43 run.py     INFO    : Starting training iteration 12.
+2024-11-22 15:44:52 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 23
+2024-11-22 15:44:52 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:44:52 run.py     INFO    : ####################################################################
+2024-11-22 15:44:52 run.py     INFO    : Starting training iteration 13.
+2024-11-22 15:45:02 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 29
+2024-11-22 15:45:02 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:45:02 run.py     INFO    : ####################################################################
+2024-11-22 15:45:02 run.py     INFO    : Starting training iteration 14.
+2024-11-22 15:45:09 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 21
+2024-11-22 15:45:09 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:45:09 run.py     INFO    : ####################################################################
+2024-11-22 15:45:09 run.py     INFO    : Starting training iteration 15.
+2024-11-22 15:45:22 run.py     INFO    : Rewards obtained: [-40], Rollout Length: 41
+2024-11-22 15:45:22 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:45:22 run.py     INFO    : ####################################################################
+2024-11-22 15:45:22 run.py     INFO    : Starting training iteration 16.
+2024-11-22 15:45:32 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 34
+2024-11-22 15:45:32 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:45:32 run.py     INFO    : ####################################################################
+2024-11-22 15:45:32 run.py     INFO    : Starting training iteration 17.
+2024-11-22 15:45:44 run.py     INFO    : Rewards obtained: [-40], Rollout Length: 41
+2024-11-22 15:45:44 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:45:44 run.py     INFO    : ####################################################################
+2024-11-22 15:45:44 run.py     INFO    : Starting training iteration 18.
+2024-11-22 15:45:49 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 15:45:49 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:45:49 run.py     INFO    : ####################################################################
+2024-11-22 15:45:49 run.py     INFO    : Starting training iteration 19.
+2024-11-22 15:46:00 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 40
+2024-11-22 15:46:00 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:46:01 run.py     INFO    : ####################################################################
+2024-11-22 15:46:01 run.py     INFO    : Starting training iteration 20.
+2024-11-22 15:46:09 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 25
+2024-11-22 15:46:09 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:46:09 run.py     INFO    : ####################################################################
+2024-11-22 15:46:09 run.py     INFO    : Starting training iteration 21.
+2024-11-22 15:46:16 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 23
+2024-11-22 15:46:16 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:46:16 run.py     INFO    : ####################################################################
+2024-11-22 15:46:16 run.py     INFO    : Starting training iteration 22.
+2024-11-22 15:46:21 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:46:21 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:46:21 run.py     INFO    : ####################################################################
+2024-11-22 15:46:21 run.py     INFO    : Starting training iteration 23.
+2024-11-22 15:46:24 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 15:46:24 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:46:24 run.py     INFO    : ####################################################################
+2024-11-22 15:46:24 run.py     INFO    : Starting training iteration 24.
+2024-11-22 15:46:32 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 24
+2024-11-22 15:46:32 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:46:32 run.py     INFO    : ####################################################################
+2024-11-22 15:46:32 run.py     INFO    : Starting training iteration 25.
+2024-11-22 15:46:39 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 23
+2024-11-22 15:46:39 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:46:39 run.py     INFO    : ####################################################################
+2024-11-22 15:46:39 run.py     INFO    : Starting training iteration 26.
+2024-11-22 15:46:42 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 15:46:42 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:46:42 run.py     INFO    : ####################################################################
+2024-11-22 15:46:42 run.py     INFO    : Starting training iteration 27.
+2024-11-22 15:46:48 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 15:46:48 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:46:48 run.py     INFO    : ####################################################################
+2024-11-22 15:46:48 run.py     INFO    : Starting training iteration 28.
+2024-11-22 15:46:56 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 21
+2024-11-22 15:46:56 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:46:56 run.py     INFO    : ####################################################################
+2024-11-22 15:46:56 run.py     INFO    : Starting training iteration 29.
+2024-11-22 15:47:00 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 15:47:00 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:47:00 run.py     INFO    : ####################################################################
+2024-11-22 15:47:00 run.py     INFO    : Starting training iteration 30.
+2024-11-22 15:47:08 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:47:08 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:47:08 run.py     INFO    : ####################################################################
+2024-11-22 15:47:08 run.py     INFO    : Starting training iteration 31.
+2024-11-22 15:47:15 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:47:15 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:47:15 run.py     INFO    : ####################################################################
+2024-11-22 15:47:15 run.py     INFO    : Starting training iteration 32.
+2024-11-22 15:47:22 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:47:22 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:47:22 run.py     INFO    : ####################################################################
+2024-11-22 15:47:22 run.py     INFO    : Starting training iteration 33.
+2024-11-22 15:47:27 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 15:47:27 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:47:27 run.py     INFO    : ####################################################################
+2024-11-22 15:47:27 run.py     INFO    : Starting training iteration 34.
+2024-11-22 15:47:34 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 21
+2024-11-22 15:47:34 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:47:34 run.py     INFO    : ####################################################################
+2024-11-22 15:47:34 run.py     INFO    : Starting training iteration 35.
+2024-11-22 15:47:41 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:47:41 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:47:41 run.py     INFO    : ####################################################################
+2024-11-22 15:47:41 run.py     INFO    : Starting training iteration 36.
+2024-11-22 15:47:46 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:47:46 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:47:46 run.py     INFO    : ####################################################################
+2024-11-22 15:47:46 run.py     INFO    : Starting training iteration 37.
+2024-11-22 15:47:48 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 15:47:48 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:47:48 run.py     INFO    : ####################################################################
+2024-11-22 15:47:48 run.py     INFO    : Starting training iteration 38.
+2024-11-22 15:47:52 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 15:47:52 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:47:52 run.py     INFO    : ####################################################################
+2024-11-22 15:47:52 run.py     INFO    : Starting training iteration 39.
+2024-11-22 15:48:00 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 26
+2024-11-22 15:48:00 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:48:00 run.py     INFO    : ####################################################################
+2024-11-22 15:48:00 run.py     INFO    : Starting training iteration 40.
+2024-11-22 15:48:05 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 15:48:05 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:48:05 run.py     INFO    : ####################################################################
+2024-11-22 15:48:05 run.py     INFO    : Starting training iteration 41.
+2024-11-22 15:48:13 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:48:13 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:48:13 run.py     INFO    : ####################################################################
+2024-11-22 15:48:13 run.py     INFO    : Starting training iteration 42.
+2024-11-22 15:48:21 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 21
+2024-11-22 15:48:21 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:48:21 run.py     INFO    : ####################################################################
+2024-11-22 15:48:21 run.py     INFO    : Starting training iteration 43.
+2024-11-22 15:48:25 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 15:48:25 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:48:25 run.py     INFO    : ####################################################################
+2024-11-22 15:48:25 run.py     INFO    : Starting training iteration 44.
+2024-11-22 15:48:29 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 15:48:29 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:48:29 run.py     INFO    : ####################################################################
+2024-11-22 15:48:29 run.py     INFO    : Starting training iteration 45.
+2024-11-22 15:48:36 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:48:36 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:48:36 run.py     INFO    : ####################################################################
+2024-11-22 15:48:36 run.py     INFO    : Starting training iteration 46.
+2024-11-22 15:48:39 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 15:48:39 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:48:39 run.py     INFO    : ####################################################################
+2024-11-22 15:48:39 run.py     INFO    : Starting training iteration 47.
+2024-11-22 15:48:47 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 25
+2024-11-22 15:48:47 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:48:48 run.py     INFO    : ####################################################################
+2024-11-22 15:48:48 run.py     INFO    : Starting training iteration 48.
+2024-11-22 15:48:54 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 15:48:54 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:48:54 run.py     INFO    : ####################################################################
+2024-11-22 15:48:54 run.py     INFO    : Starting training iteration 49.
+2024-11-22 15:48:59 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 15:48:59 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:48:59 run.py     INFO    : ####################################################################
+2024-11-22 15:48:59 run.py     INFO    : Starting training iteration 50.
+2024-11-22 15:49:06 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 21
+2024-11-22 15:49:06 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:49:06 run.py     INFO    : Test episode 0
+2024-11-22 15:49:53 run.py     INFO    : Test episode 9
+2024-11-22 15:51:16 run.py     INFO    : Test episode 19
+2024-11-22 15:51:20 run.py     INFO    : Test success CEM + MPC: 0.7
+2024-11-22 15:51:20 run.py     INFO    : Test episode 0
+2024-11-22 15:52:58 run.py     INFO    : Test episode 9
+2024-11-22 15:54:47 run.py     INFO    : Test episode 19
+2024-11-22 15:55:06 run.py     INFO    : Test success Random + MPC: 0.45
+2024-11-22 15:55:06 run.py     INFO    : ####################################################################
+2024-11-22 15:55:06 run.py     INFO    : Starting training iteration 51.
+2024-11-22 15:55:17 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 24
+2024-11-22 15:55:17 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:55:17 run.py     INFO    : ####################################################################
+2024-11-22 15:55:17 run.py     INFO    : Starting training iteration 52.
+2024-11-22 15:55:23 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 15:55:23 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:55:23 run.py     INFO    : ####################################################################
+2024-11-22 15:55:23 run.py     INFO    : Starting training iteration 53.
+2024-11-22 15:55:26 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 15:55:26 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:55:26 run.py     INFO    : ####################################################################
+2024-11-22 15:55:26 run.py     INFO    : Starting training iteration 54.
+2024-11-22 15:55:30 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 15:55:30 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:55:30 run.py     INFO    : ####################################################################
+2024-11-22 15:55:30 run.py     INFO    : Starting training iteration 55.
+2024-11-22 15:55:38 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 15:55:38 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:55:38 run.py     INFO    : ####################################################################
+2024-11-22 15:55:38 run.py     INFO    : Starting training iteration 56.
+2024-11-22 15:55:46 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 15:55:46 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:55:46 run.py     INFO    : ####################################################################
+2024-11-22 15:55:46 run.py     INFO    : Starting training iteration 57.
+2024-11-22 15:55:51 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 15:55:51 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:55:51 run.py     INFO    : ####################################################################
+2024-11-22 15:55:51 run.py     INFO    : Starting training iteration 58.
+2024-11-22 15:55:59 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:55:59 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:56:00 run.py     INFO    : ####################################################################
+2024-11-22 15:56:00 run.py     INFO    : Starting training iteration 59.
+2024-11-22 15:56:04 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 15:56:04 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:56:04 run.py     INFO    : ####################################################################
+2024-11-22 15:56:04 run.py     INFO    : Starting training iteration 60.
+2024-11-22 15:56:12 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:56:12 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:56:12 run.py     INFO    : ####################################################################
+2024-11-22 15:56:12 run.py     INFO    : Starting training iteration 61.
+2024-11-22 15:56:17 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 15:56:17 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:56:17 run.py     INFO    : ####################################################################
+2024-11-22 15:56:17 run.py     INFO    : Starting training iteration 62.
+2024-11-22 15:56:26 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:56:26 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:56:26 run.py     INFO    : ####################################################################
+2024-11-22 15:56:26 run.py     INFO    : Starting training iteration 63.
+2024-11-22 15:56:34 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 15:56:34 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:56:34 run.py     INFO    : ####################################################################
+2024-11-22 15:56:34 run.py     INFO    : Starting training iteration 64.
+2024-11-22 15:56:43 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:56:43 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:56:43 run.py     INFO    : ####################################################################
+2024-11-22 15:56:43 run.py     INFO    : Starting training iteration 65.
+2024-11-22 15:56:50 run.py     INFO    : Rewards obtained: [-15], Rollout Length: 17
+2024-11-22 15:56:50 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:56:50 run.py     INFO    : ####################################################################
+2024-11-22 15:56:50 run.py     INFO    : Starting training iteration 66.
+2024-11-22 15:56:57 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 15:56:57 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:56:57 run.py     INFO    : ####################################################################
+2024-11-22 15:56:57 run.py     INFO    : Starting training iteration 67.
+2024-11-22 15:57:02 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 15:57:02 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:57:02 run.py     INFO    : ####################################################################
+2024-11-22 15:57:02 run.py     INFO    : Starting training iteration 68.
+2024-11-22 15:57:06 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 15:57:06 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:57:06 run.py     INFO    : ####################################################################
+2024-11-22 15:57:06 run.py     INFO    : Starting training iteration 69.
+2024-11-22 15:57:11 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 15:57:11 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:57:11 run.py     INFO    : ####################################################################
+2024-11-22 15:57:11 run.py     INFO    : Starting training iteration 70.
+2024-11-22 15:57:17 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 15:57:17 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:57:17 run.py     INFO    : ####################################################################
+2024-11-22 15:57:17 run.py     INFO    : Starting training iteration 71.
+2024-11-22 15:57:22 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 15:57:22 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:57:22 run.py     INFO    : ####################################################################
+2024-11-22 15:57:22 run.py     INFO    : Starting training iteration 72.
+2024-11-22 15:57:31 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:57:31 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:57:31 run.py     INFO    : ####################################################################
+2024-11-22 15:57:31 run.py     INFO    : Starting training iteration 73.
+2024-11-22 15:57:38 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 15:57:38 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:57:38 run.py     INFO    : ####################################################################
+2024-11-22 15:57:38 run.py     INFO    : Starting training iteration 74.
+2024-11-22 15:57:42 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 15:57:42 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:57:42 run.py     INFO    : ####################################################################
+2024-11-22 15:57:42 run.py     INFO    : Starting training iteration 75.
+2024-11-22 15:57:50 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 15:57:50 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:57:50 run.py     INFO    : ####################################################################
+2024-11-22 15:57:50 run.py     INFO    : Starting training iteration 76.
+2024-11-22 15:57:53 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 15:57:53 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:57:53 run.py     INFO    : ####################################################################
+2024-11-22 15:57:53 run.py     INFO    : Starting training iteration 77.
+2024-11-22 15:57:57 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 15:57:57 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:57:57 run.py     INFO    : ####################################################################
+2024-11-22 15:57:57 run.py     INFO    : Starting training iteration 78.
+2024-11-22 15:58:04 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 15:58:04 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:58:04 run.py     INFO    : ####################################################################
+2024-11-22 15:58:04 run.py     INFO    : Starting training iteration 79.
+2024-11-22 15:58:09 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 15:58:09 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:58:09 run.py     INFO    : ####################################################################
+2024-11-22 15:58:09 run.py     INFO    : Starting training iteration 80.
+2024-11-22 15:58:14 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 15:58:14 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:58:14 run.py     INFO    : ####################################################################
+2024-11-22 15:58:14 run.py     INFO    : Starting training iteration 81.
+2024-11-22 15:58:18 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 15:58:18 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:58:18 run.py     INFO    : ####################################################################
+2024-11-22 15:58:18 run.py     INFO    : Starting training iteration 82.
+2024-11-22 15:58:24 run.py     INFO    : Rewards obtained: [-15], Rollout Length: 17
+2024-11-22 15:58:24 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:58:24 run.py     INFO    : ####################################################################
+2024-11-22 15:58:24 run.py     INFO    : Starting training iteration 83.
+2024-11-22 15:58:28 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 15:58:28 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:58:28 run.py     INFO    : ####################################################################
+2024-11-22 15:58:28 run.py     INFO    : Starting training iteration 84.
+2024-11-22 15:58:35 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 15:58:35 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:58:35 run.py     INFO    : ####################################################################
+2024-11-22 15:58:35 run.py     INFO    : Starting training iteration 85.
+2024-11-22 15:58:38 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 15:58:38 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:58:38 run.py     INFO    : ####################################################################
+2024-11-22 15:58:38 run.py     INFO    : Starting training iteration 86.
+2024-11-22 15:58:43 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 15:58:43 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:58:43 run.py     INFO    : ####################################################################
+2024-11-22 15:58:43 run.py     INFO    : Starting training iteration 87.
+2024-11-22 15:58:46 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 15:58:46 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:58:46 run.py     INFO    : ####################################################################
+2024-11-22 15:58:46 run.py     INFO    : Starting training iteration 88.
+2024-11-22 15:58:54 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 25
+2024-11-22 15:58:54 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:58:54 run.py     INFO    : ####################################################################
+2024-11-22 15:58:54 run.py     INFO    : Starting training iteration 89.
+2024-11-22 15:59:01 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 15:59:01 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:59:01 run.py     INFO    : ####################################################################
+2024-11-22 15:59:01 run.py     INFO    : Starting training iteration 90.
+2024-11-22 15:59:03 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 15:59:03 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:59:03 run.py     INFO    : ####################################################################
+2024-11-22 15:59:03 run.py     INFO    : Starting training iteration 91.
+2024-11-22 15:59:08 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 15:59:08 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:59:08 run.py     INFO    : ####################################################################
+2024-11-22 15:59:08 run.py     INFO    : Starting training iteration 92.
+2024-11-22 15:59:12 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 15:59:12 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:59:12 run.py     INFO    : ####################################################################
+2024-11-22 15:59:12 run.py     INFO    : Starting training iteration 93.
+2024-11-22 15:59:16 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 15:59:16 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:59:16 run.py     INFO    : ####################################################################
+2024-11-22 15:59:16 run.py     INFO    : Starting training iteration 94.
+2024-11-22 15:59:21 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 15:59:21 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:59:21 run.py     INFO    : ####################################################################
+2024-11-22 15:59:21 run.py     INFO    : Starting training iteration 95.
+2024-11-22 15:59:28 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 21
+2024-11-22 15:59:28 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:59:28 run.py     INFO    : ####################################################################
+2024-11-22 15:59:28 run.py     INFO    : Starting training iteration 96.
+2024-11-22 15:59:32 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 15:59:32 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:59:32 run.py     INFO    : ####################################################################
+2024-11-22 15:59:32 run.py     INFO    : Starting training iteration 97.
+2024-11-22 15:59:37 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 15:59:37 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:59:37 run.py     INFO    : ####################################################################
+2024-11-22 15:59:37 run.py     INFO    : Starting training iteration 98.
+2024-11-22 15:59:43 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:59:43 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:59:43 run.py     INFO    : ####################################################################
+2024-11-22 15:59:43 run.py     INFO    : Starting training iteration 99.
+2024-11-22 15:59:51 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 15:59:51 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:59:51 run.py     INFO    : ####################################################################
+2024-11-22 15:59:51 run.py     INFO    : Starting training iteration 100.
+2024-11-22 15:59:55 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 15:59:55 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 15:59:55 run.py     INFO    : Test episode 0
+2024-11-22 16:00:44 run.py     INFO    : Test episode 9
+2024-11-22 16:01:34 run.py     INFO    : Test episode 19
+2024-11-22 16:01:42 run.py     INFO    : Test success CEM + MPC: 0.7
+2024-11-22 16:01:42 run.py     INFO    : Test episode 0
+2024-11-22 16:03:19 run.py     INFO    : Test episode 9
+2024-11-22 16:05:09 run.py     INFO    : Test episode 19
+2024-11-22 16:05:24 run.py     INFO    : Test success Random + MPC: 0.3
+2024-11-22 16:05:24 run.py     INFO    : ####################################################################
+2024-11-22 16:05:24 run.py     INFO    : Starting training iteration 101.
+2024-11-22 16:05:32 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:05:32 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:05:32 run.py     INFO    : ####################################################################
+2024-11-22 16:05:32 run.py     INFO    : Starting training iteration 102.
+2024-11-22 16:05:40 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 22
+2024-11-22 16:05:40 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:05:40 run.py     INFO    : ####################################################################
+2024-11-22 16:05:40 run.py     INFO    : Starting training iteration 103.
+2024-11-22 16:05:46 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:05:46 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:05:46 run.py     INFO    : ####################################################################
+2024-11-22 16:05:46 run.py     INFO    : Starting training iteration 104.
+2024-11-22 16:05:54 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 22
+2024-11-22 16:05:54 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:05:54 run.py     INFO    : ####################################################################
+2024-11-22 16:05:54 run.py     INFO    : Starting training iteration 105.
+2024-11-22 16:05:58 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:05:58 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:05:58 run.py     INFO    : ####################################################################
+2024-11-22 16:05:58 run.py     INFO    : Starting training iteration 106.
+2024-11-22 16:06:03 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:06:03 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:06:03 run.py     INFO    : ####################################################################
+2024-11-22 16:06:03 run.py     INFO    : Starting training iteration 107.
+2024-11-22 16:06:11 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 21
+2024-11-22 16:06:11 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:06:11 run.py     INFO    : ####################################################################
+2024-11-22 16:06:11 run.py     INFO    : Starting training iteration 108.
+2024-11-22 16:06:20 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 22
+2024-11-22 16:06:20 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:06:20 run.py     INFO    : ####################################################################
+2024-11-22 16:06:20 run.py     INFO    : Starting training iteration 109.
+2024-11-22 16:06:25 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:06:25 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:06:25 run.py     INFO    : ####################################################################
+2024-11-22 16:06:25 run.py     INFO    : Starting training iteration 110.
+2024-11-22 16:06:29 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:06:29 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:06:29 run.py     INFO    : ####################################################################
+2024-11-22 16:06:29 run.py     INFO    : Starting training iteration 111.
+2024-11-22 16:06:35 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:06:35 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:06:35 run.py     INFO    : ####################################################################
+2024-11-22 16:06:35 run.py     INFO    : Starting training iteration 112.
+2024-11-22 16:06:39 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:06:39 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:06:39 run.py     INFO    : ####################################################################
+2024-11-22 16:06:39 run.py     INFO    : Starting training iteration 113.
+2024-11-22 16:06:46 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 21
+2024-11-22 16:06:46 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:06:47 run.py     INFO    : ####################################################################
+2024-11-22 16:06:47 run.py     INFO    : Starting training iteration 114.
+2024-11-22 16:06:51 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:06:51 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:06:51 run.py     INFO    : ####################################################################
+2024-11-22 16:06:51 run.py     INFO    : Starting training iteration 115.
+2024-11-22 16:06:59 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:06:59 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:06:59 run.py     INFO    : ####################################################################
+2024-11-22 16:06:59 run.py     INFO    : Starting training iteration 116.
+2024-11-22 16:07:04 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:07:04 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:07:04 run.py     INFO    : ####################################################################
+2024-11-22 16:07:04 run.py     INFO    : Starting training iteration 117.
+2024-11-22 16:07:07 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:07:07 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:07:07 run.py     INFO    : ####################################################################
+2024-11-22 16:07:07 run.py     INFO    : Starting training iteration 118.
+2024-11-22 16:07:16 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:07:16 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:07:16 run.py     INFO    : ####################################################################
+2024-11-22 16:07:16 run.py     INFO    : Starting training iteration 119.
+2024-11-22 16:07:21 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:07:21 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:07:21 run.py     INFO    : ####################################################################
+2024-11-22 16:07:21 run.py     INFO    : Starting training iteration 120.
+2024-11-22 16:07:27 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:07:27 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:07:27 run.py     INFO    : ####################################################################
+2024-11-22 16:07:27 run.py     INFO    : Starting training iteration 121.
+2024-11-22 16:07:32 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:07:32 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:07:33 run.py     INFO    : ####################################################################
+2024-11-22 16:07:33 run.py     INFO    : Starting training iteration 122.
+2024-11-22 16:07:36 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:07:36 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:07:36 run.py     INFO    : ####################################################################
+2024-11-22 16:07:36 run.py     INFO    : Starting training iteration 123.
+2024-11-22 16:07:42 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:07:42 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:07:42 run.py     INFO    : ####################################################################
+2024-11-22 16:07:42 run.py     INFO    : Starting training iteration 124.
+2024-11-22 16:07:48 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:07:48 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:07:48 run.py     INFO    : ####################################################################
+2024-11-22 16:07:48 run.py     INFO    : Starting training iteration 125.
+2024-11-22 16:07:56 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:07:56 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:07:56 run.py     INFO    : ####################################################################
+2024-11-22 16:07:56 run.py     INFO    : Starting training iteration 126.
+2024-11-22 16:07:59 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:07:59 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:07:59 run.py     INFO    : ####################################################################
+2024-11-22 16:07:59 run.py     INFO    : Starting training iteration 127.
+2024-11-22 16:08:04 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:08:04 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:08:04 run.py     INFO    : ####################################################################
+2024-11-22 16:08:04 run.py     INFO    : Starting training iteration 128.
+2024-11-22 16:08:09 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:08:09 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:08:09 run.py     INFO    : ####################################################################
+2024-11-22 16:08:09 run.py     INFO    : Starting training iteration 129.
+2024-11-22 16:08:13 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:08:13 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:08:13 run.py     INFO    : ####################################################################
+2024-11-22 16:08:13 run.py     INFO    : Starting training iteration 130.
+2024-11-22 16:08:17 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:08:17 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:08:18 run.py     INFO    : ####################################################################
+2024-11-22 16:08:18 run.py     INFO    : Starting training iteration 131.
+2024-11-22 16:08:25 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:08:25 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:08:25 run.py     INFO    : ####################################################################
+2024-11-22 16:08:25 run.py     INFO    : Starting training iteration 132.
+2024-11-22 16:08:33 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:08:33 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:08:33 run.py     INFO    : ####################################################################
+2024-11-22 16:08:33 run.py     INFO    : Starting training iteration 133.
+2024-11-22 16:08:37 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:08:37 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:08:37 run.py     INFO    : ####################################################################
+2024-11-22 16:08:37 run.py     INFO    : Starting training iteration 134.
+2024-11-22 16:08:41 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:08:41 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:08:41 run.py     INFO    : ####################################################################
+2024-11-22 16:08:41 run.py     INFO    : Starting training iteration 135.
+2024-11-22 16:08:46 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:08:46 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:08:46 run.py     INFO    : ####################################################################
+2024-11-22 16:08:46 run.py     INFO    : Starting training iteration 136.
+2024-11-22 16:08:52 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:08:52 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:08:52 run.py     INFO    : ####################################################################
+2024-11-22 16:08:52 run.py     INFO    : Starting training iteration 137.
+2024-11-22 16:08:56 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:08:56 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:08:56 run.py     INFO    : ####################################################################
+2024-11-22 16:08:56 run.py     INFO    : Starting training iteration 138.
+2024-11-22 16:09:02 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:09:02 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:09:03 run.py     INFO    : ####################################################################
+2024-11-22 16:09:03 run.py     INFO    : Starting training iteration 139.
+2024-11-22 16:09:07 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:09:07 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:09:07 run.py     INFO    : ####################################################################
+2024-11-22 16:09:07 run.py     INFO    : Starting training iteration 140.
+2024-11-22 16:09:12 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:09:12 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:09:12 run.py     INFO    : ####################################################################
+2024-11-22 16:09:12 run.py     INFO    : Starting training iteration 141.
+2024-11-22 16:09:16 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:09:16 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:09:16 run.py     INFO    : ####################################################################
+2024-11-22 16:09:16 run.py     INFO    : Starting training iteration 142.
+2024-11-22 16:09:20 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:09:20 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:09:20 run.py     INFO    : ####################################################################
+2024-11-22 16:09:20 run.py     INFO    : Starting training iteration 143.
+2024-11-22 16:09:26 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:09:26 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:09:26 run.py     INFO    : ####################################################################
+2024-11-22 16:09:26 run.py     INFO    : Starting training iteration 144.
+2024-11-22 16:09:32 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:09:32 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:09:32 run.py     INFO    : ####################################################################
+2024-11-22 16:09:32 run.py     INFO    : Starting training iteration 145.
+2024-11-22 16:09:37 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:09:37 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:09:37 run.py     INFO    : ####################################################################
+2024-11-22 16:09:37 run.py     INFO    : Starting training iteration 146.
+2024-11-22 16:09:43 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:09:43 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:09:43 run.py     INFO    : ####################################################################
+2024-11-22 16:09:43 run.py     INFO    : Starting training iteration 147.
+2024-11-22 16:09:47 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:09:47 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:09:47 run.py     INFO    : ####################################################################
+2024-11-22 16:09:47 run.py     INFO    : Starting training iteration 148.
+2024-11-22 16:09:51 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:09:51 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:09:51 run.py     INFO    : ####################################################################
+2024-11-22 16:09:51 run.py     INFO    : Starting training iteration 149.
+2024-11-22 16:09:53 run.py     INFO    : Rewards obtained: [-5], Rollout Length: 7
+2024-11-22 16:09:53 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:09:54 run.py     INFO    : ####################################################################
+2024-11-22 16:09:54 run.py     INFO    : Starting training iteration 150.
+2024-11-22 16:09:59 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:09:59 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:09:59 run.py     INFO    : Test episode 0
+2024-11-22 16:10:39 run.py     INFO    : Test episode 9
+2024-11-22 16:11:32 run.py     INFO    : Test episode 19
+2024-11-22 16:11:36 run.py     INFO    : Test success CEM + MPC: 0.95
+2024-11-22 16:11:36 run.py     INFO    : Test episode 0
+2024-11-22 16:12:51 run.py     INFO    : Test episode 9
+2024-11-22 16:14:31 run.py     INFO    : Test episode 19
+2024-11-22 16:14:48 run.py     INFO    : Test success Random + MPC: 0.35
+2024-11-22 16:14:48 run.py     INFO    : ####################################################################
+2024-11-22 16:14:48 run.py     INFO    : Starting training iteration 151.
+2024-11-22 16:14:54 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:14:54 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:14:55 run.py     INFO    : ####################################################################
+2024-11-22 16:14:55 run.py     INFO    : Starting training iteration 152.
+2024-11-22 16:14:58 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:14:58 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:14:58 run.py     INFO    : ####################################################################
+2024-11-22 16:14:58 run.py     INFO    : Starting training iteration 153.
+2024-11-22 16:15:05 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:15:05 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:15:05 run.py     INFO    : ####################################################################
+2024-11-22 16:15:05 run.py     INFO    : Starting training iteration 154.
+2024-11-22 16:15:10 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:15:10 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:15:10 run.py     INFO    : ####################################################################
+2024-11-22 16:15:10 run.py     INFO    : Starting training iteration 155.
+2024-11-22 16:15:17 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:15:17 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:15:17 run.py     INFO    : ####################################################################
+2024-11-22 16:15:17 run.py     INFO    : Starting training iteration 156.
+2024-11-22 16:15:22 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:15:22 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:15:22 run.py     INFO    : ####################################################################
+2024-11-22 16:15:22 run.py     INFO    : Starting training iteration 157.
+2024-11-22 16:15:27 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:15:27 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:15:28 run.py     INFO    : ####################################################################
+2024-11-22 16:15:28 run.py     INFO    : Starting training iteration 158.
+2024-11-22 16:15:32 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:15:32 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:15:32 run.py     INFO    : ####################################################################
+2024-11-22 16:15:32 run.py     INFO    : Starting training iteration 159.
+2024-11-22 16:15:38 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:15:38 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:15:38 run.py     INFO    : ####################################################################
+2024-11-22 16:15:38 run.py     INFO    : Starting training iteration 160.
+2024-11-22 16:15:43 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:15:43 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:15:43 run.py     INFO    : ####################################################################
+2024-11-22 16:15:43 run.py     INFO    : Starting training iteration 161.
+2024-11-22 16:15:52 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:15:52 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:15:53 run.py     INFO    : ####################################################################
+2024-11-22 16:15:53 run.py     INFO    : Starting training iteration 162.
+2024-11-22 16:16:00 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:16:00 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:16:00 run.py     INFO    : ####################################################################
+2024-11-22 16:16:00 run.py     INFO    : Starting training iteration 163.
+2024-11-22 16:16:06 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:16:06 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:16:06 run.py     INFO    : ####################################################################
+2024-11-22 16:16:06 run.py     INFO    : Starting training iteration 164.
+2024-11-22 16:16:10 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:16:10 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:16:10 run.py     INFO    : ####################################################################
+2024-11-22 16:16:10 run.py     INFO    : Starting training iteration 165.
+2024-11-22 16:16:17 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:16:17 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:16:17 run.py     INFO    : ####################################################################
+2024-11-22 16:16:17 run.py     INFO    : Starting training iteration 166.
+2024-11-22 16:16:23 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:16:23 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:16:23 run.py     INFO    : ####################################################################
+2024-11-22 16:16:23 run.py     INFO    : Starting training iteration 167.
+2024-11-22 16:16:30 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:16:30 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:16:30 run.py     INFO    : ####################################################################
+2024-11-22 16:16:30 run.py     INFO    : Starting training iteration 168.
+2024-11-22 16:16:35 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:16:35 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:16:35 run.py     INFO    : ####################################################################
+2024-11-22 16:16:35 run.py     INFO    : Starting training iteration 169.
+2024-11-22 16:16:40 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:16:40 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:16:40 run.py     INFO    : ####################################################################
+2024-11-22 16:16:40 run.py     INFO    : Starting training iteration 170.
+2024-11-22 16:16:46 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:16:46 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:16:46 run.py     INFO    : ####################################################################
+2024-11-22 16:16:46 run.py     INFO    : Starting training iteration 171.
+2024-11-22 16:16:52 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:16:52 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:16:52 run.py     INFO    : ####################################################################
+2024-11-22 16:16:52 run.py     INFO    : Starting training iteration 172.
+2024-11-22 16:16:57 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:16:57 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:16:57 run.py     INFO    : ####################################################################
+2024-11-22 16:16:57 run.py     INFO    : Starting training iteration 173.
+2024-11-22 16:17:02 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:17:02 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:17:02 run.py     INFO    : ####################################################################
+2024-11-22 16:17:02 run.py     INFO    : Starting training iteration 174.
+2024-11-22 16:17:08 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:17:08 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:17:08 run.py     INFO    : ####################################################################
+2024-11-22 16:17:08 run.py     INFO    : Starting training iteration 175.
+2024-11-22 16:17:13 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:17:13 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:17:14 run.py     INFO    : ####################################################################
+2024-11-22 16:17:14 run.py     INFO    : Starting training iteration 176.
+2024-11-22 16:17:19 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:17:19 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:17:19 run.py     INFO    : ####################################################################
+2024-11-22 16:17:19 run.py     INFO    : Starting training iteration 177.
+2024-11-22 16:17:27 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 16:17:27 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:17:27 run.py     INFO    : ####################################################################
+2024-11-22 16:17:27 run.py     INFO    : Starting training iteration 178.
+2024-11-22 16:17:36 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:17:36 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:17:36 run.py     INFO    : ####################################################################
+2024-11-22 16:17:36 run.py     INFO    : Starting training iteration 179.
+2024-11-22 16:17:43 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 16:17:43 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:17:44 run.py     INFO    : ####################################################################
+2024-11-22 16:17:44 run.py     INFO    : Starting training iteration 180.
+2024-11-22 16:17:55 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:17:55 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:17:55 run.py     INFO    : ####################################################################
+2024-11-22 16:17:55 run.py     INFO    : Starting training iteration 181.
+2024-11-22 16:18:01 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:18:01 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:18:02 run.py     INFO    : ####################################################################
+2024-11-22 16:18:02 run.py     INFO    : Starting training iteration 182.
+2024-11-22 16:18:10 run.py     INFO    : Rewards obtained: [-15], Rollout Length: 17
+2024-11-22 16:18:10 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:18:10 run.py     INFO    : ####################################################################
+2024-11-22 16:18:10 run.py     INFO    : Starting training iteration 183.
+2024-11-22 16:18:21 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:18:21 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:18:21 run.py     INFO    : ####################################################################
+2024-11-22 16:18:21 run.py     INFO    : Starting training iteration 184.
+2024-11-22 16:18:27 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:18:27 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:18:28 run.py     INFO    : ####################################################################
+2024-11-22 16:18:28 run.py     INFO    : Starting training iteration 185.
+2024-11-22 16:18:37 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:18:37 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:18:37 run.py     INFO    : ####################################################################
+2024-11-22 16:18:37 run.py     INFO    : Starting training iteration 186.
+2024-11-22 16:18:42 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:18:42 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:18:42 run.py     INFO    : ####################################################################
+2024-11-22 16:18:42 run.py     INFO    : Starting training iteration 187.
+2024-11-22 16:18:49 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:18:49 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:18:49 run.py     INFO    : ####################################################################
+2024-11-22 16:18:49 run.py     INFO    : Starting training iteration 188.
+2024-11-22 16:18:59 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:18:59 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:19:00 run.py     INFO    : ####################################################################
+2024-11-22 16:19:00 run.py     INFO    : Starting training iteration 189.
+2024-11-22 16:19:12 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 23
+2024-11-22 16:19:12 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:19:13 run.py     INFO    : ####################################################################
+2024-11-22 16:19:13 run.py     INFO    : Starting training iteration 190.
+2024-11-22 16:19:21 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:19:21 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:19:21 run.py     INFO    : ####################################################################
+2024-11-22 16:19:21 run.py     INFO    : Starting training iteration 191.
+2024-11-22 16:19:28 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:19:28 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:19:29 run.py     INFO    : ####################################################################
+2024-11-22 16:19:29 run.py     INFO    : Starting training iteration 192.
+2024-11-22 16:19:36 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:19:36 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:19:36 run.py     INFO    : ####################################################################
+2024-11-22 16:19:36 run.py     INFO    : Starting training iteration 193.
+2024-11-22 16:19:45 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:19:45 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:19:45 run.py     INFO    : ####################################################################
+2024-11-22 16:19:45 run.py     INFO    : Starting training iteration 194.
+2024-11-22 16:19:54 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:19:54 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:19:54 run.py     INFO    : ####################################################################
+2024-11-22 16:19:54 run.py     INFO    : Starting training iteration 195.
+2024-11-22 16:20:01 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:20:01 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:20:01 run.py     INFO    : ####################################################################
+2024-11-22 16:20:01 run.py     INFO    : Starting training iteration 196.
+2024-11-22 16:20:10 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:20:10 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:20:10 run.py     INFO    : ####################################################################
+2024-11-22 16:20:10 run.py     INFO    : Starting training iteration 197.
+2024-11-22 16:20:17 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:20:17 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:20:17 run.py     INFO    : ####################################################################
+2024-11-22 16:20:17 run.py     INFO    : Starting training iteration 198.
+2024-11-22 16:20:27 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:20:27 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:20:27 run.py     INFO    : ####################################################################
+2024-11-22 16:20:27 run.py     INFO    : Starting training iteration 199.
+2024-11-22 16:20:35 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:20:35 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:20:35 run.py     INFO    : ####################################################################
+2024-11-22 16:20:35 run.py     INFO    : Starting training iteration 200.
+2024-11-22 16:20:43 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:20:43 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:20:43 run.py     INFO    : Test episode 0
+2024-11-22 16:25:08 run.py     INFO    : Test episode 9
+2024-11-22 16:25:40 run.py     INFO    : Test episode 19
+2024-11-22 16:25:46 run.py     INFO    : Test success CEM + MPC: 0.9
+2024-11-22 16:25:46 run.py     INFO    : Test episode 0
+2024-11-22 16:26:38 run.py     INFO    : Test episode 9
+2024-11-22 16:27:35 run.py     INFO    : Test episode 19
+2024-11-22 16:27:39 run.py     INFO    : Test success Random + MPC: 0.55
+2024-11-22 16:27:39 run.py     INFO    : ####################################################################
+2024-11-22 16:27:39 run.py     INFO    : Starting training iteration 201.
+2024-11-22 16:27:42 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:27:42 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:27:43 run.py     INFO    : ####################################################################
+2024-11-22 16:27:43 run.py     INFO    : Starting training iteration 202.
+2024-11-22 16:27:45 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:27:45 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:27:45 run.py     INFO    : ####################################################################
+2024-11-22 16:27:45 run.py     INFO    : Starting training iteration 203.
+2024-11-22 16:27:48 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:27:48 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:27:48 run.py     INFO    : ####################################################################
+2024-11-22 16:27:48 run.py     INFO    : Starting training iteration 204.
+2024-11-22 16:27:52 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 18
+2024-11-22 16:27:52 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:27:53 run.py     INFO    : ####################################################################
+2024-11-22 16:27:53 run.py     INFO    : Starting training iteration 205.
+2024-11-22 16:27:56 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:27:56 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:27:56 run.py     INFO    : ####################################################################
+2024-11-22 16:27:56 run.py     INFO    : Starting training iteration 206.
+2024-11-22 16:28:01 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 21
+2024-11-22 16:28:01 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:01 run.py     INFO    : ####################################################################
+2024-11-22 16:28:01 run.py     INFO    : Starting training iteration 207.
+2024-11-22 16:28:04 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:28:04 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:04 run.py     INFO    : ####################################################################
+2024-11-22 16:28:04 run.py     INFO    : Starting training iteration 208.
+2024-11-22 16:28:07 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:28:07 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:07 run.py     INFO    : ####################################################################
+2024-11-22 16:28:07 run.py     INFO    : Starting training iteration 209.
+2024-11-22 16:28:09 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:28:09 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:09 run.py     INFO    : ####################################################################
+2024-11-22 16:28:09 run.py     INFO    : Starting training iteration 210.
+2024-11-22 16:28:14 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:28:14 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:14 run.py     INFO    : ####################################################################
+2024-11-22 16:28:14 run.py     INFO    : Starting training iteration 211.
+2024-11-22 16:28:19 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:28:19 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:19 run.py     INFO    : ####################################################################
+2024-11-22 16:28:19 run.py     INFO    : Starting training iteration 212.
+2024-11-22 16:28:23 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 16:28:23 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:23 run.py     INFO    : ####################################################################
+2024-11-22 16:28:23 run.py     INFO    : Starting training iteration 213.
+2024-11-22 16:28:26 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 16:28:26 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:26 run.py     INFO    : ####################################################################
+2024-11-22 16:28:26 run.py     INFO    : Starting training iteration 214.
+2024-11-22 16:28:29 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:28:29 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:29 run.py     INFO    : ####################################################################
+2024-11-22 16:28:29 run.py     INFO    : Starting training iteration 215.
+2024-11-22 16:28:34 run.py     INFO    : Rewards obtained: [-19], Rollout Length: 21
+2024-11-22 16:28:34 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:34 run.py     INFO    : ####################################################################
+2024-11-22 16:28:34 run.py     INFO    : Starting training iteration 216.
+2024-11-22 16:28:37 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:28:37 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:38 run.py     INFO    : ####################################################################
+2024-11-22 16:28:38 run.py     INFO    : Starting training iteration 217.
+2024-11-22 16:28:42 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 18
+2024-11-22 16:28:42 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:42 run.py     INFO    : ####################################################################
+2024-11-22 16:28:42 run.py     INFO    : Starting training iteration 218.
+2024-11-22 16:28:46 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:28:46 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:47 run.py     INFO    : ####################################################################
+2024-11-22 16:28:47 run.py     INFO    : Starting training iteration 219.
+2024-11-22 16:28:51 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 18
+2024-11-22 16:28:51 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:51 run.py     INFO    : ####################################################################
+2024-11-22 16:28:51 run.py     INFO    : Starting training iteration 220.
+2024-11-22 16:28:54 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:28:54 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:54 run.py     INFO    : ####################################################################
+2024-11-22 16:28:54 run.py     INFO    : Starting training iteration 221.
+2024-11-22 16:28:57 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:28:57 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:28:57 run.py     INFO    : ####################################################################
+2024-11-22 16:28:57 run.py     INFO    : Starting training iteration 222.
+2024-11-22 16:29:00 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:29:00 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:00 run.py     INFO    : ####################################################################
+2024-11-22 16:29:00 run.py     INFO    : Starting training iteration 223.
+2024-11-22 16:29:03 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:29:03 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:03 run.py     INFO    : ####################################################################
+2024-11-22 16:29:03 run.py     INFO    : Starting training iteration 224.
+2024-11-22 16:29:09 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 24
+2024-11-22 16:29:09 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:09 run.py     INFO    : ####################################################################
+2024-11-22 16:29:09 run.py     INFO    : Starting training iteration 225.
+2024-11-22 16:29:12 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:29:12 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:12 run.py     INFO    : ####################################################################
+2024-11-22 16:29:12 run.py     INFO    : Starting training iteration 226.
+2024-11-22 16:29:15 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:29:15 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:15 run.py     INFO    : ####################################################################
+2024-11-22 16:29:15 run.py     INFO    : Starting training iteration 227.
+2024-11-22 16:29:17 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:29:17 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:17 run.py     INFO    : ####################################################################
+2024-11-22 16:29:17 run.py     INFO    : Starting training iteration 228.
+2024-11-22 16:29:20 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:29:20 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:20 run.py     INFO    : ####################################################################
+2024-11-22 16:29:20 run.py     INFO    : Starting training iteration 229.
+2024-11-22 16:29:23 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:29:23 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:23 run.py     INFO    : ####################################################################
+2024-11-22 16:29:23 run.py     INFO    : Starting training iteration 230.
+2024-11-22 16:29:27 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:29:27 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:27 run.py     INFO    : ####################################################################
+2024-11-22 16:29:27 run.py     INFO    : Starting training iteration 231.
+2024-11-22 16:29:29 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:29:29 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:29 run.py     INFO    : ####################################################################
+2024-11-22 16:29:29 run.py     INFO    : Starting training iteration 232.
+2024-11-22 16:29:34 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:29:34 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:34 run.py     INFO    : ####################################################################
+2024-11-22 16:29:34 run.py     INFO    : Starting training iteration 233.
+2024-11-22 16:29:39 run.py     INFO    : Rewards obtained: [-17], Rollout Length: 19
+2024-11-22 16:29:39 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:39 run.py     INFO    : ####################################################################
+2024-11-22 16:29:39 run.py     INFO    : Starting training iteration 234.
+2024-11-22 16:29:42 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:29:42 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:42 run.py     INFO    : ####################################################################
+2024-11-22 16:29:42 run.py     INFO    : Starting training iteration 235.
+2024-11-22 16:29:46 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:29:46 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:46 run.py     INFO    : ####################################################################
+2024-11-22 16:29:46 run.py     INFO    : Starting training iteration 236.
+2024-11-22 16:29:48 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:29:48 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:48 run.py     INFO    : ####################################################################
+2024-11-22 16:29:48 run.py     INFO    : Starting training iteration 237.
+2024-11-22 16:29:51 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:29:51 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:51 run.py     INFO    : ####################################################################
+2024-11-22 16:29:51 run.py     INFO    : Starting training iteration 238.
+2024-11-22 16:29:54 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:29:54 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:54 run.py     INFO    : ####################################################################
+2024-11-22 16:29:54 run.py     INFO    : Starting training iteration 239.
+2024-11-22 16:29:58 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:29:58 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:29:58 run.py     INFO    : ####################################################################
+2024-11-22 16:29:58 run.py     INFO    : Starting training iteration 240.
+2024-11-22 16:30:04 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 24
+2024-11-22 16:30:04 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:30:04 run.py     INFO    : ####################################################################
+2024-11-22 16:30:04 run.py     INFO    : Starting training iteration 241.
+2024-11-22 16:30:07 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:30:07 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:30:07 run.py     INFO    : ####################################################################
+2024-11-22 16:30:07 run.py     INFO    : Starting training iteration 242.
+2024-11-22 16:30:09 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:30:09 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:30:09 run.py     INFO    : ####################################################################
+2024-11-22 16:30:09 run.py     INFO    : Starting training iteration 243.
+2024-11-22 16:30:11 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:30:11 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:30:11 run.py     INFO    : ####################################################################
+2024-11-22 16:30:11 run.py     INFO    : Starting training iteration 244.
+2024-11-22 16:30:14 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:30:14 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:30:14 run.py     INFO    : ####################################################################
+2024-11-22 16:30:14 run.py     INFO    : Starting training iteration 245.
+2024-11-22 16:30:18 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:30:18 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:30:18 run.py     INFO    : ####################################################################
+2024-11-22 16:30:18 run.py     INFO    : Starting training iteration 246.
+2024-11-22 16:30:22 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:30:22 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:30:22 run.py     INFO    : ####################################################################
+2024-11-22 16:30:22 run.py     INFO    : Starting training iteration 247.
+2024-11-22 16:30:25 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:30:25 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:30:25 run.py     INFO    : ####################################################################
+2024-11-22 16:30:25 run.py     INFO    : Starting training iteration 248.
+2024-11-22 16:30:28 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:30:28 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:30:28 run.py     INFO    : ####################################################################
+2024-11-22 16:30:28 run.py     INFO    : Starting training iteration 249.
+2024-11-22 16:30:29 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:30:29 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:30:30 run.py     INFO    : ####################################################################
+2024-11-22 16:30:30 run.py     INFO    : Starting training iteration 250.
+2024-11-22 16:30:33 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:30:33 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:30:33 run.py     INFO    : Test episode 0
+2024-11-22 16:31:03 run.py     INFO    : Test episode 9
+2024-11-22 16:31:41 run.py     INFO    : Test episode 19
+2024-11-22 16:31:44 run.py     INFO    : Test success CEM + MPC: 0.75
+2024-11-22 16:31:44 run.py     INFO    : Test episode 0
+2024-11-22 16:32:39 run.py     INFO    : Test episode 9
+2024-11-22 16:33:36 run.py     INFO    : Test episode 19
+2024-11-22 16:33:41 run.py     INFO    : Test success Random + MPC: 0.35
+2024-11-22 16:33:41 run.py     INFO    : ####################################################################
+2024-11-22 16:33:41 run.py     INFO    : Starting training iteration 251.
+2024-11-22 16:33:44 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:33:44 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:33:45 run.py     INFO    : ####################################################################
+2024-11-22 16:33:45 run.py     INFO    : Starting training iteration 252.
+2024-11-22 16:33:47 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:33:47 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:33:47 run.py     INFO    : ####################################################################
+2024-11-22 16:33:47 run.py     INFO    : Starting training iteration 253.
+2024-11-22 16:33:51 run.py     INFO    : Rewards obtained: [-16], Rollout Length: 18
+2024-11-22 16:33:51 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:33:51 run.py     INFO    : ####################################################################
+2024-11-22 16:33:51 run.py     INFO    : Starting training iteration 254.
+2024-11-22 16:33:55 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 16:33:55 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:33:55 run.py     INFO    : ####################################################################
+2024-11-22 16:33:55 run.py     INFO    : Starting training iteration 255.
+2024-11-22 16:33:59 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:33:59 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:33:59 run.py     INFO    : ####################################################################
+2024-11-22 16:33:59 run.py     INFO    : Starting training iteration 256.
+2024-11-22 16:34:02 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:34:02 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:02 run.py     INFO    : ####################################################################
+2024-11-22 16:34:02 run.py     INFO    : Starting training iteration 257.
+2024-11-22 16:34:04 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:34:04 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:05 run.py     INFO    : ####################################################################
+2024-11-22 16:34:05 run.py     INFO    : Starting training iteration 258.
+2024-11-22 16:34:07 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:34:07 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:07 run.py     INFO    : ####################################################################
+2024-11-22 16:34:07 run.py     INFO    : Starting training iteration 259.
+2024-11-22 16:34:10 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:34:10 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:10 run.py     INFO    : ####################################################################
+2024-11-22 16:34:10 run.py     INFO    : Starting training iteration 260.
+2024-11-22 16:34:13 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:34:13 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:13 run.py     INFO    : ####################################################################
+2024-11-22 16:34:13 run.py     INFO    : Starting training iteration 261.
+2024-11-22 16:34:16 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:34:16 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:16 run.py     INFO    : ####################################################################
+2024-11-22 16:34:16 run.py     INFO    : Starting training iteration 262.
+2024-11-22 16:34:21 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 22
+2024-11-22 16:34:21 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:21 run.py     INFO    : ####################################################################
+2024-11-22 16:34:21 run.py     INFO    : Starting training iteration 263.
+2024-11-22 16:34:24 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:34:24 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:25 run.py     INFO    : ####################################################################
+2024-11-22 16:34:25 run.py     INFO    : Starting training iteration 264.
+2024-11-22 16:34:29 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:34:29 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:29 run.py     INFO    : ####################################################################
+2024-11-22 16:34:29 run.py     INFO    : Starting training iteration 265.
+2024-11-22 16:34:31 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:34:31 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:31 run.py     INFO    : ####################################################################
+2024-11-22 16:34:31 run.py     INFO    : Starting training iteration 266.
+2024-11-22 16:34:34 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:34:34 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:34 run.py     INFO    : ####################################################################
+2024-11-22 16:34:34 run.py     INFO    : Starting training iteration 267.
+2024-11-22 16:34:36 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:34:36 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:36 run.py     INFO    : ####################################################################
+2024-11-22 16:34:36 run.py     INFO    : Starting training iteration 268.
+2024-11-22 16:34:38 run.py     INFO    : Rewards obtained: [-5], Rollout Length: 7
+2024-11-22 16:34:38 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:38 run.py     INFO    : ####################################################################
+2024-11-22 16:34:38 run.py     INFO    : Starting training iteration 269.
+2024-11-22 16:34:40 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:34:40 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:40 run.py     INFO    : ####################################################################
+2024-11-22 16:34:40 run.py     INFO    : Starting training iteration 270.
+2024-11-22 16:34:43 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:34:43 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:44 run.py     INFO    : ####################################################################
+2024-11-22 16:34:44 run.py     INFO    : Starting training iteration 271.
+2024-11-22 16:34:49 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 21
+2024-11-22 16:34:49 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:49 run.py     INFO    : ####################################################################
+2024-11-22 16:34:49 run.py     INFO    : Starting training iteration 272.
+2024-11-22 16:34:53 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:34:53 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:53 run.py     INFO    : ####################################################################
+2024-11-22 16:34:53 run.py     INFO    : Starting training iteration 273.
+2024-11-22 16:34:56 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:34:56 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:56 run.py     INFO    : ####################################################################
+2024-11-22 16:34:56 run.py     INFO    : Starting training iteration 274.
+2024-11-22 16:34:59 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:34:59 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:34:59 run.py     INFO    : ####################################################################
+2024-11-22 16:34:59 run.py     INFO    : Starting training iteration 275.
+2024-11-22 16:35:04 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:35:04 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:04 run.py     INFO    : ####################################################################
+2024-11-22 16:35:04 run.py     INFO    : Starting training iteration 276.
+2024-11-22 16:35:09 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:35:09 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:09 run.py     INFO    : ####################################################################
+2024-11-22 16:35:09 run.py     INFO    : Starting training iteration 277.
+2024-11-22 16:35:15 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:35:15 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:15 run.py     INFO    : ####################################################################
+2024-11-22 16:35:15 run.py     INFO    : Starting training iteration 278.
+2024-11-22 16:35:20 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:35:20 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:20 run.py     INFO    : ####################################################################
+2024-11-22 16:35:20 run.py     INFO    : Starting training iteration 279.
+2024-11-22 16:35:24 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:35:24 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:24 run.py     INFO    : ####################################################################
+2024-11-22 16:35:24 run.py     INFO    : Starting training iteration 280.
+2024-11-22 16:35:28 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:35:28 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:28 run.py     INFO    : ####################################################################
+2024-11-22 16:35:28 run.py     INFO    : Starting training iteration 281.
+2024-11-22 16:35:31 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:35:31 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:31 run.py     INFO    : ####################################################################
+2024-11-22 16:35:31 run.py     INFO    : Starting training iteration 282.
+2024-11-22 16:35:33 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:35:33 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:33 run.py     INFO    : ####################################################################
+2024-11-22 16:35:33 run.py     INFO    : Starting training iteration 283.
+2024-11-22 16:35:36 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:35:36 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:36 run.py     INFO    : ####################################################################
+2024-11-22 16:35:36 run.py     INFO    : Starting training iteration 284.
+2024-11-22 16:35:42 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 24
+2024-11-22 16:35:42 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:42 run.py     INFO    : ####################################################################
+2024-11-22 16:35:42 run.py     INFO    : Starting training iteration 285.
+2024-11-22 16:35:44 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:35:44 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:44 run.py     INFO    : ####################################################################
+2024-11-22 16:35:44 run.py     INFO    : Starting training iteration 286.
+2024-11-22 16:35:47 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:35:47 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:47 run.py     INFO    : ####################################################################
+2024-11-22 16:35:47 run.py     INFO    : Starting training iteration 287.
+2024-11-22 16:35:50 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:35:50 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:50 run.py     INFO    : ####################################################################
+2024-11-22 16:35:50 run.py     INFO    : Starting training iteration 288.
+2024-11-22 16:35:54 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 18
+2024-11-22 16:35:54 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:54 run.py     INFO    : ####################################################################
+2024-11-22 16:35:54 run.py     INFO    : Starting training iteration 289.
+2024-11-22 16:35:57 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:35:57 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:35:57 run.py     INFO    : ####################################################################
+2024-11-22 16:35:57 run.py     INFO    : Starting training iteration 290.
+2024-11-22 16:36:01 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:36:01 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:36:01 run.py     INFO    : ####################################################################
+2024-11-22 16:36:01 run.py     INFO    : Starting training iteration 291.
+2024-11-22 16:36:04 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 16:36:04 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:36:04 run.py     INFO    : ####################################################################
+2024-11-22 16:36:04 run.py     INFO    : Starting training iteration 292.
+2024-11-22 16:36:08 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:36:08 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:36:08 run.py     INFO    : ####################################################################
+2024-11-22 16:36:08 run.py     INFO    : Starting training iteration 293.
+2024-11-22 16:36:12 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:36:12 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:36:12 run.py     INFO    : ####################################################################
+2024-11-22 16:36:12 run.py     INFO    : Starting training iteration 294.
+2024-11-22 16:36:22 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:36:22 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:36:22 run.py     INFO    : ####################################################################
+2024-11-22 16:36:22 run.py     INFO    : Starting training iteration 295.
+2024-11-22 16:36:27 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:36:27 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:36:27 run.py     INFO    : ####################################################################
+2024-11-22 16:36:27 run.py     INFO    : Starting training iteration 296.
+2024-11-22 16:36:34 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 16:36:34 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:36:34 run.py     INFO    : ####################################################################
+2024-11-22 16:36:34 run.py     INFO    : Starting training iteration 297.
+2024-11-22 16:36:39 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 16:36:39 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:36:39 run.py     INFO    : ####################################################################
+2024-11-22 16:36:39 run.py     INFO    : Starting training iteration 298.
+2024-11-22 16:36:43 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:36:43 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:36:43 run.py     INFO    : ####################################################################
+2024-11-22 16:36:43 run.py     INFO    : Starting training iteration 299.
+2024-11-22 16:36:47 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:36:47 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:36:47 run.py     INFO    : ####################################################################
+2024-11-22 16:36:47 run.py     INFO    : Starting training iteration 300.
+2024-11-22 16:36:52 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:36:52 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:36:52 run.py     INFO    : Test episode 0
+2024-11-22 16:37:24 run.py     INFO    : Test episode 9
+2024-11-22 16:37:59 run.py     INFO    : Test episode 19
+2024-11-22 16:38:03 run.py     INFO    : Test success CEM + MPC: 0.75
+2024-11-22 16:38:03 run.py     INFO    : Test episode 0
+2024-11-22 16:38:46 run.py     INFO    : Test episode 9
+2024-11-22 16:39:42 run.py     INFO    : Test episode 19
+2024-11-22 16:39:48 run.py     INFO    : Test success Random + MPC: 0.8
+2024-11-22 16:39:48 run.py     INFO    : ####################################################################
+2024-11-22 16:39:48 run.py     INFO    : Starting training iteration 301.
+2024-11-22 16:39:52 run.py     INFO    : Rewards obtained: [-15], Rollout Length: 17
+2024-11-22 16:39:52 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:39:52 run.py     INFO    : ####################################################################
+2024-11-22 16:39:52 run.py     INFO    : Starting training iteration 302.
+2024-11-22 16:39:57 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 18
+2024-11-22 16:39:57 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:39:57 run.py     INFO    : ####################################################################
+2024-11-22 16:39:57 run.py     INFO    : Starting training iteration 303.
+2024-11-22 16:40:02 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 22
+2024-11-22 16:40:02 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:02 run.py     INFO    : ####################################################################
+2024-11-22 16:40:02 run.py     INFO    : Starting training iteration 304.
+2024-11-22 16:40:06 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:40:06 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:06 run.py     INFO    : ####################################################################
+2024-11-22 16:40:06 run.py     INFO    : Starting training iteration 305.
+2024-11-22 16:40:09 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:40:09 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:09 run.py     INFO    : ####################################################################
+2024-11-22 16:40:09 run.py     INFO    : Starting training iteration 306.
+2024-11-22 16:40:13 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:40:13 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:13 run.py     INFO    : ####################################################################
+2024-11-22 16:40:13 run.py     INFO    : Starting training iteration 307.
+2024-11-22 16:40:16 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 16:40:16 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:17 run.py     INFO    : ####################################################################
+2024-11-22 16:40:17 run.py     INFO    : Starting training iteration 308.
+2024-11-22 16:40:21 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:40:21 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:21 run.py     INFO    : ####################################################################
+2024-11-22 16:40:21 run.py     INFO    : Starting training iteration 309.
+2024-11-22 16:40:25 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 16:40:25 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:25 run.py     INFO    : ####################################################################
+2024-11-22 16:40:25 run.py     INFO    : Starting training iteration 310.
+2024-11-22 16:40:27 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:40:27 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:27 run.py     INFO    : ####################################################################
+2024-11-22 16:40:27 run.py     INFO    : Starting training iteration 311.
+2024-11-22 16:40:30 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:40:30 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:30 run.py     INFO    : ####################################################################
+2024-11-22 16:40:30 run.py     INFO    : Starting training iteration 312.
+2024-11-22 16:40:33 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:40:33 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:33 run.py     INFO    : ####################################################################
+2024-11-22 16:40:33 run.py     INFO    : Starting training iteration 313.
+2024-11-22 16:40:38 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:40:38 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:38 run.py     INFO    : ####################################################################
+2024-11-22 16:40:38 run.py     INFO    : Starting training iteration 314.
+2024-11-22 16:40:40 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:40:40 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:40 run.py     INFO    : ####################################################################
+2024-11-22 16:40:40 run.py     INFO    : Starting training iteration 315.
+2024-11-22 16:40:43 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:40:43 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:43 run.py     INFO    : ####################################################################
+2024-11-22 16:40:43 run.py     INFO    : Starting training iteration 316.
+2024-11-22 16:40:45 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:40:45 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:45 run.py     INFO    : ####################################################################
+2024-11-22 16:40:45 run.py     INFO    : Starting training iteration 317.
+2024-11-22 16:40:50 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:40:50 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:50 run.py     INFO    : ####################################################################
+2024-11-22 16:40:50 run.py     INFO    : Starting training iteration 318.
+2024-11-22 16:40:51 run.py     INFO    : Rewards obtained: [-5], Rollout Length: 7
+2024-11-22 16:40:51 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:51 run.py     INFO    : ####################################################################
+2024-11-22 16:40:51 run.py     INFO    : Starting training iteration 319.
+2024-11-22 16:40:57 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 22
+2024-11-22 16:40:57 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:40:57 run.py     INFO    : ####################################################################
+2024-11-22 16:40:57 run.py     INFO    : Starting training iteration 320.
+2024-11-22 16:41:00 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:41:00 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:00 run.py     INFO    : ####################################################################
+2024-11-22 16:41:00 run.py     INFO    : Starting training iteration 321.
+2024-11-22 16:41:04 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:41:04 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:04 run.py     INFO    : ####################################################################
+2024-11-22 16:41:04 run.py     INFO    : Starting training iteration 322.
+2024-11-22 16:41:07 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:41:07 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:07 run.py     INFO    : ####################################################################
+2024-11-22 16:41:07 run.py     INFO    : Starting training iteration 323.
+2024-11-22 16:41:10 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:41:10 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:10 run.py     INFO    : ####################################################################
+2024-11-22 16:41:10 run.py     INFO    : Starting training iteration 324.
+2024-11-22 16:41:14 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:41:14 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:15 run.py     INFO    : ####################################################################
+2024-11-22 16:41:15 run.py     INFO    : Starting training iteration 325.
+2024-11-22 16:41:17 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:41:17 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:17 run.py     INFO    : ####################################################################
+2024-11-22 16:41:17 run.py     INFO    : Starting training iteration 326.
+2024-11-22 16:41:20 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:41:20 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:20 run.py     INFO    : ####################################################################
+2024-11-22 16:41:20 run.py     INFO    : Starting training iteration 327.
+2024-11-22 16:41:23 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:41:23 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:23 run.py     INFO    : ####################################################################
+2024-11-22 16:41:23 run.py     INFO    : Starting training iteration 328.
+2024-11-22 16:41:26 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:41:26 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:26 run.py     INFO    : ####################################################################
+2024-11-22 16:41:26 run.py     INFO    : Starting training iteration 329.
+2024-11-22 16:41:29 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:41:29 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:29 run.py     INFO    : ####################################################################
+2024-11-22 16:41:29 run.py     INFO    : Starting training iteration 330.
+2024-11-22 16:41:32 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:41:32 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:32 run.py     INFO    : ####################################################################
+2024-11-22 16:41:32 run.py     INFO    : Starting training iteration 331.
+2024-11-22 16:41:36 run.py     INFO    : Rewards obtained: [-15], Rollout Length: 17
+2024-11-22 16:41:36 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:36 run.py     INFO    : ####################################################################
+2024-11-22 16:41:36 run.py     INFO    : Starting training iteration 332.
+2024-11-22 16:41:39 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:41:39 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:39 run.py     INFO    : ####################################################################
+2024-11-22 16:41:39 run.py     INFO    : Starting training iteration 333.
+2024-11-22 16:41:42 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:41:42 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:43 run.py     INFO    : ####################################################################
+2024-11-22 16:41:43 run.py     INFO    : Starting training iteration 334.
+2024-11-22 16:41:45 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:41:45 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:45 run.py     INFO    : ####################################################################
+2024-11-22 16:41:45 run.py     INFO    : Starting training iteration 335.
+2024-11-22 16:41:49 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:41:49 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:49 run.py     INFO    : ####################################################################
+2024-11-22 16:41:49 run.py     INFO    : Starting training iteration 336.
+2024-11-22 16:41:51 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:41:51 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:51 run.py     INFO    : ####################################################################
+2024-11-22 16:41:51 run.py     INFO    : Starting training iteration 337.
+2024-11-22 16:41:54 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:41:54 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:54 run.py     INFO    : ####################################################################
+2024-11-22 16:41:54 run.py     INFO    : Starting training iteration 338.
+2024-11-22 16:41:59 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:41:59 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:41:59 run.py     INFO    : ####################################################################
+2024-11-22 16:41:59 run.py     INFO    : Starting training iteration 339.
+2024-11-22 16:42:01 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:42:01 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:42:01 run.py     INFO    : ####################################################################
+2024-11-22 16:42:01 run.py     INFO    : Starting training iteration 340.
+2024-11-22 16:42:04 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:42:04 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:42:04 run.py     INFO    : ####################################################################
+2024-11-22 16:42:04 run.py     INFO    : Starting training iteration 341.
+2024-11-22 16:42:07 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:42:07 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:42:07 run.py     INFO    : ####################################################################
+2024-11-22 16:42:07 run.py     INFO    : Starting training iteration 342.
+2024-11-22 16:42:12 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 22
+2024-11-22 16:42:12 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:42:12 run.py     INFO    : ####################################################################
+2024-11-22 16:42:12 run.py     INFO    : Starting training iteration 343.
+2024-11-22 16:42:15 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:42:15 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:42:15 run.py     INFO    : ####################################################################
+2024-11-22 16:42:15 run.py     INFO    : Starting training iteration 344.
+2024-11-22 16:42:19 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:42:19 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:42:19 run.py     INFO    : ####################################################################
+2024-11-22 16:42:19 run.py     INFO    : Starting training iteration 345.
+2024-11-22 16:42:22 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:42:22 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:42:22 run.py     INFO    : ####################################################################
+2024-11-22 16:42:22 run.py     INFO    : Starting training iteration 346.
+2024-11-22 16:42:25 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:42:25 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:42:25 run.py     INFO    : ####################################################################
+2024-11-22 16:42:25 run.py     INFO    : Starting training iteration 347.
+2024-11-22 16:42:28 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:42:28 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:42:28 run.py     INFO    : ####################################################################
+2024-11-22 16:42:28 run.py     INFO    : Starting training iteration 348.
+2024-11-22 16:42:33 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:42:33 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:42:33 run.py     INFO    : ####################################################################
+2024-11-22 16:42:33 run.py     INFO    : Starting training iteration 349.
+2024-11-22 16:42:36 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:42:36 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:42:36 run.py     INFO    : ####################################################################
+2024-11-22 16:42:36 run.py     INFO    : Starting training iteration 350.
+2024-11-22 16:42:39 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:42:39 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:42:39 run.py     INFO    : Test episode 0
+2024-11-22 16:43:07 run.py     INFO    : Test episode 9
+2024-11-22 16:43:38 run.py     INFO    : Test episode 19
+2024-11-22 16:43:40 run.py     INFO    : Test success CEM + MPC: 0.95
+2024-11-22 16:43:40 run.py     INFO    : Test episode 0
+2024-11-22 16:44:24 run.py     INFO    : Test episode 9
+2024-11-22 16:45:31 run.py     INFO    : Test episode 19
+2024-11-22 16:45:38 run.py     INFO    : Test success Random + MPC: 0.5
+2024-11-22 16:45:38 run.py     INFO    : ####################################################################
+2024-11-22 16:45:38 run.py     INFO    : Starting training iteration 351.
+2024-11-22 16:45:41 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:45:41 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:45:42 run.py     INFO    : ####################################################################
+2024-11-22 16:45:42 run.py     INFO    : Starting training iteration 352.
+2024-11-22 16:45:44 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:45:44 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:45:44 run.py     INFO    : ####################################################################
+2024-11-22 16:45:44 run.py     INFO    : Starting training iteration 353.
+2024-11-22 16:45:47 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:45:47 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:45:47 run.py     INFO    : ####################################################################
+2024-11-22 16:45:47 run.py     INFO    : Starting training iteration 354.
+2024-11-22 16:45:50 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:45:50 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:45:50 run.py     INFO    : ####################################################################
+2024-11-22 16:45:50 run.py     INFO    : Starting training iteration 355.
+2024-11-22 16:45:54 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:45:54 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:45:54 run.py     INFO    : ####################################################################
+2024-11-22 16:45:54 run.py     INFO    : Starting training iteration 356.
+2024-11-22 16:45:57 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:45:57 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:45:57 run.py     INFO    : ####################################################################
+2024-11-22 16:45:57 run.py     INFO    : Starting training iteration 357.
+2024-11-22 16:45:59 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:45:59 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:45:59 run.py     INFO    : ####################################################################
+2024-11-22 16:45:59 run.py     INFO    : Starting training iteration 358.
+2024-11-22 16:46:01 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:46:01 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:01 run.py     INFO    : ####################################################################
+2024-11-22 16:46:01 run.py     INFO    : Starting training iteration 359.
+2024-11-22 16:46:04 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:46:04 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:04 run.py     INFO    : ####################################################################
+2024-11-22 16:46:04 run.py     INFO    : Starting training iteration 360.
+2024-11-22 16:46:07 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:46:07 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:07 run.py     INFO    : ####################################################################
+2024-11-22 16:46:07 run.py     INFO    : Starting training iteration 361.
+2024-11-22 16:46:10 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:46:10 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:10 run.py     INFO    : ####################################################################
+2024-11-22 16:46:10 run.py     INFO    : Starting training iteration 362.
+2024-11-22 16:46:13 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:46:13 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:13 run.py     INFO    : ####################################################################
+2024-11-22 16:46:13 run.py     INFO    : Starting training iteration 363.
+2024-11-22 16:46:16 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:46:16 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:16 run.py     INFO    : ####################################################################
+2024-11-22 16:46:16 run.py     INFO    : Starting training iteration 364.
+2024-11-22 16:46:19 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:46:19 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:19 run.py     INFO    : ####################################################################
+2024-11-22 16:46:19 run.py     INFO    : Starting training iteration 365.
+2024-11-22 16:46:21 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:46:21 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:21 run.py     INFO    : ####################################################################
+2024-11-22 16:46:21 run.py     INFO    : Starting training iteration 366.
+2024-11-22 16:46:24 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:46:24 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:24 run.py     INFO    : ####################################################################
+2024-11-22 16:46:24 run.py     INFO    : Starting training iteration 367.
+2024-11-22 16:46:28 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:46:28 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:28 run.py     INFO    : ####################################################################
+2024-11-22 16:46:28 run.py     INFO    : Starting training iteration 368.
+2024-11-22 16:46:31 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:46:31 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:31 run.py     INFO    : ####################################################################
+2024-11-22 16:46:31 run.py     INFO    : Starting training iteration 369.
+2024-11-22 16:46:34 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 16:46:34 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:34 run.py     INFO    : ####################################################################
+2024-11-22 16:46:34 run.py     INFO    : Starting training iteration 370.
+2024-11-22 16:46:36 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:46:36 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:36 run.py     INFO    : ####################################################################
+2024-11-22 16:46:36 run.py     INFO    : Starting training iteration 371.
+2024-11-22 16:46:39 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:46:39 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:39 run.py     INFO    : ####################################################################
+2024-11-22 16:46:39 run.py     INFO    : Starting training iteration 372.
+2024-11-22 16:46:43 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 16:46:43 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:43 run.py     INFO    : ####################################################################
+2024-11-22 16:46:43 run.py     INFO    : Starting training iteration 373.
+2024-11-22 16:46:45 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:46:45 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:45 run.py     INFO    : ####################################################################
+2024-11-22 16:46:45 run.py     INFO    : Starting training iteration 374.
+2024-11-22 16:46:50 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 20
+2024-11-22 16:46:50 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:50 run.py     INFO    : ####################################################################
+2024-11-22 16:46:50 run.py     INFO    : Starting training iteration 375.
+2024-11-22 16:46:52 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:46:52 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:52 run.py     INFO    : ####################################################################
+2024-11-22 16:46:52 run.py     INFO    : Starting training iteration 376.
+2024-11-22 16:46:55 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:46:55 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:55 run.py     INFO    : ####################################################################
+2024-11-22 16:46:55 run.py     INFO    : Starting training iteration 377.
+2024-11-22 16:46:58 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:46:58 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:46:58 run.py     INFO    : ####################################################################
+2024-11-22 16:46:58 run.py     INFO    : Starting training iteration 378.
+2024-11-22 16:47:00 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:47:00 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:00 run.py     INFO    : ####################################################################
+2024-11-22 16:47:00 run.py     INFO    : Starting training iteration 379.
+2024-11-22 16:47:03 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:47:03 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:03 run.py     INFO    : ####################################################################
+2024-11-22 16:47:03 run.py     INFO    : Starting training iteration 380.
+2024-11-22 16:47:07 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:47:07 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:07 run.py     INFO    : ####################################################################
+2024-11-22 16:47:07 run.py     INFO    : Starting training iteration 381.
+2024-11-22 16:47:09 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:47:09 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:09 run.py     INFO    : ####################################################################
+2024-11-22 16:47:09 run.py     INFO    : Starting training iteration 382.
+2024-11-22 16:47:12 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:47:12 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:12 run.py     INFO    : ####################################################################
+2024-11-22 16:47:12 run.py     INFO    : Starting training iteration 383.
+2024-11-22 16:47:17 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 22
+2024-11-22 16:47:17 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:17 run.py     INFO    : ####################################################################
+2024-11-22 16:47:17 run.py     INFO    : Starting training iteration 384.
+2024-11-22 16:47:19 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:47:19 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:19 run.py     INFO    : ####################################################################
+2024-11-22 16:47:19 run.py     INFO    : Starting training iteration 385.
+2024-11-22 16:47:22 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:47:22 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:23 run.py     INFO    : ####################################################################
+2024-11-22 16:47:23 run.py     INFO    : Starting training iteration 386.
+2024-11-22 16:47:26 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:47:26 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:26 run.py     INFO    : ####################################################################
+2024-11-22 16:47:26 run.py     INFO    : Starting training iteration 387.
+2024-11-22 16:47:29 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:47:29 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:29 run.py     INFO    : ####################################################################
+2024-11-22 16:47:29 run.py     INFO    : Starting training iteration 388.
+2024-11-22 16:47:32 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:47:32 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:32 run.py     INFO    : ####################################################################
+2024-11-22 16:47:32 run.py     INFO    : Starting training iteration 389.
+2024-11-22 16:47:34 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:47:34 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:34 run.py     INFO    : ####################################################################
+2024-11-22 16:47:34 run.py     INFO    : Starting training iteration 390.
+2024-11-22 16:47:37 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:47:37 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:37 run.py     INFO    : ####################################################################
+2024-11-22 16:47:37 run.py     INFO    : Starting training iteration 391.
+2024-11-22 16:47:41 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:47:41 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:41 run.py     INFO    : ####################################################################
+2024-11-22 16:47:41 run.py     INFO    : Starting training iteration 392.
+2024-11-22 16:47:44 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:47:44 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:44 run.py     INFO    : ####################################################################
+2024-11-22 16:47:44 run.py     INFO    : Starting training iteration 393.
+2024-11-22 16:47:47 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:47:47 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:47 run.py     INFO    : ####################################################################
+2024-11-22 16:47:47 run.py     INFO    : Starting training iteration 394.
+2024-11-22 16:47:50 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:47:50 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:50 run.py     INFO    : ####################################################################
+2024-11-22 16:47:50 run.py     INFO    : Starting training iteration 395.
+2024-11-22 16:47:53 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:47:53 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:53 run.py     INFO    : ####################################################################
+2024-11-22 16:47:53 run.py     INFO    : Starting training iteration 396.
+2024-11-22 16:47:55 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:47:55 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:55 run.py     INFO    : ####################################################################
+2024-11-22 16:47:55 run.py     INFO    : Starting training iteration 397.
+2024-11-22 16:47:59 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:47:59 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:47:59 run.py     INFO    : ####################################################################
+2024-11-22 16:47:59 run.py     INFO    : Starting training iteration 398.
+2024-11-22 16:48:01 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:48:01 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:48:01 run.py     INFO    : ####################################################################
+2024-11-22 16:48:01 run.py     INFO    : Starting training iteration 399.
+2024-11-22 16:48:04 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:48:04 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:48:04 run.py     INFO    : ####################################################################
+2024-11-22 16:48:04 run.py     INFO    : Starting training iteration 400.
+2024-11-22 16:48:08 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:48:08 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:48:08 run.py     INFO    : Test episode 0
+2024-11-22 16:48:32 run.py     INFO    : Test episode 9
+2024-11-22 16:48:59 run.py     INFO    : Test episode 19
+2024-11-22 16:49:01 run.py     INFO    : Test success CEM + MPC: 1.0
+2024-11-22 16:49:01 run.py     INFO    : Test episode 0
+2024-11-22 16:49:53 run.py     INFO    : Test episode 9
+2024-11-22 16:50:55 run.py     INFO    : Test episode 19
+2024-11-22 16:50:59 run.py     INFO    : Test success Random + MPC: 0.4
+2024-11-22 16:50:59 run.py     INFO    : ####################################################################
+2024-11-22 16:50:59 run.py     INFO    : Starting training iteration 401.
+2024-11-22 16:51:01 run.py     INFO    : Rewards obtained: [-5], Rollout Length: 7
+2024-11-22 16:51:01 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:01 run.py     INFO    : ####################################################################
+2024-11-22 16:51:01 run.py     INFO    : Starting training iteration 402.
+2024-11-22 16:51:03 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:51:03 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:03 run.py     INFO    : ####################################################################
+2024-11-22 16:51:03 run.py     INFO    : Starting training iteration 403.
+2024-11-22 16:51:05 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:51:05 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:06 run.py     INFO    : ####################################################################
+2024-11-22 16:51:06 run.py     INFO    : Starting training iteration 404.
+2024-11-22 16:51:08 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:51:08 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:08 run.py     INFO    : ####################################################################
+2024-11-22 16:51:08 run.py     INFO    : Starting training iteration 405.
+2024-11-22 16:51:09 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:51:09 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:09 run.py     INFO    : ####################################################################
+2024-11-22 16:51:09 run.py     INFO    : Starting training iteration 406.
+2024-11-22 16:51:12 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:51:12 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:12 run.py     INFO    : ####################################################################
+2024-11-22 16:51:12 run.py     INFO    : Starting training iteration 407.
+2024-11-22 16:51:14 run.py     INFO    : Rewards obtained: [-5], Rollout Length: 7
+2024-11-22 16:51:14 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:14 run.py     INFO    : ####################################################################
+2024-11-22 16:51:14 run.py     INFO    : Starting training iteration 408.
+2024-11-22 16:51:17 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:51:17 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:17 run.py     INFO    : ####################################################################
+2024-11-22 16:51:17 run.py     INFO    : Starting training iteration 409.
+2024-11-22 16:51:19 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:51:19 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:19 run.py     INFO    : ####################################################################
+2024-11-22 16:51:19 run.py     INFO    : Starting training iteration 410.
+2024-11-22 16:51:21 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:51:21 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:21 run.py     INFO    : ####################################################################
+2024-11-22 16:51:21 run.py     INFO    : Starting training iteration 411.
+2024-11-22 16:51:23 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:51:23 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:23 run.py     INFO    : ####################################################################
+2024-11-22 16:51:23 run.py     INFO    : Starting training iteration 412.
+2024-11-22 16:51:28 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 21
+2024-11-22 16:51:28 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:28 run.py     INFO    : ####################################################################
+2024-11-22 16:51:28 run.py     INFO    : Starting training iteration 413.
+2024-11-22 16:51:32 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:51:32 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:32 run.py     INFO    : ####################################################################
+2024-11-22 16:51:32 run.py     INFO    : Starting training iteration 414.
+2024-11-22 16:51:35 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:51:35 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:35 run.py     INFO    : ####################################################################
+2024-11-22 16:51:35 run.py     INFO    : Starting training iteration 415.
+2024-11-22 16:51:38 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:51:38 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:39 run.py     INFO    : ####################################################################
+2024-11-22 16:51:39 run.py     INFO    : Starting training iteration 416.
+2024-11-22 16:51:42 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:51:42 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:42 run.py     INFO    : ####################################################################
+2024-11-22 16:51:42 run.py     INFO    : Starting training iteration 417.
+2024-11-22 16:51:45 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:51:45 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:45 run.py     INFO    : ####################################################################
+2024-11-22 16:51:45 run.py     INFO    : Starting training iteration 418.
+2024-11-22 16:51:49 run.py     INFO    : Rewards obtained: [-15], Rollout Length: 17
+2024-11-22 16:51:49 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:49 run.py     INFO    : ####################################################################
+2024-11-22 16:51:49 run.py     INFO    : Starting training iteration 419.
+2024-11-22 16:51:52 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:51:52 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:53 run.py     INFO    : ####################################################################
+2024-11-22 16:51:53 run.py     INFO    : Starting training iteration 420.
+2024-11-22 16:51:54 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:51:54 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:54 run.py     INFO    : ####################################################################
+2024-11-22 16:51:54 run.py     INFO    : Starting training iteration 421.
+2024-11-22 16:51:57 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:51:57 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:51:57 run.py     INFO    : ####################################################################
+2024-11-22 16:51:57 run.py     INFO    : Starting training iteration 422.
+2024-11-22 16:52:00 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:52:00 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:00 run.py     INFO    : ####################################################################
+2024-11-22 16:52:00 run.py     INFO    : Starting training iteration 423.
+2024-11-22 16:52:02 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:52:02 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:03 run.py     INFO    : ####################################################################
+2024-11-22 16:52:03 run.py     INFO    : Starting training iteration 424.
+2024-11-22 16:52:05 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:52:05 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:05 run.py     INFO    : ####################################################################
+2024-11-22 16:52:05 run.py     INFO    : Starting training iteration 425.
+2024-11-22 16:52:08 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:52:08 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:08 run.py     INFO    : ####################################################################
+2024-11-22 16:52:08 run.py     INFO    : Starting training iteration 426.
+2024-11-22 16:52:10 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:52:10 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:10 run.py     INFO    : ####################################################################
+2024-11-22 16:52:10 run.py     INFO    : Starting training iteration 427.
+2024-11-22 16:52:13 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:52:13 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:13 run.py     INFO    : ####################################################################
+2024-11-22 16:52:13 run.py     INFO    : Starting training iteration 428.
+2024-11-22 16:52:15 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:52:15 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:15 run.py     INFO    : ####################################################################
+2024-11-22 16:52:15 run.py     INFO    : Starting training iteration 429.
+2024-11-22 16:52:19 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:52:19 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:19 run.py     INFO    : ####################################################################
+2024-11-22 16:52:19 run.py     INFO    : Starting training iteration 430.
+2024-11-22 16:52:22 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:52:22 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:22 run.py     INFO    : ####################################################################
+2024-11-22 16:52:22 run.py     INFO    : Starting training iteration 431.
+2024-11-22 16:52:26 run.py     INFO    : Rewards obtained: [-16], Rollout Length: 18
+2024-11-22 16:52:26 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:26 run.py     INFO    : ####################################################################
+2024-11-22 16:52:26 run.py     INFO    : Starting training iteration 432.
+2024-11-22 16:52:29 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:52:29 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:30 run.py     INFO    : ####################################################################
+2024-11-22 16:52:30 run.py     INFO    : Starting training iteration 433.
+2024-11-22 16:52:32 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:52:32 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:32 run.py     INFO    : ####################################################################
+2024-11-22 16:52:32 run.py     INFO    : Starting training iteration 434.
+2024-11-22 16:52:34 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:52:34 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:34 run.py     INFO    : ####################################################################
+2024-11-22 16:52:34 run.py     INFO    : Starting training iteration 435.
+2024-11-22 16:52:36 run.py     INFO    : Rewards obtained: [-5], Rollout Length: 7
+2024-11-22 16:52:36 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:36 run.py     INFO    : ####################################################################
+2024-11-22 16:52:36 run.py     INFO    : Starting training iteration 436.
+2024-11-22 16:52:39 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:52:39 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:39 run.py     INFO    : ####################################################################
+2024-11-22 16:52:39 run.py     INFO    : Starting training iteration 437.
+2024-11-22 16:52:42 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:52:42 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:42 run.py     INFO    : ####################################################################
+2024-11-22 16:52:42 run.py     INFO    : Starting training iteration 438.
+2024-11-22 16:52:44 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:52:44 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:44 run.py     INFO    : ####################################################################
+2024-11-22 16:52:44 run.py     INFO    : Starting training iteration 439.
+2024-11-22 16:52:46 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:52:46 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:46 run.py     INFO    : ####################################################################
+2024-11-22 16:52:46 run.py     INFO    : Starting training iteration 440.
+2024-11-22 16:52:48 run.py     INFO    : Rewards obtained: [-5], Rollout Length: 7
+2024-11-22 16:52:48 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:48 run.py     INFO    : ####################################################################
+2024-11-22 16:52:48 run.py     INFO    : Starting training iteration 441.
+2024-11-22 16:52:50 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:52:50 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:50 run.py     INFO    : ####################################################################
+2024-11-22 16:52:50 run.py     INFO    : Starting training iteration 442.
+2024-11-22 16:52:53 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:52:53 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:54 run.py     INFO    : ####################################################################
+2024-11-22 16:52:54 run.py     INFO    : Starting training iteration 443.
+2024-11-22 16:52:56 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:52:56 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:56 run.py     INFO    : ####################################################################
+2024-11-22 16:52:56 run.py     INFO    : Starting training iteration 444.
+2024-11-22 16:52:59 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:52:59 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:52:59 run.py     INFO    : ####################################################################
+2024-11-22 16:52:59 run.py     INFO    : Starting training iteration 445.
+2024-11-22 16:53:02 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:53:02 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:53:02 run.py     INFO    : ####################################################################
+2024-11-22 16:53:02 run.py     INFO    : Starting training iteration 446.
+2024-11-22 16:53:05 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:53:05 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:53:05 run.py     INFO    : ####################################################################
+2024-11-22 16:53:05 run.py     INFO    : Starting training iteration 447.
+2024-11-22 16:53:08 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:53:08 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:53:08 run.py     INFO    : ####################################################################
+2024-11-22 16:53:08 run.py     INFO    : Starting training iteration 448.
+2024-11-22 16:53:12 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 16:53:12 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:53:12 run.py     INFO    : ####################################################################
+2024-11-22 16:53:12 run.py     INFO    : Starting training iteration 449.
+2024-11-22 16:53:15 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:53:15 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:53:15 run.py     INFO    : ####################################################################
+2024-11-22 16:53:15 run.py     INFO    : Starting training iteration 450.
+2024-11-22 16:53:17 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:53:17 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:53:17 run.py     INFO    : Test episode 0
+2024-11-22 16:53:42 run.py     INFO    : Test episode 9
+2024-11-22 16:54:12 run.py     INFO    : Test episode 19
+2024-11-22 16:54:14 run.py     INFO    : Test success CEM + MPC: 0.95
+2024-11-22 16:54:14 run.py     INFO    : Test episode 0
+2024-11-22 16:55:21 run.py     INFO    : Test episode 9
+2024-11-22 16:56:14 run.py     INFO    : Test episode 19
+2024-11-22 16:56:18 run.py     INFO    : Test success Random + MPC: 0.6
+2024-11-22 16:56:18 run.py     INFO    : ####################################################################
+2024-11-22 16:56:18 run.py     INFO    : Starting training iteration 451.
+2024-11-22 16:56:21 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:56:21 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:56:21 run.py     INFO    : ####################################################################
+2024-11-22 16:56:21 run.py     INFO    : Starting training iteration 452.
+2024-11-22 16:56:25 run.py     INFO    : Rewards obtained: [-16], Rollout Length: 18
+2024-11-22 16:56:25 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:56:25 run.py     INFO    : ####################################################################
+2024-11-22 16:56:25 run.py     INFO    : Starting training iteration 453.
+2024-11-22 16:56:28 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:56:28 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:56:28 run.py     INFO    : ####################################################################
+2024-11-22 16:56:28 run.py     INFO    : Starting training iteration 454.
+2024-11-22 16:56:31 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:56:31 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:56:31 run.py     INFO    : ####################################################################
+2024-11-22 16:56:31 run.py     INFO    : Starting training iteration 455.
+2024-11-22 16:56:34 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:56:34 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:56:34 run.py     INFO    : ####################################################################
+2024-11-22 16:56:34 run.py     INFO    : Starting training iteration 456.
+2024-11-22 16:56:36 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:56:36 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:56:36 run.py     INFO    : ####################################################################
+2024-11-22 16:56:36 run.py     INFO    : Starting training iteration 457.
+2024-11-22 16:56:40 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:56:40 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:56:40 run.py     INFO    : ####################################################################
+2024-11-22 16:56:40 run.py     INFO    : Starting training iteration 458.
+2024-11-22 16:56:42 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:56:42 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:56:42 run.py     INFO    : ####################################################################
+2024-11-22 16:56:42 run.py     INFO    : Starting training iteration 459.
+2024-11-22 16:56:45 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:56:45 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:56:45 run.py     INFO    : ####################################################################
+2024-11-22 16:56:45 run.py     INFO    : Starting training iteration 460.
+2024-11-22 16:56:48 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:56:48 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:56:48 run.py     INFO    : ####################################################################
+2024-11-22 16:56:48 run.py     INFO    : Starting training iteration 461.
+2024-11-22 16:56:50 run.py     INFO    : Rewards obtained: [-7], Rollout Length: 9
+2024-11-22 16:56:50 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:56:50 run.py     INFO    : ####################################################################
+2024-11-22 16:56:50 run.py     INFO    : Starting training iteration 462.
+2024-11-22 16:56:52 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:56:52 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:56:52 run.py     INFO    : ####################################################################
+2024-11-22 16:56:52 run.py     INFO    : Starting training iteration 463.
+2024-11-22 16:56:56 run.py     INFO    : Rewards obtained: [-15], Rollout Length: 17
+2024-11-22 16:56:56 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:56:56 run.py     INFO    : ####################################################################
+2024-11-22 16:56:56 run.py     INFO    : Starting training iteration 464.
+2024-11-22 16:56:59 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:56:59 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:56:59 run.py     INFO    : ####################################################################
+2024-11-22 16:56:59 run.py     INFO    : Starting training iteration 465.
+2024-11-22 16:57:02 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:57:02 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:02 run.py     INFO    : ####################################################################
+2024-11-22 16:57:02 run.py     INFO    : Starting training iteration 466.
+2024-11-22 16:57:06 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:57:06 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:06 run.py     INFO    : ####################################################################
+2024-11-22 16:57:06 run.py     INFO    : Starting training iteration 467.
+2024-11-22 16:57:08 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:57:08 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:08 run.py     INFO    : ####################################################################
+2024-11-22 16:57:08 run.py     INFO    : Starting training iteration 468.
+2024-11-22 16:57:10 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:57:10 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:10 run.py     INFO    : ####################################################################
+2024-11-22 16:57:10 run.py     INFO    : Starting training iteration 469.
+2024-11-22 16:57:13 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:57:13 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:13 run.py     INFO    : ####################################################################
+2024-11-22 16:57:13 run.py     INFO    : Starting training iteration 470.
+2024-11-22 16:57:15 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:57:15 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:15 run.py     INFO    : ####################################################################
+2024-11-22 16:57:15 run.py     INFO    : Starting training iteration 471.
+2024-11-22 16:57:18 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:57:18 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:18 run.py     INFO    : ####################################################################
+2024-11-22 16:57:18 run.py     INFO    : Starting training iteration 472.
+2024-11-22 16:57:21 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:57:21 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:21 run.py     INFO    : ####################################################################
+2024-11-22 16:57:21 run.py     INFO    : Starting training iteration 473.
+2024-11-22 16:57:25 run.py     INFO    : Rewards obtained: [-15], Rollout Length: 17
+2024-11-22 16:57:25 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:25 run.py     INFO    : ####################################################################
+2024-11-22 16:57:25 run.py     INFO    : Starting training iteration 474.
+2024-11-22 16:57:29 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 18
+2024-11-22 16:57:29 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:29 run.py     INFO    : ####################################################################
+2024-11-22 16:57:29 run.py     INFO    : Starting training iteration 475.
+2024-11-22 16:57:32 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:57:32 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:32 run.py     INFO    : ####################################################################
+2024-11-22 16:57:32 run.py     INFO    : Starting training iteration 476.
+2024-11-22 16:57:35 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:57:35 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:35 run.py     INFO    : ####################################################################
+2024-11-22 16:57:35 run.py     INFO    : Starting training iteration 477.
+2024-11-22 16:57:37 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:57:37 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:37 run.py     INFO    : ####################################################################
+2024-11-22 16:57:37 run.py     INFO    : Starting training iteration 478.
+2024-11-22 16:57:41 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:57:41 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:41 run.py     INFO    : ####################################################################
+2024-11-22 16:57:41 run.py     INFO    : Starting training iteration 479.
+2024-11-22 16:57:44 run.py     INFO    : Rewards obtained: [-14], Rollout Length: 16
+2024-11-22 16:57:44 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:44 run.py     INFO    : ####################################################################
+2024-11-22 16:57:44 run.py     INFO    : Starting training iteration 480.
+2024-11-22 16:57:47 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:57:47 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:47 run.py     INFO    : ####################################################################
+2024-11-22 16:57:47 run.py     INFO    : Starting training iteration 481.
+2024-11-22 16:57:50 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:57:50 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:50 run.py     INFO    : ####################################################################
+2024-11-22 16:57:50 run.py     INFO    : Starting training iteration 482.
+2024-11-22 16:57:53 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:57:53 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:53 run.py     INFO    : ####################################################################
+2024-11-22 16:57:53 run.py     INFO    : Starting training iteration 483.
+2024-11-22 16:57:56 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:57:56 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:56 run.py     INFO    : ####################################################################
+2024-11-22 16:57:56 run.py     INFO    : Starting training iteration 484.
+2024-11-22 16:57:58 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:57:58 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:57:58 run.py     INFO    : ####################################################################
+2024-11-22 16:57:58 run.py     INFO    : Starting training iteration 485.
+2024-11-22 16:58:03 run.py     INFO    : Rewards obtained: [-41], Rollout Length: 19
+2024-11-22 16:58:03 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:03 run.py     INFO    : ####################################################################
+2024-11-22 16:58:03 run.py     INFO    : Starting training iteration 486.
+2024-11-22 16:58:06 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:58:06 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:06 run.py     INFO    : ####################################################################
+2024-11-22 16:58:06 run.py     INFO    : Starting training iteration 487.
+2024-11-22 16:58:08 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:58:08 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:08 run.py     INFO    : ####################################################################
+2024-11-22 16:58:08 run.py     INFO    : Starting training iteration 488.
+2024-11-22 16:58:11 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:58:11 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:11 run.py     INFO    : ####################################################################
+2024-11-22 16:58:11 run.py     INFO    : Starting training iteration 489.
+2024-11-22 16:58:14 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:58:14 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:14 run.py     INFO    : ####################################################################
+2024-11-22 16:58:14 run.py     INFO    : Starting training iteration 490.
+2024-11-22 16:58:16 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:58:16 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:16 run.py     INFO    : ####################################################################
+2024-11-22 16:58:16 run.py     INFO    : Starting training iteration 491.
+2024-11-22 16:58:19 run.py     INFO    : Rewards obtained: [-10], Rollout Length: 12
+2024-11-22 16:58:19 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:19 run.py     INFO    : ####################################################################
+2024-11-22 16:58:19 run.py     INFO    : Starting training iteration 492.
+2024-11-22 16:58:21 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:58:21 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:21 run.py     INFO    : ####################################################################
+2024-11-22 16:58:21 run.py     INFO    : Starting training iteration 493.
+2024-11-22 16:58:23 run.py     INFO    : Rewards obtained: [-8], Rollout Length: 10
+2024-11-22 16:58:23 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:23 run.py     INFO    : ####################################################################
+2024-11-22 16:58:23 run.py     INFO    : Starting training iteration 494.
+2024-11-22 16:58:26 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:58:26 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:26 run.py     INFO    : ####################################################################
+2024-11-22 16:58:26 run.py     INFO    : Starting training iteration 495.
+2024-11-22 16:58:28 run.py     INFO    : Rewards obtained: [-9], Rollout Length: 11
+2024-11-22 16:58:28 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:28 run.py     INFO    : ####################################################################
+2024-11-22 16:58:28 run.py     INFO    : Starting training iteration 496.
+2024-11-22 16:58:30 run.py     INFO    : Rewards obtained: [-6], Rollout Length: 8
+2024-11-22 16:58:30 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:30 run.py     INFO    : ####################################################################
+2024-11-22 16:58:30 run.py     INFO    : Starting training iteration 497.
+2024-11-22 16:58:33 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:58:33 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:33 run.py     INFO    : ####################################################################
+2024-11-22 16:58:33 run.py     INFO    : Starting training iteration 498.
+2024-11-22 16:58:36 run.py     INFO    : Rewards obtained: [-12], Rollout Length: 14
+2024-11-22 16:58:36 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:36 run.py     INFO    : ####################################################################
+2024-11-22 16:58:36 run.py     INFO    : Starting training iteration 499.
+2024-11-22 16:58:39 run.py     INFO    : Rewards obtained: [-11], Rollout Length: 13
+2024-11-22 16:58:39 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:39 run.py     INFO    : ####################################################################
+2024-11-22 16:58:39 run.py     INFO    : Starting training iteration 500.
+2024-11-22 16:58:43 run.py     INFO    : Rewards obtained: [-13], Rollout Length: 15
+2024-11-22 16:58:43 mpc.py     INFO    : Train dynamics model with CEM for 5 iterations
+2024-11-22 16:58:43 run.py     INFO    : Test episode 0
+2024-11-22 16:59:09 run.py     INFO    : Test episode 9
+2024-11-22 16:59:35 run.py     INFO    : Test episode 19
+2024-11-22 16:59:38 run.py     INFO    : Test success CEM + MPC: 1.0
+2024-11-22 16:59:38 run.py     INFO    : Test episode 0
+2024-11-22 17:00:31 run.py     INFO    : Test episode 9
+2024-11-22 17:01:27 run.py     INFO    : Test episode 19
+2024-11-22 17:01:31 run.py     INFO    : Test success Random + MPC: 0.7
+2024-11-22 17:01:31 run.py     INFO    : ### Q1.3.2: Plot CEM + MPC v.s. Random Policy + MPC over training

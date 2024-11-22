@@ -1,0 +1,30 @@
+2024-11-22 15:16:24 run.py     INFO    : ### Q1.2.1: Train a single dynamics model f(s, a, phi) using a random policy
+2024-11-22 15:16:26 run.py     INFO    : ### Q1.2.1: Train from 1000 randomly sampled episodes with 100 iterations
+2024-11-22 15:16:26 run.py     INFO    : Warm up episode 0
+2024-11-22 15:16:26 run.py     INFO    : Warm up episode 99
+2024-11-22 15:16:26 run.py     INFO    : Warm up episode 199
+2024-11-22 15:16:26 run.py     INFO    : Warm up episode 299
+2024-11-22 15:16:27 run.py     INFO    : Warm up episode 399
+2024-11-22 15:16:27 run.py     INFO    : Warm up episode 499
+2024-11-22 15:16:27 run.py     INFO    : Warm up episode 599
+2024-11-22 15:16:27 run.py     INFO    : Warm up episode 699
+2024-11-22 15:16:28 run.py     INFO    : Warm up episode 799
+2024-11-22 15:16:28 run.py     INFO    : Warm up episode 899
+2024-11-22 15:16:28 run.py     INFO    : Warm up episode 999
+2024-11-22 15:16:28 mpc.py     INFO    : Train dynamics model with CEM for 100 iterations
+2024-11-22 15:16:30 run.py     INFO    : ### Q1.2.2: Test with Random Policy for 50 episodes
+2024-11-22 15:16:30 run.py     INFO    : Test episode 0
+2024-11-22 15:17:23 run.py     INFO    : Test episode 9
+2024-11-22 15:18:26 run.py     INFO    : Test episode 19
+2024-11-22 15:19:42 run.py     INFO    : Test episode 29
+2024-11-22 15:20:59 run.py     INFO    : Test episode 39
+2024-11-22 15:22:10 run.py     INFO    : Test episode 49
+2024-11-22 15:22:19 run.py     INFO    : Single + Random: avg_reward: -34.02, avg_success: 0.32
+2024-11-22 15:22:19 run.py     INFO    : ### Q1.2.3: Test with CEM for 50 episodes
+2024-11-22 15:22:19 run.py     INFO    : Test episode 0
+2024-11-22 15:22:59 run.py     INFO    : Test episode 9
+2024-11-22 15:23:41 run.py     INFO    : Test episode 19
+2024-11-22 15:24:28 run.py     INFO    : Test episode 29
+2024-11-22 15:25:17 run.py     INFO    : Test episode 39
+2024-11-22 15:26:16 run.py     INFO    : Test episode 49
+2024-11-22 15:26:23 run.py     INFO    : Single + CEM: avg_reward: -31.18, avg_success: 0.4

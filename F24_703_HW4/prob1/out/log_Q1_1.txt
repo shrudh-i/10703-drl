@@ -1,0 +1,76 @@
+python3 run.py 
+2024-11-21 22:51:09.841881: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:477] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1732247469.906421   13525 cuda_dnn.cc:8310] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1732247469.928510   13525 cuda_blas.cc:1418] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-11-21 22:51:10.094933: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-11-21 22:51:13 run.py     INFO    : ### Q1.1.1: CEM (without MPC)
+/home/shrudh-i/.local/lib/python3.10/site-packages/gym/spaces/box.py:127: UserWarning: WARN: Box bound precision lowered by casting to float32
+  logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+2024-11-21 22:51:13 run.py     INFO    : Test episode 0
+/home/shrudh-i/.local/lib/python3.10/site-packages/gym/utils/passive_env_checker.py:174: UserWarning: WARN: Future gym versions will require that `Env.reset` can be passed a `seed` instead of using `Env.seed` for resetting the environment random number generator.
+  logger.warn(
+/home/shrudh-i/.local/lib/python3.10/site-packages/gym/utils/passive_env_checker.py:187: UserWarning: WARN: Future gym versions will require that `Env.reset` can be passed `options` to allow the environment initialisation to be passed additional information.
+  logger.warn(
+/home/shrudh-i/.local/lib/python3.10/site-packages/gym/utils/passive_env_checker.py:195: UserWarning: WARN: The result returned by `env.reset()` was not a tuple of the form `(obs, info)`, where `obs` is a observation and `info` is a dictionary containing additional information. Actual type: `<class 'numpy.ndarray'>`
+  logger.warn(
+/home/shrudh-i/.local/lib/python3.10/site-packages/gym/utils/passive_env_checker.py:219: DeprecationWarning: WARN: Core environment is written in old step API which returns one bool instead of two. It is recommended to rewrite the environment with new step API. 
+  logger.deprecation(
+/home/shrudh-i/.local/lib/python3.10/site-packages/gym/utils/passive_env_checker.py:225: DeprecationWarning: `np.bool8` is a deprecated alias for `np.bool_`.  (Deprecated NumPy 1.24)
+  if not isinstance(done, (bool, np.bool8)):
+/home/shrudh-i/.local/lib/python3.10/site-packages/gym/utils/passive_env_checker.py:141: UserWarning: WARN: The obs returned by the `step()` method was expecting numpy array dtype to be float32, actual type: float64
+  logger.warn(
+/home/shrudh-i/.local/lib/python3.10/site-packages/gym/utils/passive_env_checker.py:165: UserWarning: WARN: The obs returned by the `step()` method is not within the observation space.
+  logger.warn(f"{pre} is not within the observation space.")
+2024-11-21 22:51:24 run.py     INFO    : Test episode 9
+2024-11-21 22:51:36 run.py     INFO    : Test episode 19
+2024-11-21 22:51:49 run.py     INFO    : Test episode 29
+2024-11-21 22:51:59 run.py     INFO    : Test episode 39
+2024-11-21 22:52:12 run.py     INFO    : Test episode 49
+2024-11-21 22:52:13 run.py     INFO    : CEM PushingEnv: avg_reward: -16.36, avg_success: 0.86
+2024-11-21 22:52:13 run.py     INFO    : ### Q1.1.2: Random Policy (without MPC)
+2024-11-21 22:52:13 run.py     INFO    : Test episode 0
+2024-11-21 22:52:36 run.py     INFO    : Test episode 9
+2024-11-21 22:53:03 run.py     INFO    : Test episode 19
+2024-11-21 22:53:30 run.py     INFO    : Test episode 29
+2024-11-21 22:53:58 run.py     INFO    : Test episode 39
+2024-11-21 22:54:26 run.py     INFO    : Test episode 49
+2024-11-21 22:54:29 run.py     INFO    : Random PushingEnv: avg_reward: -33.32, avg_success: 0.68
+2024-11-21 22:54:29 run.py     INFO    : ### Q1.1.2: Random Policy + MPC
+2024-11-21 22:54:29 run.py     INFO    : Test episode 0
+2024-11-21 22:55:16 run.py     INFO    : Test episode 9
+2024-11-21 22:56:09 run.py     INFO    : Test episode 19
+2024-11-21 22:57:00 run.py     INFO    : Test episode 29
+2024-11-21 22:57:49 run.py     INFO    : Test episode 39
+2024-11-21 22:58:35 run.py     INFO    : Test episode 49
+2024-11-21 22:58:39 run.py     INFO    : Random + MPC PushingEnv: avg_reward: -13.14, avg_success: 0.94
+2024-11-21 22:58:39 run.py     INFO    : ### Q1.1.3:
+2024-11-21 22:58:39 run.py     INFO    : Test episode 0
+2024-11-21 22:58:49 run.py     INFO    : Test episode 9
+2024-11-21 22:58:59 run.py     INFO    : Test episode 19
+2024-11-21 22:59:08 run.py     INFO    : Test episode 29
+2024-11-21 22:59:19 run.py     INFO    : Test episode 39
+2024-11-21 22:59:30 run.py     INFO    : Test episode 49
+2024-11-21 22:59:32 run.py     INFO    : CEM Pushing2D: avg_reward: -13.64, avg_success: 0.94
+2024-11-21 22:59:32 run.py     INFO    : Test episode 0
+2024-11-21 23:00:11 run.py     INFO    : Test episode 9
+2024-11-21 23:00:54 run.py     INFO    : Test episode 19
+2024-11-21 23:01:39 run.py     INFO    : Test episode 29
+2024-11-21 23:02:27 run.py     INFO    : Test episode 39
+2024-11-21 23:03:12 run.py     INFO    : Test episode 49
+2024-11-21 23:03:15 run.py     INFO    : CEM + MPC Pushing2D: avg_reward: -10.62, avg_success: 0.98
+2024-11-21 23:03:15 run.py     INFO    : Test episode 0
+2024-11-21 23:03:32 run.py     INFO    : Test episode 9
+2024-11-21 23:03:54 run.py     INFO    : Test episode 19
+2024-11-21 23:04:15 run.py     INFO    : Test episode 29
+2024-11-21 23:04:36 run.py     INFO    : Test episode 39
+2024-11-21 23:04:58 run.py     INFO    : Test episode 49
+2024-11-21 23:04:58 run.py     INFO    : CEM Pushing2DNoisyControl: avg_reward: -31.12, avg_success: 0.4
+2024-11-21 23:04:58 run.py     INFO    : Test episode 0
+2024-11-21 23:05:48 run.py     INFO    : Test episode 9
+2024-11-21 23:06:43 run.py     INFO    : Test episode 19
+2024-11-21 23:07:54 run.py     INFO    : Test episode 29
+2024-11-21 23:08:50 run.py     INFO    : Test episode 39
+2024-11-21 23:09:55 run.py     INFO    : Test episode 49
+2024-11-21 23:10:04 run.py     INFO    : CEM + MPC Pushing2DNoisyControl: avg_reward: -18.58, avg_success: 0.72
