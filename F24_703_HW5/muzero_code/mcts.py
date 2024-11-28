@@ -1,4 +1,6 @@
 import numpy as np
+from networks_base import BaseNetwork
+import tensorflow as tf
 
 
 class Node(object):
@@ -81,8 +83,18 @@ def select_child(config, node, min_max_stats):
     normalized Q values from the min max stats
     """
 
+    ucb_scores = -np.inf
+
+    for action, child in node.children.items():
+        # ucb_scores.append(ucb_score(config, node, child, min_max_stats))
+        ucb_curr = ucb_score(config, node, child, min_max_stats)
+        if  ucb_curr > ucb_scores:
+            ucb_scores =  ucb_curr
+            ucb_action = action
+            ucb_child = child
+
+    return ucb_action, ucb_child
     raise NotImplementedError()
-    return action, child
 
 
 def ucb_score(config, parent, child, min_max_stats):
@@ -110,20 +122,33 @@ def expand_root(node, actions, network, current_state):
     This should perform initial inference, and calculate a softmax policy over children
     You should set the attributes hidden representation, the reward, the policy and children of the node
     Also, set node.expanded to be true
-    For setting the nodes children, you should use node.children and  instantiate
+    For setting the nodes children, you should use node.children and instantiate
     with the prior from the policy
 
     Return: the value of the root
     """
     # get hidden state representation
-
+    print(f"current state input: {current_state}")
+    value, reward, policy_logits, hidden_rep = network.initial_inference(np.expand_dims(current_state[0], axis=0))
+    
+    node.hidden_representation = hidden_rep
+    node.reward = reward
+    
     # Extract softmax policy and set node.policy
+    policy = tf.squeeze(tf.nn.softmax(policy_logits)).numpy()
 
     # instantiate node's children with prior values, obtained from the predicted policy
+    # print(f"policy: {policy}")
+
+    for action in actions:
+        node.children[action] = Node(policy[action])
 
     # set node as expanded
-    raise NotImplementedError()
+    node.expanded = True
+    print(f"value: {value}")
     return value
+    raise NotImplementedError()
+    
 
 
 def expand_node(node, actions, network, parent_state, parent_action):
@@ -135,8 +160,25 @@ def expand_node(node, actions, network, parent_state, parent_action):
 
     Return: value
     """
-    raise NotImplementedError()
+
+    # get hidden state representation
+    value, reward, policy_logits, hidden_rep = network.recurrent_inference(np.expand_dims(parent_state[0], axis=0), parent_action)
+    
+    node.hidden_representation = hidden_rep
+    node.reward = reward
+    
+    # Extract softmax policy and set node.policy
+    policy = tf.squeeze(tf.nn.softmax(policy_logits)).numpy()
+
+    # instantiate node's children with prior values, obtained from the predicted policy
+    for action in actions:
+        node.children[action] = Node(policy[action])
+
+    # set node as expanded
+    node.expanded = True
+    
     return value
+    raise NotImplementedError()
 
 
 def backpropagate(path, value, discount, min_max_stats):
@@ -147,10 +189,17 @@ def backpropagate(path, value, discount, min_max_stats):
 
     Update the value with discount and reward of node
     """
+
     for node in reversed(path):
-        # YOUR CODE HERE
+        # TODO: YOUR CODE HERE
+        node.visit_count +=1
+
+        node.value_sum += value
+        value = value * discount + node.reward
+
         min_max_stats.update(node.value())
-    raise NotImplementedError()
+    
+    # raise NotImplementedError()
 
 
 def add_exploration_noise(config, node):
@@ -186,5 +235,18 @@ def softmax_sample(visit_counts, temperature):
     Else: Compute distribution over visit_counts and sample action as in writeup
     """
 
-    # YOUR CODE HERE
-    raise NotImplementedError()
+    # TODO: YOUR CODE HERE
+    print(f"shape of visit_count: {visit_counts}")
+
+    if temperature == 0:
+        result_idx = np.argmax([count for count, _ in visit_counts])
+        return visit_counts[result_idx][1]
+    
+    else:
+        visit_count = np.array([count for count, _ in visit_counts]) ** 1/temperature
+        p = visit_count / np.sum(visit_count)
+        # print(f"{np.sum(p)}")
+        result_idx = np.random.choice(len(p), p=p)
+        print(f"action: {visit_counts[result_idx][1]}")
+        return visit_counts[result_idx][1]
+    # raise NotImplementedError()

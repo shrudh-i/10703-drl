@@ -94,7 +94,7 @@ class CartPoleNetwork(BaseNetwork):
         """
         No reward transform for cartpole
         """
-        return np.asscalar(reward.numpy()[0])
+        return np.isscalar(reward.numpy()[0])
 
     def _conditioned_hidden_state(self, hidden_state: np.array, action: int) -> np.array:
         """
