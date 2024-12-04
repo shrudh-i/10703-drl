@@ -128,7 +128,7 @@ def expand_root(node, actions, network, current_state):
     Return: the value of the root
     """
     # get hidden state representation
-    print(f"current state input: {current_state}")
+    # print(f"current state input: {current_state}")
     value, reward, policy_logits, hidden_rep = network.initial_inference(np.expand_dims(current_state, axis=0))
     
     node.hidden_representation = hidden_rep

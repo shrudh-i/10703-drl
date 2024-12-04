@@ -50,7 +50,7 @@ class Game:
 
     def action(self, action, env):
         obs, reward, done, _, _ = env.step(action)
-        print(f"obs: {obs}")
+        # print(f"obs: {obs}")
         # Only for walker environment
         # obs, reward, done, _ = env.step(CONVERTER[action])
         self.curr_state = obs

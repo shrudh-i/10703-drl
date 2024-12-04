@@ -70,7 +70,7 @@ def play_game(config: MuZeroConfig, network: CartPoleNetwork, env, games_played)
         # Min Max Stats for child selection in tree (normalized Q-values)
         min_max_stats = MinMaxStats(config.known_bounds)
         curr_state = game.curr_state
-        print(f"current state in play_game: {curr_state}")
+        # print(f"current state in play_game: {curr_state}")
         root = Node(0)
         # Expand root and backpropagate once
         value = expand_root(root, list(range(config.action_space_size)),
