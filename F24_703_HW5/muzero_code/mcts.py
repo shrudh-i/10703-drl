@@ -129,7 +129,7 @@ def expand_root(node, actions, network, current_state):
     """
     # get hidden state representation
     print(f"current state input: {current_state}")
-    value, reward, policy_logits, hidden_rep = network.initial_inference(np.expand_dims(current_state[0], axis=0))
+    value, reward, policy_logits, hidden_rep = network.initial_inference(np.expand_dims(current_state, axis=0))
     
     node.hidden_representation = hidden_rep
     node.reward = reward
@@ -145,7 +145,7 @@ def expand_root(node, actions, network, current_state):
 
     # set node as expanded
     node.expanded = True
-    print(f"value: {value}")
+    # print(f"value: {value}")
     return value
     raise NotImplementedError()
     
@@ -162,7 +162,8 @@ def expand_node(node, actions, network, parent_state, parent_action):
     """
 
     # get hidden state representation
-    value, reward, policy_logits, hidden_rep = network.recurrent_inference(np.expand_dims(parent_state[0], axis=0), parent_action)
+    # print("Parent State: ", parent_state)
+    value, reward, policy_logits, hidden_rep = network.recurrent_inference(parent_state, parent_action)
     
     node.hidden_representation = hidden_rep
     node.reward = reward
@@ -236,7 +237,7 @@ def softmax_sample(visit_counts, temperature):
     """
 
     # TODO: YOUR CODE HERE
-    print(f"shape of visit_count: {visit_counts}")
+    # print(f"shape of visit_count: {visit_counts}")
 
     if temperature == 0:
         result_idx = np.argmax([count for count, _ in visit_counts])
@@ -247,6 +248,6 @@ def softmax_sample(visit_counts, temperature):
         p = visit_count / np.sum(visit_count)
         # print(f"{np.sum(p)}")
         result_idx = np.random.choice(len(p), p=p)
-        print(f"action: {visit_counts[result_idx][1]}")
+        # print(f"action: {visit_counts[result_idx][1]}")
         return visit_counts[result_idx][1]
     # raise NotImplementedError()

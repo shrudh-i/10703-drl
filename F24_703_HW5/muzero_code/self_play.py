@@ -1,3 +1,8 @@
+import os
+
+# Set TensorFlow to use legacy Keras
+os.environ["TF_USE_LEGACY_KERAS"] = "True"
+
 from game import Game
 from config import MuZeroConfig, MinMaxStats, TestResults, TrainResults
 from replay import ReplayBuffer
@@ -5,7 +10,8 @@ from networks import CartPoleNetwork, train_network
 from mcts import Node
 from mcts import expand_root, add_exploration_noise, run_mcts
 from mcts import select_action, backpropagate
-from tensorflow.keras.optimizers import Adam
+# from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.optimizers.legacy import Adam
 
 CARTPOLE_STOP_REWARD = 195
 LAST_N = 40
@@ -57,12 +63,14 @@ def play_game(config: MuZeroConfig, network: CartPoleNetwork, env, games_played)
     """
     # env.seed(1) Use for reproducibility of trajectories
     start_state = env.reset()
+    start_state = start_state[0]
     # Create Game Objects
     game = Game(config.action_space_size, config.discount, start_state)
     while not game.done and len(game.action_history) < config.max_moves:
         # Min Max Stats for child selection in tree (normalized Q-values)
         min_max_stats = MinMaxStats(config.known_bounds)
         curr_state = game.curr_state
+        print(f"current state in play_game: {curr_state}")
         root = Node(0)
         # Expand root and backpropagate once
         value = expand_root(root, list(range(config.action_space_size)),
@@ -93,6 +101,7 @@ def test(config: MuZeroConfig, network: CartPoleNetwork, env, test_rewards: Test
     for _ in range(config.episodes_per_test):
         # env.seed(1) Use for reproducibility of trajectories
         start_state = env.reset()
+        start_state = start_state[0]
         game = Game(config.action_space_size, config.discount, start_state)
         while not game.done and len(game.action_history) < config.max_moves:
             min_max_stats = MinMaxStats(config.known_bounds)

@@ -49,10 +49,12 @@ class Game:
         self.root_values.append(root.value())
 
     def action(self, action, env):
-        obs, reward, done, _ = env.step(action)
+        obs, reward, done, _, _ = env.step(action)
+        print(f"obs: {obs}")
         # Only for walker environment
         # obs, reward, done, _ = env.step(CONVERTER[action])
         self.curr_state = obs
+        # self.curr_state = (obs, {})
         self.action_history.append(action)
         self.reward_history.append(reward)
         self.done = done

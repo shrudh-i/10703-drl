@@ -198,9 +198,10 @@ def update_weights(config, network, optimizer, batch, train_results):
         total_policy_loss = 0
         (state_batch, targets_init_batch, targets_recurrent_batch,
          actions_batch) = batch
-
+        
         # YOUR CODE HERE: Perform initial embedding of state batch
-
+        print(f"size of state_batch: {state_batch}")
+        hidden_representation, pred_values, policy_logits = network.initial_model.call(np.array(state_batch)) # called from networks_base
         target_value_batch, _, target_policy_batch = zip(
             *targets_init_batch)
         # Use this to convert scalar value targets to categorical representation
@@ -209,6 +210,16 @@ def update_weights(config, network, optimizer, batch, train_results):
             tf.convert_to_tensor(target_value_batch))
         # YOUR CODE HERE: Compute the loss of the first pass (no reward loss)
         # Remember to scale value loss!
+        policy_loss = tf.nn.softmax_cross_entropy_with_logits(labels=target_policy_batch, logits=policy_logits)
+        value_loss = tf.nn.softmax_cross_entropy_with_logits(labels=target_value_batch, logits=pred_values)
+
+        policy_loss = tf.math.reduce_mean(policy_loss)
+        value_loss = tf.math.reduce_mean(value_loss)
+        print("policy_loss: ", policy_loss)
+        print("value_loss: ", value_loss)
+        print("complete: compute the loss of the first pass")
+        
+        loss = 0.25*(value_loss) + policy_loss
 
         for actions_batch, targets_batch in zip(actions_batch, targets_recurrent_batch):
             target_value_batch, target_reward_batch, target_policy_batch = zip(
@@ -216,6 +227,12 @@ def update_weights(config, network, optimizer, batch, train_results):
             # YOUR CODE HERE:
             # Create conditioned_representation: concatenate representations with actions batch
             # Recurrent step from conditioned representation: recurrent + prediction networks
+            one_hot_encoded_actions = action_to_one_hot(actions_batch, config.action_space_size)
+            recurrent_input = tf.concat((hidden_representation, one_hot_encoded_actions), axis=1)
+            conditioned_reccurent_input = network._conditioned_hidden_state(hidden_representation, )
+            # print(f"one hot action: {one_hot_encoded_actions}")
+            # exit(0)
+            hidden_representation, reward, pred_values, policy_logits = network.recurrent_model.call(recurrent_input) # called from networks_base
 
             # Same as above, convert scalar targets to categorical
             target_value_batch = tf.convert_to_tensor(target_value_batch)
@@ -226,9 +243,21 @@ def update_weights(config, network, optimizer, batch, train_results):
 
             # YOUR CODE HERE: Compute value loss, reward loss, policy loss
             # Remember to scale value loss!
+            policy_loss = tf.nn.softmax_cross_entropy_with_logits(labels=target_policy_batch, logits=policy_logits)
+            value_loss = tf.nn.softmax_cross_entropy_with_logits(labels=target_value_batch, logits=pred_values)
+            reward_loss = MSE(target_reward_batch - reward)
+
+            policy_loss = tf.math.reduce_mean(policy_loss)
+            value_loss = tf.math.reduce_mean(value_loss)
+            reward_loss = tf.math.reduce_mean(reward_loss)
+
+            loss_step = 0.25*value_loss + policy_loss + reward_loss
+
             # Add to total losses
+            loss = loss + scale_gradient(loss_step, 1/config.num_unroll_steps)
 
             # YOUR CODE HERE: Half the gradient of the representation
+            hidden_representation = scale_gradient(hidden_representation, 1/2)
 
             # YOUR CODE HERE: Sum the losses, scale gradient of the loss, add to overall loss
         train_results.total_losses.append(loss)
