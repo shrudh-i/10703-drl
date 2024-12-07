@@ -217,7 +217,7 @@ def update_weights(config, network, optimizer, batch, train_results):
         value_loss = tf.math.reduce_mean(value_loss)
         # print("policy_loss: ", policy_loss)
         # print("value_loss: ", value_loss)
-        print("complete: compute the loss of the first pass")
+        # print("complete: compute the loss of the first pass")
         
         loss = 0.25*(value_loss) + policy_loss
 
